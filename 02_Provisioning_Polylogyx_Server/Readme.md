@@ -119,7 +119,7 @@ DOORMAN_PASSWORD=<login password>
 1.  Log on to server using following URL using the latest version of Chrome or
     Firefox browser.
     
-    ```https://<ip address>:9000/manage```
+    ```https://<ip address>:5000/manage```
 
 In the syntax, `<IP address>` is the IP address of the system on which the
 PolyLogyx server is hosted. This is the IP address you specified in step 4.
