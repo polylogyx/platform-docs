@@ -40,7 +40,7 @@ following information.
 
     -   Quad Core processor
 
-    -   8 GB RAM
+    -   16 GB RAM
 
 -   Contact PolyLogyx to procure the following:
 
