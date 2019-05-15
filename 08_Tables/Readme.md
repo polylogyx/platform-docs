@@ -43,8 +43,6 @@ Here are the PolyLogyx tables that allow real time activity monitoring
 
 -   [win_msr](#win_msr-table)
 
--   [win_obfuscated_ps](#win_obfuscated_ps-table)
-
 -   [win_pefile_events](#win_pefile_events-table)
 
 -   [win_process_events](#win_process_events-table)
@@ -60,6 +58,8 @@ Here are the PolyLogyx tables that allow real time activity monitoring
 -   [win_removable_media_events](#win_removable_media_events-table)
 
 -   [win_socket_events](#win_socket_events-table)
+
+-   [win_ssl_events](#win_ssl_events-table)
 
 -   [win_yara_events](#win_yara_events-table)
 
@@ -377,6 +377,28 @@ Captures socket operations, such as accept, listen, and close.
 | remote_address | TEXT    | Remote IP address (destination)               |
 | local_port     | INTEGER | Local port number for connection              |
 | remote_port    | INTEGER | Remote port number                            |
+
+### win_ssl_events Table
+
+Captures SSL cerificate events. 
+
+| Column         | Type    | Description                                   |
+|----------------|---------|-----------------------------------------------|
+| action         | TEXT    | TLS certificate event                         |
+| event_type     | TEXT    | SSL event                                     |
+| eid            | TEXT    | Unique event identifier                       |
+| issuer_name    | TEXT    | Issuer name                                   |
+| subject_name   | TEXT    | Subject name                                  |
+| serial_number  | TEXT    | Serial number                                 |
+| dns_names      | TEXT    | Domain names associated with the certficate   |
+| pid            | INTEGER | Process identifier of the originating process |
+| process_guid   | TEXT    | Process Guid                                  |
+| process_name   | TEXT    | Process name                                  |
+| remote_address | TEXT    | Remote IP address (destination)               |
+| remote_port    | INTEGER | Remote port number                            |
+| time           | INTEGER | Time stamp of the event in unix format        |
+| utc_time       | TEXT    | Time stamp of the event in UTC                |
+
 
 ### win_yara_events Table
 
