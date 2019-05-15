@@ -14,6 +14,6 @@ You can define rules using the web interface. Perform these steps to view or edi
  
  3. Specify the information for the rule and click add rule. 
  
- PolyLogyx provides a seeded repository of rules in Sigma format that you can use as a starting point. These rules have been developed based on MITRE attack vector framework. These rules are available here: https://github.com/polylogyx/DetectionRules
+ PolyLogyx provides a seeded repository of rules in Sigma format that you can use as a starting point. These rules have been developed based on MITRE attack vector framework. You can review these rules https://github.com/polylogyx/DetectionRules
 
  
