@@ -162,6 +162,7 @@ Captures the http requests and targets details.
 
 | Column               | Type    | Description                            |
 |----------------------|---------|----------------------------------------|
+| action               | TEXT    | Http events                            |
 | event_type           | TEXT    | Http Events                            |
 | eid                  | INTEGER | Unique Event identifier                |
 | pid                  | TEXT    | Windows provided process id            |
@@ -179,6 +180,7 @@ Captures the load of binary executable files and their certificate information.
 
 | Column               | Type    | Description                                      |
 |----------------------|---------|--------------------------------------------------|
+| action               | TEXT    | Image load                                       |
 | eid                  | TEXT    | Unique event identifier                          |
 | pid                  | INTEGER | Process identifier of the originating process    |
 | md5                  | TEXT    | Process Guid                                     |
@@ -232,20 +234,6 @@ on MSR, their properties and values.
 | rapl_power_limit   | INTEGER | CPU properties from MSR (MSR_PKG_POWER_LIMIT)      |
 | rapl_energy_status | INTEGER | CPU properties from MSR (MSR_PKG_ENERGY_STATUS)    |
 | rapl_power_units   | INTEGER | CPU properties from MSR (MSR_RAPL_POWER_UNIT)      |
-
-### win_obfuscated_ps Table
-
-Powershell based attacks can be *fileless*. Many of these attacks obfuscate
-powershell scripts and allow them evade detection. These scripts get logged in
-Windows Event Viewer. PolyLogyx uses intelligence and statistics to analyze the
-script logs to determine their obfuscation.
-
-| Column           | Type | Description                                            |
-|------------------|------|--------------------------------------------------------|
-| script_id        | TEXT | Script identifier as recorded in the Windows event log |
-| time_created     | TEXT | Timestamp                                              |
-| obfuscated_state | TEXT | Obfuscated or Un-obfuscated                            |
-| obfuscated_score | TEXT | Numerical value to measure the degree of obfuscation   |
 
 ### win_pefile_events Table
 
@@ -342,6 +330,7 @@ Captures the remote thread creations.
 
 | Column              | Type    | Description                                                 |
 |---------------------|---------|-------------------------------------------------------------|
+| action              | TEXT    | Remote thread creation                                      |
 | eid                 | TEXT    | Unique event identifier                                     |
 | src_pid             | INTEGER | Windows provided Process identifier of source process       |
 | src_process_guid    | TEXT    | Src_process_guid                                            |
