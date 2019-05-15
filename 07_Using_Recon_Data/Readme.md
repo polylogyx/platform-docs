@@ -1,4 +1,4 @@
-Underdtanding Recon Data
+Understanding Recon Data
 =================
 
 As the name suggests, recon refers to preliminary research or analysis. After
