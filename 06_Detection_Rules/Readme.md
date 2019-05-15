@@ -6,8 +6,8 @@ You can define rules using the web interface. Perform these steps to view or edi
 1. Access the web interface for the server.
 2. Navigate to Add  > Rule.
 
- ![add_rule_menu](https://github.com/preetpoly/test/blob/pooja/add_rule_menu.png)
+     ![add_rule_menu](https://github.com/preetpoly/test/blob/pooja/add_rule_menu.png)
 
   The add rule page is displayed.
 
-   ![add_rule_dialog](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog.png)
+     ![add_rule_dialog](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog.png)
