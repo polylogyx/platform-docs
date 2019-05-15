@@ -43,8 +43,6 @@ Here are the PolyLogyx tables that allow real time activity monitoring
 
 -   [win_msr](#win_msr-table)
 
--   [win_obfuscated_ps](#win_obfuscated_ps-table)
-
 -   [win_pefile_events](#win_pefile_events-table)
 
 -   [win_process_events](#win_process_events-table)
@@ -61,6 +59,8 @@ Here are the PolyLogyx tables that allow real time activity monitoring
 
 -   [win_socket_events](#win_socket_events-table)
 
+-   [win_ssl_events](#win_ssl_events-table)
+
 -   [win_yara_events](#win_yara_events-table)
 
 ### win_dns_events Table
@@ -69,6 +69,7 @@ Captures the DNS look up details.
 
 | Column          | Type    | Description                                      |
 |-----------------|---------|--------------------------------------------------|
+| action          | TEXT    | DNS lookup                                       |
 | eid             | TEXT    | Unique event identifier                          |
 | event_type      | TEXT    | DNS request                                      |
 | domain_name     | TEXT    | Domain name to be looked up                      |
@@ -88,6 +89,7 @@ the source process based on IP address in the
 
 | Column          | Type    | Description                                              |
 |-----------------|---------|----------------------------------------------------------|
+| action          | TEXT    | DNS response                                             |
 | eid             | TEXT    | Unique event identifier                                  |
 | event_type      | TEXT    | DNS response                                             |
 | domain_name     | TEXT    | Domain name to be looked up                              |
@@ -123,6 +125,7 @@ configuration.
 | eid          | TEXT    | Unique event identifier                    |
 | target_path  | TEXT    | Complete file path                         |
 | md5          | TEXT    | MD5 hash of file contents, if available    |
+| sha256       | TEXT    | SHA256 hash of file contents, if available |
 | hashed       | INTEGER | Hash available or not                      |
 | uid          | TEXT    | User name of file owner                    |
 | time         | INTEGER | Time stamp of the event in unix format     |
@@ -159,6 +162,7 @@ Captures the http requests and targets details.
 
 | Column               | Type    | Description                            |
 |----------------------|---------|----------------------------------------|
+| action               | TEXT    | Http events                            |
 | event_type           | TEXT    | Http Events                            |
 | eid                  | INTEGER | Unique Event identifier                |
 | pid                  | TEXT    | Windows provided process id            |
@@ -176,6 +180,7 @@ Captures the load of binary executable files and their certificate information.
 
 | Column               | Type    | Description                                      |
 |----------------------|---------|--------------------------------------------------|
+| action               | TEXT    | Image load                                       |
 | eid                  | TEXT    | Unique event identifier                          |
 | pid                  | INTEGER | Process identifier of the originating process    |
 | md5                  | TEXT    | Process Guid                                     |
@@ -229,20 +234,6 @@ on MSR, their properties and values.
 | rapl_power_limit   | INTEGER | CPU properties from MSR (MSR_PKG_POWER_LIMIT)      |
 | rapl_energy_status | INTEGER | CPU properties from MSR (MSR_PKG_ENERGY_STATUS)    |
 | rapl_power_units   | INTEGER | CPU properties from MSR (MSR_RAPL_POWER_UNIT)      |
-
-### win_obfuscated_ps Table
-
-Powershell based attacks can be *fileless*. Many of these attacks obfuscate
-powershell scripts and allow them evade detection. These scripts get logged in
-Windows Event Viewer. PolyLogyx uses intelligence and statistics to analyze the
-script logs to determine their obfuscation.
-
-| Column           | Type | Description                                            |
-|------------------|------|--------------------------------------------------------|
-| script_id        | TEXT | Script identifier as recorded in the Windows event log |
-| time_created     | TEXT | Timestamp                                              |
-| obfuscated_state | TEXT | Obfuscated or Un-obfuscated                            |
-| obfuscated_score | TEXT | Numerical value to measure the degree of obfuscation   |
 
 ### win_pefile_events Table
 
@@ -339,6 +330,7 @@ Captures the remote thread creations.
 
 | Column              | Type    | Description                                                 |
 |---------------------|---------|-------------------------------------------------------------|
+| action              | TEXT    | Remote thread creation                                      |
 | eid                 | TEXT    | Unique event identifier                                     |
 | src_pid             | INTEGER | Windows provided Process identifier of source process       |
 | src_process_guid    | TEXT    | Src_process_guid                                            |
@@ -385,6 +377,28 @@ Captures socket operations, such as accept, listen, and close.
 | remote_address | TEXT    | Remote IP address (destination)               |
 | local_port     | INTEGER | Local port number for connection              |
 | remote_port    | INTEGER | Remote port number                            |
+
+### win_ssl_events Table
+
+Captures SSL cerificate events. 
+
+| Column         | Type    | Description                                   |
+|----------------|---------|-----------------------------------------------|
+| action         | TEXT    | TLS certificate event                         |
+| event_type     | TEXT    | SSL event                                     |
+| eid            | TEXT    | Unique event identifier                       |
+| issuer_name    | TEXT    | Issuer name                                   |
+| subject_name   | TEXT    | Subject name                                  |
+| serial_number  | TEXT    | Serial number                                 |
+| dns_names      | TEXT    | Domain names associated with the certficate   |
+| pid            | INTEGER | Process identifier of the originating process |
+| process_guid   | TEXT    | Process Guid                                  |
+| process_name   | TEXT    | Process name                                  |
+| remote_address | TEXT    | Remote IP address (destination)               |
+| remote_port    | INTEGER | Remote port number                            |
+| time           | INTEGER | Time stamp of the event in unix format        |
+| utc_time       | TEXT    | Time stamp of the event in UTC                |
+
 
 ### win_yara_events Table
 

@@ -175,6 +175,7 @@ Event filtering is supported on following tables (and fields or columns).
 |  win_remote_thread_events                                   | src_path, target_path, and function_name          |
 |  win_dns_events                                             | domain_name       |
 |  win_dns_response_events                                    | domain_name       |
+|  win_ssl_events                                             | process_name       |
 
 
 |										|																							|
