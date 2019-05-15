@@ -69,6 +69,7 @@ Captures the DNS look up details.
 
 | Column          | Type    | Description                                      |
 |-----------------|---------|--------------------------------------------------|
+| action          | TEXT    | DNS lookup                                       |
 | eid             | TEXT    | Unique event identifier                          |
 | event_type      | TEXT    | DNS request                                      |
 | domain_name     | TEXT    | Domain name to be looked up                      |
@@ -88,6 +89,7 @@ the source process based on IP address in the
 
 | Column          | Type    | Description                                              |
 |-----------------|---------|----------------------------------------------------------|
+| action          | TEXT    | DNS response                                             |
 | eid             | TEXT    | Unique event identifier                                  |
 | event_type      | TEXT    | DNS response                                             |
 | domain_name     | TEXT    | Domain name to be looked up                              |
@@ -123,6 +125,7 @@ configuration.
 | eid          | TEXT    | Unique event identifier                    |
 | target_path  | TEXT    | Complete file path                         |
 | md5          | TEXT    | MD5 hash of file contents, if available    |
+| sha256       | TEXT    | SHA256 hash of file contents, if available |
 | hashed       | INTEGER | Hash available or not                      |
 | uid          | TEXT    | User name of file owner                    |
 | time         | INTEGER | Time stamp of the event in unix format     |
