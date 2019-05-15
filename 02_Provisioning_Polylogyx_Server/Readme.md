@@ -105,12 +105,12 @@ server.
     POLYLOGYX_PASSWORD=<login password> 
     *RSYSLOG_FORWARDING=true
     *LOGSTASH_FORWARDING=true
-     VT_API_KEY=<VirusTotal Api Key> 
-     IBMxForceKey=<IBMxForce Key> 
-     IBMxForcePass=<IBMxForce Pass>
-     APPLY_DEFAULT_POLICY=true|false  
-     PURGE_DATA_DURATION=<number of days>  
-     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes> 
+    VT_API_KEY=<VirusTotal Api Key> 
+    IBMxForceKey=<IBMxForce Key> 
+    IBMxForcePass=<IBMxForce Pass>
+    APPLY_DEFAULT_POLICY=true|false  
+    PURGE_DATA_DURATION=<number of days>  
+    THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes> 
      ```   
     3. Ensure all the ports specified in the YAML file are open and accessible
     4. Save the file.
