@@ -1,6 +1,6 @@
 Understanding Rules
 ===============
-Rules, in the PolyLogyx framework, offer a mechanish to deep-dive or analyze the data fetched from nodes. You can define rules, based on different criteria, to detect malicious activity in the enterprise. 
+Rules, in the PolyLogyx framework, offer a mechanish to detect malicious files and network connections.  
 
 You can define rules using the web interface. Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
