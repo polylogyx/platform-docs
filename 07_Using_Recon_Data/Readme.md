@@ -29,7 +29,7 @@ fetched data provides insight and visibility on these aspects.
 | Time                            | Provides the system time stamp in Unix and UTC formats. The timestamp represents the time at which the agent starts after installation or reboot. |                                                                                                                                                    
 | Windows epp table               | Lists the status of the Anti-Virus solutions on your system.    |                                                                                                                                                                                                                                      
 | Windows programs                | Lists the Windows programs installed or running on your system. |                                                                                                                                                                                                                                     
-| Windows services                | A Windows service, or a daemon on Unix, is a program that operates in the background and is often loaded automatically on start-up. Lists the services running on your system.  |                                                                                                                      
+| Windows services                | A Windows service is a program that operates in the background and is often loaded automatically on start-up. Lists the services running on your system.  |                                                                                                                      
 
 Accessing data
 --------------
