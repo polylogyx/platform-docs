@@ -85,7 +85,7 @@ server.
     ```~/Downloads\$ cd plgx_docker/```
 4.  Enter the certificate-generate.sh script to generate certificates for
     osquery.  
-    ```~/Downloads/plgx_docker$ sh ./certificate-generate.sh x.x.x.x```
+    ```~/Downloads/plgx_docker$ sh ./certificate-generate.sh <IP address>```
     ```x.x.x.x
     Generating a 2048 bit RSA private key
     .........................................................................................+++
@@ -93,45 +93,56 @@ server.
     writing new private key to 'nginx/private.key'
     ``` 
             
-In the syntax, \<IP address\> is the IP address of the system on which on to
-host the PolyLogyx server. This will generate the certificate for osquery (used
-for provisioning clients) and place the certificate in the plgx_docker folder.
+    In the syntax, \<IP address\> is the IP address of the system on which on to host the PolyLogyx server. This will generate 
+    the certificate for osquery (used for provisioning clients) and place the certificate in the plgx_docker folder.
 
-1.  Modify and save the docker-compose.yaml file.
+5.  Modify and save the docker-compose.yaml file.
 
     1.  Edit the following configuration parameters in the file. In the syntax, replace the values in angle brackets with required values.
-```
-ENROLL_SECRET=<secret value>
-DOORMAN_USER=<user login name>
-DOORMAN_PASSWORD=<login password>
-```  
-             
-1.  Ensure all the ports specified in the YAML file are open and accessible
-2.  Save the file.
-3.  Run the following command to start Docker compose.
+    ```
+    ENROLL_SECRET=<secret value>
+    POLYLOGYX_USER=<user login name> 
+    POLYLOGYX_PASSWORD=<login password> 
+    *RSYSLOG_FORWARDING=true
+    *LOGSTASH_FORWARDING=true
+     VT_API_KEY=<VirusTotal Api Key> 
+     IBMxForceKey=<IBMxForce Key> 
+     IBMxForcePass=<IBMxForce Pass>
+     APPLY_DEFAULT_POLICY=true|false  
+     PURGE_DATA_DURATION=<number of days>  
+     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes> 
+     ```   
+    3. Ensure all the ports specified in the YAML file are open and accessible
+    4. Save the file.
+6.  Run the following command to start Docker compose.
 
     ```docker-compose up```
     
     Typically, this takes approximately 10-15 minutes. The following lines appear on
     the screen when Docker starts:
-    ````~/Downloads/plgx_docker$ docker-compose up
-    Starting plgx_docker_rabbit1_1  ... done
-    Starting plgx_docker_postgres_1 ... done
-    Starting plgx_docker_vasp_1     ... done
-    Attaching to plgx_docker_rabbit1_1, plgx_docker_postgres_1, plgx_docker_vasp_1```
-1.  Log on to server using following URL using the latest version of Chrome or
+    ````Starting plgx_docker_rabbit1_1  ... done
+        Starting plgx_docker_postgres_1 ... done
+        Starting plgx_docker_vasp_1     ... done
+        Attaching to plgx_docker_rabbit1_1, plgx_docker_postgres_1, plgx_docker_vasp_1
+        .
+        .
+        .
+        API key is : <API_KEY>
+        Server is up and running```
+        
+7.  Log on to server using following URL using the latest version of Chrome or
     Firefox browser.
     
     ```https://<ip address>:9000/manage```
 
-In the syntax, `<IP address>` is the IP address of the system on which the
-PolyLogyx server is hosted. This is the IP address you specified in step 4.
+    In the syntax, `<IP address>` is the IP address of the system on which the
+    PolyLogyx server is hosted. This is the IP address you specified in step 4.
 
-1.  Ignore the SSL warning, if any.
+8.  Ignore the SSL warning, if any.
 
-2.  Log on to the server using the credentials provided above at step 5a.
+9.  Log on to the server using the credentials provided above at step 5a.
 
-3.  Provision the clients. For more information, see [Provisioning the PolyLogyx
+10.  Provision the clients. For more information, see [Provisioning the PolyLogyx
     Client for Endpoints](#provisioning-the-polylogyx-client-for-endpoints).
 
 Uninstalling the Server 
