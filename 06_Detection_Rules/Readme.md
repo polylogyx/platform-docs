@@ -10,4 +10,7 @@ You can define rules using the web interface. Perform these steps to view or edi
 
   The add rule page is displayed.
 
-     ![add_rule_dialog](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog.png)
+ ![add_rule_dialog](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog.png)
+ 
+ 
+ 
