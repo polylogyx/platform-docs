@@ -145,9 +145,8 @@ existing Docker images and containers.
 Upgrading the Server
 --------------------
 
-Upgrading the PolyLogyx server is manual process. 
+Upgrading the PolyLogyx server is manual process. Complete these steps to perform an upgrade:
 
-Here are the setsp to perform to complete upgrade:
 1. Back up the certificate.crt and private.key files stored in the nginx directory in the installation
 directory. 
 2. Back up the postgres-data folder from the existing installation directory. 
