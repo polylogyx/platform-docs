@@ -49,8 +49,7 @@ events:
 
 -   File Acquistion
 
-For more information on the type of information, see Using Recon
-Data.
+For more information on the type of information, see https://github.com/polylogyx/osq-ext-bin
 
 ### Intrusion detection
 

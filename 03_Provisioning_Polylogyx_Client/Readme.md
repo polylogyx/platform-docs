@@ -91,7 +91,7 @@ PSEXEC or WMIC command line utilities) with administrative privileges.
 
 Here is the syntax to execute the installation command.
 
-```plgx_cpt.exe -i <ip address> -h <hostname> -k <server's public key file> [-p <port number>] [-v <osquery version>] [-o <download directory>]```
+```plgx_cpt.exe -i <ip address> | -h <hostname> -k <server's public key file> [-p <port number>] [-v <osquery version>] [-o <download directory>]```
 
 Here is the syntax description.
 
@@ -242,7 +242,7 @@ Follow these steps to upgrade the PolyLogyx client.
 
     Here is the syntax to execute the upgrade command.
 
-```plgx_cpt.exe [-g {<f> <update flagsfile>} | {<x> <update extension binary alone>} | {<a> <update osquery full>} | {<o> <update osquery only without extension>} | {<c> <update cpt>]}```
+```plgx_cpt.exe -i <ip address> | -h <hostname> -k <server's public key file> [-g {<f> <update flagsfile>} | {<x> <update extension binary alone>} | {<a> <update osquery full>} | {<o> <update osquery only without extension>} | {<c> <update cpt>]}```
 
 The -g parameter is used to upgrade the agent and cannot be combined with any
 other options. With the –g option, you must use one of these options:

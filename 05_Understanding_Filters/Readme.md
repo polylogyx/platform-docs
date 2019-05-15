@@ -133,17 +133,17 @@ Examples
 
 Here are a few examples of exclude filters.
 ``` "win_process_events": {	
-	"cmdline": {
-		"exclude" : {
-			"values": 
-				[
-				"C:\\Windows\\system32\\DllHost.exe /Processid*",
-				"C:\\Windows\\system32\\SearchIndexer.exe /Embedding",
-				"C:\\windows\\system32\\wermgr.exe -queuereporting",
-				]
-     }
-    }
-                                         }
+			"cmdline": {
+				"exclude" : {
+					"values": 
+					[
+					"C:\\Windows\\system32\\DllHost.exe /Processid*",
+					"C:\\Windows\\system32\\SearchIndexer.exe /Embedding",
+					"C:\\windows\\system32\\wermgr.exe -queuereporting",
+					]
+     		            	           }
+                                    }
+                            }
 ```
 Here are a few examples of include filters.
 ``` "win_registry_events": {
@@ -157,8 +157,8 @@ Here are a few examples of include filters.
 					"*Windows\\System\\Scripts*",
 					]
 					   }
-					 }
-			}
+				      }
+			     }
 ```
 
 Tables that Support Filters
@@ -180,4 +180,4 @@ Event filtering is supported on following tables (and fields or columns).
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Client Configurations](../04_PolyLogyx_Client_Configurations/Readme.md)  | [Next >> Configuring Queries](../06_Queries/Readme.md)|
+|[Previous << Client Configurations](../04_PolyLogyx_Client_Configurations/Readme.md)  | [Next >> Detection Rules](../06_Detection_Rules/Readme.md)|
