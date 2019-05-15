@@ -40,7 +40,7 @@ following information.
 
     -   Quad Core processor
 
-    -   16 GB RAM
+    -   16 GB RAM (Use 64 GB RAM if supported clients > 500)
 
 -   Contact PolyLogyx to procure the following:
 
