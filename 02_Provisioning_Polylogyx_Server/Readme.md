@@ -154,15 +154,15 @@ directory.
 2. Back up the postgres-data folder from the existing installation directory. 
 3. Uninstall the installed version. For more
 information, see [Uninstalling the Server](#uninstalling-the-server).
-4. Install the latest version of the server. 
-    When installing, instead of performing step 4:
-       1. Copy the certificate.crt and private.key files you backed up to the nginx directory. 
-       2. Set –tls_hostname=<IP_ADDRESS>:9000 for both the resources/osquery.flags and resources/osquery_linux.flags files.
-       3. Copy the backed up postgres-data folder you backed up to the new installation directory.
-For more information, see [Installing the PolyLogyx Server](#installing-the-polylogyx-server).
+4. Install the latest version of the server. When installing, instead of performing step 4:
 
-
-
+    1. Copy the certificate.crt and private.key files you backed up to the nginx directory. 
+    
+    2. Set –tls_hostname=<IP_ADDRESS>:9000 for both the resources/osquery.flags and resources/osquery_linux.flags files.
+    
+    3. Copy the backed up postgres-data folder you backed up to the new installation directory.
+    
+   For more information, see [Installing the PolyLogyx Server](#installing-the-polylogyx-server).
 
 |										|																							|
 |:---									|													   								    ---:|
