@@ -145,15 +145,18 @@ existing Docker images and containers.
 Upgrading the Server
 --------------------
 
-Upgrading the PolyLogyx server is manual process. You must uninstall the
-installed version and then install the latest version of the server. For more
-information, see [Uninstalling the Server](#uninstalling-the-server) and
-[Installing the PolyLogyx Server](#installing-the-polylogyx-server).
+Upgrading the PolyLogyx server is manual process. 
 
-Troubleshooting Server Installation Issues
-------------------------------------------
+Here are the setsp to perform to complete upgrade:
+1. Back up the certificate.crt and private.key files stored in the nginx directory in the installation
+directory. 
+2. Back up the postgres-data folder from the existing installation directory. 
+3. Uninstall the installed version. For more
+information, see [Uninstalling the Server](#uninstalling-the-server).
+4. Install the latest version of the server. For more
+information, see [Installing the PolyLogyx Server](#installing-the-polylogyx-server).
 
-To be added
+
 
 
 |										|																							|
