@@ -3,10 +3,7 @@ Provisioning the PolyLogyx Client for Endpoints
 
 The PolyLogyx client that is a part of the PolyLogyx endpoint platform,
 leverages osquery, a multi-platform operating system monitoring and
-instrumentation framework. Typically, deploying osquery and running it across
-your fleet can be a daunting and complicated task. Using CPT makes it easy to
-deploy and communicate with management server. Here are the features the
-PolyLogyx client offers:
+instrumentation framework. Here are the features the PolyLogyx client offers:
 
 -   Compliance (PCI, HIPAA)
 
@@ -19,6 +16,8 @@ PolyLogyx client offers:
 -   Host intrusion detection
 
 -   Performance and operational troubleshooting
+
+Typically, deploying osquery and running it across your fleet can be a daunting and complicated task, because of its large configuration surface and option.  To simplify the deployment of PolyLogyx osquery based agent, the platform is shipped with a Client Provisioning Tool (CPT) that wraps all the necessary configuration and makes the client provisioning process extremely simplified. 
 
 This chapter includes these topics:
 
