@@ -48,6 +48,9 @@ Installing the PolyLogyx client involves these steps:
 
 Before you begin installation, ensure you complete the following prerequisites.
 
+-   Procure the needed software by requesting the access from the [PolyLogyx
+    site](https://polylogyx.com/downloads).
+
 -   Provision a PolyLogyx server using a docker image. For more information, see
     [Provisioning the PolyLogyx Server](#getting-started).
 
@@ -58,7 +61,7 @@ Before you begin installation, ensure you complete the following prerequisites.
 
     -   Support 64-bit architecture
 
-    -   Have Windows 7 or later operating system installed
+    -   Windows 7 or later operating system installed as specified [here](https://github.com/polylogyx/osq-ext-bin)
 
     -   Do not have these installed:
 
@@ -70,13 +73,6 @@ Before you begin installation, ensure you complete the following prerequisites.
         interfere with a remote installation
 
     -   Allow outbound TCP traffic on port 9000
-
--   Procure the needed software by downloading the following from the [PolyLogyx
-    site](https://polylogyx.com/download).
-
-    -   CPT utility
-
-    -   Public key file
 
 ### Deploying the PolyLogyx Client
 
