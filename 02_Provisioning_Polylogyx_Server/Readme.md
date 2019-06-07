@@ -113,14 +113,14 @@ server.
     PURGE_DATA_DURATION=<number of days>  
     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes> 
      ```   
-     | Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|ENROLL_SECRET=<secret value>
-    |   |
-|POLYLOGYX_USER=<user login name> 
-   |   |
-|POLYLOGYX_PASSWORD=<login password> 
-     |   |
+|ENROLL_SECRET
+    | Specifies the enrollment shared secret that is used for authentication.     |
+|POLYLOGYX_USER 
+   | Refers to the user login name for the PolyLogyx server.   |
+|POLYLOGYX_PASSWORD 
+     | Indicates to the password for the PolyLogyx server user.  |
 |*RSYSLOG_FORWARDING=true
    |   |
 |*LOGSTASH_FORWARDING=true
@@ -136,7 +136,8 @@ server.
 |PURGE_DATA_DURATION=<number of days>
     |   |
 |THREAT_INTEL_LOOKUP_FREQUENCY          
-    |   |. 
+    |   |
+    
     3. Ensure all the ports specified in the YAML file are open and accessible
     4. Save the file.
 6.  Run the following command to start Docker compose.
