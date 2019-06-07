@@ -113,7 +113,6 @@ server.
     PURGE_DATA_DURATION=<number of days>  
     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes>
      ```   
-
 | Parameter | Description                                                                                                                                                                                               |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ENROLL_SECRET | Specifies the enrollment shared secret that is used for authentication.                                                                                                                              |
@@ -126,10 +125,11 @@ server.
 | IBMxForcePass       | IBMxForce Pass |
 | APPLY_DEFAULT_POLICY       | true|false |
 | PURGE_DATA_DURATION       | number of days |
-| THREAT_INTEL_LOOKUP_FREQUENCY       |   |
+| THREAT_INTEL_LOOKUP_FREQUENCY       |  
+      
 
-    3. Ensure all the ports specified in the YAML file are open and accessible
-    4. Save the file.
+    2. Ensure all the ports specified in the YAML file are open and accessible
+    3. Save the file.
 6.  Run the following command to start Docker compose.
 
     ```docker-compose up```
