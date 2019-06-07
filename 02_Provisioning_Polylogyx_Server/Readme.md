@@ -111,20 +111,31 @@ server.
     IBMxForcePass=<IBMxForce Pass>
     APPLY_DEFAULT_POLICY=true|false  
     PURGE_DATA_DURATION=<number of days>  
-    THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes> 
+    THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes>
      ```   
+
+| Parameter | Description                                                                                                                                                                                  |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ENROLL_SECRET | Specifies the enrollment shared secret that is used for authentication.                                                                                                                              |
+| POLYLOGYX_USER       | Refers to the user login name for the PolyLogyx server.                                                                                                          |
+| POLYLOGYX_PASSWORD       | Indicates to the password for the PolyLogyx server user.                                                                                                              |
+| RSYSLOG_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using rsyslog. |
+| LOGSTASH_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using logstash.                                                                             |
+
+
+
 | Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|ENROLL_SECRET
-    | Specifies the enrollment shared secret that is used for authentication.     |
-|POLYLOGYX_USER 
-    | Refers to the user login name for the PolyLogyx server.   |
-|POLYLOGYX_PASSWORD 
-    | Indicates to the password for the PolyLogyx server user.  |
-|RSYSLOG_FORWARDING
-    | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using rsyslog.     |
-|LOGSTASH_FORWARDING=true
-   | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using logstash.     |
+|
+    |      |
+| 
+    |   |
+| 
+    |   |
+|
+    |      |
+|=true
+   |     |
 |VT_API_KEY=<VirusTotal Api Key> 
    |   |
 |IBMxForceKey=<IBMxForce Key> 
