@@ -113,9 +113,10 @@ server.
     PURGE_DATA_DURATION=<number of days>  
     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes>
      ```   
-    | Parameter | Description 
-    |
-    |-----------|--------------------------------------------------------------------------------------------------|
+   
+   | Parameter | Description      
+   |
+       |--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     | ENROLL_SECRET | Specifies the enrollment shared secret that is used for authentication.   
     |
     | POLYLOGYX_USER       | Refers to the user login name for the PolyLogyx server.      
