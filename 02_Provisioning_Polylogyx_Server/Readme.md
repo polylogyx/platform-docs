@@ -113,8 +113,8 @@ server.
     PURGE_DATA_DURATION=<number of days>  
     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes>
      ```   
-        
-        | Parameter | Description                                                                                                                                                                                  |
+                
+      | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | \-i or -h | Specify one of the following. This is a required parameter. -i represents the IP address of the PolyLogyx management server (x.x.x.x format). -h represents the fully qualified domain name to the management server in the format a.b.c. You don’t need to https.                                                                                                                              |
 | \-k       | Indicates the full path to the server public key file. This is a required parameter.                                                                                                         |
