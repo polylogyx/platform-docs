@@ -115,31 +115,22 @@ server.
      ```   
 | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| \-i or -h | Specify one of the following. This is a required parameter. -i represents the IP address of the PolyLogyx management server (x.x.x.x format). -h represents the fully qualified domain name to the management server in the format a.b.c. You don’t need to https.                                                                                                                              |
-| \-k       | Indicates the full path to the server public key file. This is a required parameter.                                                                                                         |
-| \-p       | Represents the server port. This is an optional parameter and defaults to 9000.                                                                                                              |
-| \-v       | Represents the osquery version to be installed. Currently, only version 3.2.6 is supported. This is an optional parameter. If you do not specify a version, the latest version is installed. |
+| ENROLL_SECRET | Specifies the enrollment shared secret that is used for authentication.                                                                                                                              |
+| POLYLOGYX_USER       | Refers to the user login name for the PolyLogyx server.                                                                                                         |
+| POLYLOGYX_PASSWORD       | Indicates to the password for the PolyLogyx server user.                                                                                                              |
+| RSYSLOG_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using rsyslog. |
 | \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            |               
             
     2. Ensure all the ports specified in the YAML file are open and accessible
     3. Save the file.
     
-
-    
-    
-    
-    
-| Parameter | Description 
+ | 
 |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|        |   
 |
-| ENROLL_SECRET | Specifies the enrollment shared secret that is used for authentication.
+|        |   
 |
-| POLYLOGYX_USER       | Refers to the user login name for the PolyLogyx server.  
-|
-| POLYLOGYX_PASSWORD       | Indicates to the password for the PolyLogyx server user.  
-|
-| RSYSLOG_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using rsyslog.
+|        | 
 |
 | LOGSTASH_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using logstash.
 |
