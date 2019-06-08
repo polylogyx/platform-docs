@@ -113,43 +113,25 @@ server.
     PURGE_DATA_DURATION=<number of days>  
     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes>
      ```   
+           
+    2. Ensure all the ports specified in the YAML file are open and accessible
+    3. Save the file.
+    
 | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ENROLL_SECRET | Specifies the enrollment shared secret that is used for authentication.                                                                                                                              |
 | POLYLOGYX_USER       | Refers to the user login name for the PolyLogyx server.                                                                                                         |
 | POLYLOGYX_PASSWORD       | Indicates to the password for the PolyLogyx server user.                                                                                                              |
 | RSYSLOG_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using rsyslog. |
-| \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            |  
-| \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            | 
-| \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            | 
-            
-    2. Ensure all the ports specified in the YAML file are open and accessible
-    3. Save the file.
-    
- | 
-|
-|        |   
-|
-|        |   
-|
-|        | 
-|
-| LOGSTASH_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using logstash.
-|
-| VT_API_KEY       | Represents the VirusTotal API key.
-|
-| IBMxForceKey       | Represents the IBMxForce key. 
-|
-| IBMxForcePass       | Specifies the IBMxForce pass. 
-|
-| APPLY_DEFAULT_POLICY       | Indicates whether the default policy should be applied. Possible values are true and false. 
-|
-| PURGE_DATA_DURATION       | Specifies the frequency (in number of days) for purging the data. 
-|
-| THREAT_INTEL_LOOKUP_FREQUENCY       |Specifies the frequency (in minutes) for fetching threat intelligence data. 
-| 
-    
-    
+| LOGSTASH_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using logstash.                                                                            |  
+| VT_API_KEY       | Represents the VirusTotal API key.                                                                            | 
+| IBMxForceKey       | Represents the IBMxForce key.                                                                            | 
+| IBMxForcePass       | Specifies the IBMxForce pass.                                                                            | 
+| APPLY_DEFAULT_POLICY       | Indicates whether the default policy should be applied. Possible values are true and false.                                                                            | 
+| PURGE_DATA_DURATION       | Specifies the frequency (in number of days) for purging the data.                                                                            | 
+| THREAT_INTEL_LOOKUP_FREQUENCY       | Specifies the frequency (in minutes) for fetching threat intelligence data.                                                                            | 
+
+   
 6.  Run the following command to start Docker compose.
 
     ```docker-compose up```
