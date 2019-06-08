@@ -126,9 +126,8 @@ server.
 | APPLY_DEFAULT_POLICY       | Indicates whether the default policy should be applied. Possible values are true and false.                                                                            | 
 | PURGE_DATA_DURATION       | Specifies the frequency (in number of days) for purging the data.                                                                            | 
 | THREAT_INTEL_LOOKUP_FREQUENCY       | Specifies the frequency (in minutes) for fetching threat intelligence data.                                                                            |   
-
-   2. Ensure all the ports specified in the YAML file are open and accessible
-   3. Save the file.
+    2. Ensure all the ports specified in the YAML file are open and accessible
+    3. Save the file.
     
 
 
