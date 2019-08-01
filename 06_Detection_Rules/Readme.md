@@ -20,6 +20,5 @@ You can define rules using the web interface. Perform these steps to view or edi
 
   ![add_rule_dialog1](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog1.png)
  
-
-
- 
+ |:---									|													   								    ---:|
+|[Previous << Understanding Filters](../05_Understanding_Filters/Readme.md)  | [Next >> Using Recon Data](../07_Using Recon Data/Readme.md)|
