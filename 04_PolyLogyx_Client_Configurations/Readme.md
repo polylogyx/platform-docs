@@ -88,7 +88,9 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
  
-10. Click Update to save your changes. 
+5. Click Update to save your changes. 
+
+
 |										|																							|
 |:---									|													   								    ---:|
 |[Previous << Provisioning the PolyLogyx Client](../03_Provisioning_Polylogyx_Client/Readme.md)  | [Next >> Configuring the filters](../05_Understanding_Filters/Readme.md)|
