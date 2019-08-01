@@ -39,7 +39,7 @@ Perform these steps to view or edit this configuration:
    The page lists the predefined queries available for Windows, Linux, and Apple.  
 3. Select an operating system, such as Windows.
 
-   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new.png)
+   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new1.png)
 
 4. Review the predefined queries applied on the Windows endpoints. 
 5. Deselect a query to remove it from the applied client configuration. 
