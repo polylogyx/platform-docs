@@ -56,6 +56,7 @@ Perform these steps to view or edit this configuration:
 9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
 For more information on filters, review the  [Understanding Filters](https://github.com/preetpoly/test/tree/pooja/Doc/Understanding_Filters#understanding-filters) section.
+10. Click Update to save your changes. 
 
 PolyLogyx configuration options
 ---------------------
@@ -71,7 +72,7 @@ Perform these steps to view or edit this configuration:
 
 3. Review the listed options. 
 
-   ![poly_options](https://github.com/preetpoly/test/blob/pooja/poly_options.png)
+   ![poly_options1](https://github.com/preetpoly/test/blob/pooja/poly_options1.png)
 
 4. Edit the option values, as needed, and click <b>update option</b>.
    Here are the options descriptions. 
@@ -87,7 +88,7 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
  
-
+10. Click Update to save your changes. 
 |										|																							|
 |:---									|													   								    ---:|
 |[Previous << Provisioning the PolyLogyx Client](../03_Provisioning_Polylogyx_Client/Readme.md)  | [Next >> Configuring the filters](../05_Understanding_Filters/Readme.md)|
