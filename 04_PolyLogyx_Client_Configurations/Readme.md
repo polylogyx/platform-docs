@@ -32,12 +32,12 @@ Predefined filters and queries
 As soon as an agent checks-in with the server, a default configuration is applied to the agent based on the operating system of the endpoint. The configuration contains the list of scheduled queries and filters that are applied on the agent. 
 Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
-2. Navigate to View  > Configs.
+2. Navigate to CONFIG MANAGEMENT  > Config.
 
    ![configs_menu](https://github.com/preetpoly/test/blob/pooja/configs_menu.png)
 
-   The configuration consists of the scheduled query intervals for various osquery tables. 
-3. Select a table from the list, such as default_config_windows.
+   The page lists the predefined queries available for Windows, Linux, and Apple.  
+3. Select an operating system, such as Windows.
 
    ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new.png)
 
