@@ -30,6 +30,12 @@ Update the parameters to configure the deployment environment to meet your speci
 Predefined filters and queries
 ---------------
 As soon as an agent checks-in with the server, a default configuration is applied to the agent based on the operating system of the endpoint. The configuration contains the list of scheduled queries and filters that are applied on the agent. 
+
+For the Windows operating system, PolyLogyx Extension is part of the agent and therefore the configuration includes the following:
+    a. Additional filtering criteria to eliminate <i>white noise</i> from the real-time telemetry. 
+    b. Set of scheduled queries that captures all the process creation and network connections data from the endpoint. 
+    The configurations are editable and the changes in the configuration are picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file.
+
 Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT  > Config.
@@ -44,9 +50,10 @@ Perform these steps to view or edit this configuration:
 4. Review the predefined queries applied on the Windows endpoints. 
 5. Deselect a query to remove it from the applied client configuration. 
 6. Optionally, modify the interval for a query to specify how often the query is run. The time duration (in seconds) specifies the duration after which the query is run on the client and query results are pushed to the server.  
-    
-    
-    For Windows operating system, PolyLogyx Extension is part of the agent and therefore the configuration carries additional filtering criteria to eliminate <i>white noise</i> from the real time telemetry and a set of scheduled queries that captures all the process creation and network connections data from the endpoint. The configurations are editable and the changes in the configuration gets picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file. The edits can be done to add more queries, change the schedules or filters. 
+7. Scroll down to view the Additional Config and Filters pane. 
+8. Select the Tree view to review the predefined values and filters. 
+![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
+9. Optionally, edit or define new filters, as needed.      
  
 For more information on filters, review the  [Understanding Filters](https://github.com/preetpoly/test/tree/pooja/Doc/Understanding_Filters#understanding-filters) section.
 
