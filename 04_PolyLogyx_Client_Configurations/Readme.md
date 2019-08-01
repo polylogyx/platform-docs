@@ -53,7 +53,7 @@ Perform these steps to view or edit this configuration:
 7. Scroll down to view the Additional Config and Filters pane. 
 8. Select the Tree view to review the predefined values and filters. 
 ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
-9. Optionally, edit or define new filters, as needed.      
+9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
 For more information on filters, review the  [Understanding Filters](https://github.com/preetpoly/test/tree/pooja/Doc/Understanding_Filters#understanding-filters) section.
 
@@ -65,9 +65,9 @@ GLOBAL for all nodes vs Custom config for selected nodes
 
 Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
-2. Navigate to Management > Options.
+2. Navigate to CONFIG MANAGEMENT > Options.
 
-   ![options_menu](https://github.com/preetpoly/test/blob/pooja/options_menu.png)
+   ![options_menu1](https://github.com/preetpoly/test/blob/pooja/options_menu1.png)
 
 3. Review the listed options. 
 
