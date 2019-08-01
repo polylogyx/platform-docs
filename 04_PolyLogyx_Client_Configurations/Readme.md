@@ -55,7 +55,7 @@ Perform these steps to view or edit this configuration:
 ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
 9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
-For more information on filters, review the  [Understanding Filters](https://github.com/preetpoly/test/tree/pooja/Doc/Understanding_Filters#understanding-filters) section.
+For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/tree/pooja-develop/05_Understanding_Filters) section.
 
 10. Click Update to save your changes. 
 
