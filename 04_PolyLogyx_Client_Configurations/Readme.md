@@ -56,6 +56,7 @@ Perform these steps to view or edit this configuration:
 9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
 For more information on filters, review the  [Understanding Filters](https://github.com/preetpoly/test/tree/pooja/Doc/Understanding_Filters#understanding-filters) section.
+
 10. Click Update to save your changes. 
 
 PolyLogyx configuration options
