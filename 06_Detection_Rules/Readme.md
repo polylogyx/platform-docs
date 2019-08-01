@@ -19,6 +19,8 @@ You can define rules using the web interface. Perform these steps to view or edi
 5. Click Add Rule to open the Add Rule page to define a new rule. Click Add when done. 
 
   ![add_rule_dialog1](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog1.png)
- 
- |:---									|													   								    ---:|
-|[Previous << Understanding Filters](../05_Understanding_Filters/Readme.md)  | [Next >> Using Recon Data](../07_Using Recon Data/Readme.md)|
+  
+  
+  |										|																							|
+|:---									|													   								    ---:|
+|[Previous << Understanding Filters](../05_Understanding_Filters/Readme.md/Readme.md)  | [Next >> Using Recon Data](../07_Using Recon Data/Readme.md)|
