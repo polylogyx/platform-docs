@@ -23,28 +23,41 @@ Update the parameters to configure the deployment environment to meet your speci
 | extensions_autoload=C:\programdata\osquery\extensions.load | Informs the osquery agent to load an extension during osquery initialization. The extensions.load contains the location to the PolyLogyx Extension file. We recommended that you DO NOT change this flag.                                                                                                                                  |
 | extensions_interval=10 <br> extensions_timeout=90 <br> extensions_require=plgx_win_extension <br> allow_unsafe | Control the extension loading behavior of the osquery agent. We recommended that you DO NOT change this flag. |
 | disable_watchdog=true <br> watchdog_level=-1 | PolyLogyx Extension is a real-time event monitor on the endpoint. Real time monitoring can be voluminous and query paths to the tables where those events are recorded could surpass the default performance constraints imposed by osquery on its child processes and threads. It is therefore recommended to turn off those constraints for better stability.|
-| events_max=20000 <br> events_expiry=3600 | Manage the history of real time events recorded on the endpoint. By default, up to 20000 events are recorded and when the count is hit, all the events that are older than 3600 seconds are purged from the local database. Altering these values can cause performance impact on queries. | 
+| events_max=2500 <br> events_expiry=3600 | Manage the history of real time events recorded on the endpoint. By default, up to 2500 events are recorded and when the count is hit, all the events that are older than 3600 seconds are purged from the local database. Altering these values can cause performance impact on queries. | 
 | config_tls_refresh=300 | Controls the refresh interval for agent configuration. Any changes to the agent configuration (as defined below) will get picked by the agent after this interval.|
 
 
 Predefined filters and queries
 ---------------
 As soon as an agent checks-in with the server, a default configuration is applied to the agent based on the operating system of the endpoint. The configuration contains the list of scheduled queries and filters that are applied on the agent. 
+
+For the Windows operating system, PolyLogyx Extension is part of the agent and therefore the configuration includes the following:
+    a. Additional filtering criteria to eliminate <i>white noise</i> from the real-time telemetry. 
+    b. Set of scheduled queries that captures all the process creation and network connections data from the endpoint. 
+    The configurations are editable and the changes in the configuration are picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file.
+
 Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
-2. Navigate to View  > Configs.
+2. Navigate to CONFIG MANAGEMENT  > Config.
 
    ![configs_menu](https://github.com/preetpoly/test/blob/pooja/configs_menu.png)
 
-   The configuration consists of the scheduled query intervals for various osquery tables. 
-3. Select a table from the list, such as default_config_windows.
+   The page lists the predefined queries available for Windows, Linux, and Apple.  
+3. Select an operating system, such as Windows.
 
-   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new.png)
+   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
 
-
-    For Windows operating system, PolyLogyx Extension is part of the agent and therefore the configuration carries additional filtering criteria to eliminate <i>white noise</i> from the real time telemetry and a set of scheduled queries that captures all the process creation and network connections data from the endpoint. The configurations are editable and the changes in the configuration gets picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file. The edits can be done to add more queries, change the schedules or filters. 
+4. Review the predefined queries applied on the Windows endpoints. 
+5. Deselect a query to remove it from the applied client configuration. 
+6. Optionally, modify the interval for a query to specify how often the query is run. The time duration (in seconds) specifies the duration after which the query is run on the client and query results are pushed to the server.  
+7. Scroll down to view the Additional Config and Filters pane. 
+8. Select the Tree view to review the predefined values and filters. 
+![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
+9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
-For more information on filters, review the  [Understanding Filters](https://github.com/preetpoly/test/tree/pooja/Doc/Understanding_Filters#understanding-filters) section.
+For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/tree/pooja-develop/05_Understanding_Filters) section.
+
+10. Click Update to save your changes. 
 
 PolyLogyx configuration options
 ---------------------
@@ -54,13 +67,13 @@ GLOBAL for all nodes vs Custom config for selected nodes
 
 Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
-2. Navigate to Management > Options.
+2. Navigate to CONFIG MANAGEMENT > Options.
 
-   ![options_menu](https://github.com/preetpoly/test/blob/pooja/options_menu.png)
+   ![options_menu1](https://github.com/preetpoly/test/blob/pooja/options_menu1.png)
 
 3. Review the listed options. 
 
-   ![poly_options](https://github.com/preetpoly/test/blob/pooja/poly_options.png)
+   ![poly_options1](https://github.com/preetpoly/test/blob/pooja/poly_options1.png)
 
 4. Edit the option values, as needed, and click <b>update option</b>.
    Here are the options descriptions. 
@@ -76,6 +89,8 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
  
+5. Click Update to save your changes. 
+
 
 |										|																							|
 |:---									|													   								    ---:|
