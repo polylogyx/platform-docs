@@ -51,6 +51,18 @@ Steps 1, 2 and 3 apply to scheduled queries, query packs, and queries. Step 2 is
 | Query           | Yes                | Yes       | Yes                    |
 | Live query      | Yes                | No        | No                     |
 
+The client database can store up to 2500 events. If it receives more events, events older than an hour are deleted. These values are configurable. See <add link> for more information. 
+   
+Query Workflow
+-------------------- 
+Here are the types of queries you can use.
 
- 
+| Type              | Description                                                                                                                                                                                                                                                               |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Scheduled queries | As the name suggests, scheduled queries run periodically to fetch the specified data for you. After the PolyLogyx client is provisioned and the connection to the PolyLogyx server is established, predefined queries are run to pull relevant information for each node. |
+| Query packs       | A pack is a collection of queries. It allows you to logically group queries into categories. Once defined, you can run all queries included in a pack simultaneously.                                                                                                     |
+| Queries           | A query is an individual request for data from a table or collection of tables. Define an individual query, as needed, to fetch data for nodes.                                                                                                                           |
+| Live Queries      | A Live Query is suitable to meet your immediate and infrequent needs. It gives you a current snapshot of the nodes.                                                                                                                                                       |
+
+
 
