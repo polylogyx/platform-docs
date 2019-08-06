@@ -36,7 +36,7 @@ Here is an example.
 Query Workflow
 --------------------
 The following diagram depicts the high-level query workflow. 
-![query_workflow](https://github.com/preetpoly/test/blob/master/query_workflow.png)
+![query_workflow](https://github.com/preetpoly/test/blob/pooja/query_workflow.png)
 
  
 
