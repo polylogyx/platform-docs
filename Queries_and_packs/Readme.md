@@ -43,6 +43,14 @@ The following diagram depicts the high-level query workflow.
 3.	Query results can be viewed on the UI or by using APIs.
 Steps 1, 2 and 3 apply to scheduled queries, query packs, and queries. Step 2 isn’t performed for Live queries. The following table describes how query data is stored.
 
+| Query type      | Query Data Storage |           |                        |
+|-----------------|--------------------|-----------|------------------------|
+|                 | Client DB          | Server DB | Stream (if configured) |
+| Scheduled query | Yes                | Yes       | Yes                    |
+| Query pack      | Yes                | Yes       | Yes                    |
+| Query           | Yes                | Yes       | Yes                    |
+| Live query      | Yes                | No        | No                     |
+
 
  
 
