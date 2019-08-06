@@ -38,5 +38,11 @@ Query Workflow
 The following diagram depicts the high-level query workflow. 
 ![query_workflow](https://github.com/preetpoly/test/blob/pooja/query_workflow.png)
 
+1.	Query is pushed to the node at the next configuration refresh interval.
+2.	Query result is sent from the client database to the server database or stream (if configured).  
+3.	Query results can be viewed on the UI or by using APIs.
+Steps 1, 2 and 3 apply to scheduled queries, query packs, and queries. Step 2 isn’t performed for Live queries. The following table describes how query data is stored.
+
+
  
 
