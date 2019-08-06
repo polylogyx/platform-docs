@@ -53,7 +53,7 @@ Steps 1, 2 and 3 apply to scheduled queries, query packs, and queries. Step 2 is
 
 The client database can store up to 2500 events. If it receives more events, events older than an hour are deleted. These values are configurable. See <add link> for more information. 
    
-Query Workflow
+Types of Queries
 -------------------- 
 Here are the types of queries you can use.
 
@@ -64,5 +64,9 @@ Here are the types of queries you can use.
 | Queries           | A query is an individual request for data from a table or collection of tables. Define an individual query, as needed, to fetch data for nodes.                                                                                                                           |
 | Live Queries      | A Live Query is suitable to meet your immediate and infrequent needs. It gives you a current snapshot of the nodes.                                                                                                                                                       |
 
+Scheduled Queries 
+-------------------- 
+These out-of-box queries run frequently (as defined for the query) to fetch data from the nodes and require no configuration. 
 
+### Manage Scheduled Queries from the UI
 
