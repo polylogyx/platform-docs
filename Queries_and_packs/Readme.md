@@ -70,3 +70,5 @@ These out-of-box queries run frequently (as defined for the query) to fetch data
 
 ### Manage Scheduled Queries from the UI
 
+
+
