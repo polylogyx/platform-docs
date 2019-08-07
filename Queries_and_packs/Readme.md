@@ -135,11 +135,11 @@ Perform these steps to add a new query pack.
 1.Access the web interface for the server.
 
 2.Navigate to CONFIG MANAGEMENT  > Pack.
-  ![select_pack](https://github.com/preetpoly/test/blob/pooja/select_pack.png)
+   ![select_pack](https://github.com/preetpoly/test/blob/pooja/select_pack.png)
   
 3. Click Add Pack.
    The Add New Pack File dialog is displayed. 
-   ![add_pack](https://github.com/preetpoly/test/blob/pooja/add_pack.png)
+    ![add_pack](https://github.com/preetpoly/test/blob/pooja/add_pack.png)
    
 4.	Select a  category from the list. 
 
@@ -186,11 +186,11 @@ Perform these steps to add a new query:
 1.Access the web interface for the server.
 
 2.Navigate to CONFIG MANAGEMENT  > Pack.
-  ![select_query](https://github.com/preetpoly/test/blob/pooja/select_query.png)
+   ![select_query](https://github.com/preetpoly/test/blob/pooja/select_query.png)
   
 3. Click Add Query.
    The Add Query page is displayed. 
-   ![add_query](https://github.com/preetpoly/test/blob/pooja/add_query.png)
+    ![add_query](https://github.com/preetpoly/test/blob/pooja/add_query.png)
    
 3.	Enter the query details, such as name, query, interval, platform, and version.
 
