@@ -68,7 +68,20 @@ Scheduled Queries
 -------------------- 
 These out-of-box queries run frequently (as defined for the query) to fetch data from the nodes and require no configuration. 
 
-### Manage Scheduled Queries from the UI
+### Manage Scheduled Queries
+Perform these steps to view or edit this configuration:
+1. Access the web interface for the server.
+2. Navigate to CONFIG MANAGEMENT  > Config.
 
+   ![configs_menu](https://github.com/preetpoly/test/blob/pooja/configs_menu.png)
+
+   The page lists the predefined queries available for Windows, Linux, and Apple.  
+3. Select an operating system, such as Windows.
+
+   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
+
+4. Review the predefined queries applied on the Windows endpoints. 
+5. Deselect a query to remove it from the applied client configuration. 
+6. Optionally, modify the interval for a query to specify how often the query is run. The time duration (in seconds) specifies the duration after which the query is run on the client and query results are pushed to the server. 
 
 
