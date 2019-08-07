@@ -120,7 +120,6 @@ Perform these steps to view and edit packs:
 1. Access the web interface for the server.
 
 2. Navigate to CONFIG MANAGEMENT  > Pack.
-
   ![select_pack](https://github.com/preetpoly/test/blob/pooja/select_pack.png)
 
 3.	Review the available packs.
@@ -132,6 +131,7 @@ Perform these steps to view and edit packs:
 
 ### Define a new Pack
 Perform these steps to add a new query pack.
+
 1.Access the web interface for the server.
 
 2.Navigate to CONFIG MANAGEMENT  > Pack.
