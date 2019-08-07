@@ -68,8 +68,7 @@ Scheduled Queries
 -------------------- 
 These out-of-box queries run frequently (as defined for the query) to fetch data from the nodes and require no configuration. 
 
-### Manage Scheduled Queries
-Perform these steps to view or edit this configuration:
+Perform these steps to view or edit scheduled queries:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT  > Config.
 
@@ -83,5 +82,46 @@ Perform these steps to view or edit this configuration:
 4. Review the predefined queries applied on the Windows endpoints. 
 5. Deselect a query to remove it from the applied client configuration. 
 6. Optionally, modify the interval for a query to specify how often the query is run. The time duration (in seconds) specifies the duration after which the query is run on the client and query results are pushed to the server. 
+7. Click Update to save your changes.
+
+Query Packs
+--------------------
+By default, 13 packs are included with your PolyLogyx configuration.  You can add more packs, as needed, to meet your requirements. 
+
+Here are the available packs. (NEED TO VALIDATE)
+•	vuln-management
+•	unwanted-chrome-extensions
+•	it-compliance
+•	osquery-monitoring
+•	win-raw-events-pack
+•	windows-attacks
+•	binary-monitoring-pack
+•	windows-hardening
+•	incident-response
+•	hardware-monitoring
+•	all-events-pack
+•	forensic-pack
+•	user-creation-updation-pack
+
+### Manage Existing Packs 
+Perform these steps to apply or review the existing packs.
+1.	Access the web interface for the server.
+2.	Navigate to View > Packs.
+ADD IMAGE
+3.	Review the available packs.
+4.	Click a pack name to see the included queries.
+5.	Specify the tag associated with the relevant nodes on which to apply the pack. The pack of queries is applied to the nodes at the next config refresh interval. 
+6.	Click Run Live for a query to run it immediately. For more information, see Live queries. <add link>
+
+
+### Define a new Pack
+Perform these steps to add a new query pack.
+1.	Access the web interface for the server.
+2.	Navigate to Add > Pack.
+ADD IMAGE
+3.	On the Upload a query Pack page, click the Browse button to specify the pack file. 
+For more information on how to create a pack file, review this page. 
+4.	Click Upload query Pack to save the configuration.
+
 
 
