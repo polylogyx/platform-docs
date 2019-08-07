@@ -221,7 +221,7 @@ Perform these steps to define and run a live query:
 
       ![select_live_query](https://github.com/preetpoly/test/blob/pooja/select_live_query.png)
    
-   The Live Query Builder page is displayed.
+      The Live Query Builder page is displayed.
    
 3.	Specify the query to run in the Type your query here field.
 
@@ -231,7 +231,8 @@ Perform these steps to define and run a live query:
 
       ![device_target](https://github.com/preetpoly/test/blob/pooja/device_target.png)
       
-   You can select the nodes based on the node names or tags. 
+      You can select the nodes based on the node names or tags. 
+      
 5. Click Close to retun to the Live Query Builder page.   
 
 6.	Click Run Query.
