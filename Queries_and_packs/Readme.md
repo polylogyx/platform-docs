@@ -89,6 +89,7 @@ Query Packs
 By default, 13 packs are included with your PolyLogyx configuration.  You can add more packs, as needed, to meet your requirements. 
 
 Here are the available packs. (NEED TO VALIDATE)
+
 • vuln-management
 
 • unwanted-chrome-extensions
@@ -156,6 +157,7 @@ Queries
 By default, 8 predefined queries are included with your PolyLogyx configuration. These are defined but not assigned to any nodes by default. 
 
 Here are the seeded queries.
+
 • auto exec
 
 • certificates
@@ -214,13 +216,23 @@ Live Queries
 When you run a Live query, the data is fetched and displayed to you immediately. If needed, you can save the data in an Excel or CSV file.
 Perform these steps to define and run a live query:
 1.	Access the web interface for the server.
-2.	Navigate to Live Queries.
-ADD IMAGE
-3.	Specify the query to run in the Enter a query field.
-4.	Choose the nodes on which to run the query.
-5.	Optionally, assign tags to the query to run on associated nodes.
-6.	Click Submit Query.
-The query results are displayed.
+2.	Navigate to SOC Operations > Live Queries.
+
+      ![select_live_query](https://github.com/preetpoly/test/blob/pooja/select_live_query.png)
+   
+   The Live Query Builder page is displayed.
+3.	Specify the query to run in the Type your query here field.
+
+    ![live_query_builder](https://github.com/preetpoly/test/blob/pooja/live_query_builder.png)
+
+4.	Click Device Target to specify the nodes on which to run the query. 
+
+      ![device_target](https://github.com/preetpoly/test/blob/pooja/device_target.png)
+   
+   You can select the nodes based on the node names or tags. 
+5. Click Close to retun to the Live Query Builder page.   
+6.	Click Run Query.
+   The query results are displayed.
 7.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
 
 
