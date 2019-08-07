@@ -162,6 +162,21 @@ Perform these steps to add a new query:
 4.	VALUE?
 5. Optionally, select a pack from the Packs list to associate the query with a pack.
 6.	Optionally, assign tags to the query to run on associated nodes.
-7.	Click Add to save the query.
+7.	Click Add to save the query. 
+
+
+Live Queries
+When you run a Live query, the data is fetched and displayed to you immediately. If needed, you can save the data in an Excel or CSV file.
+Perform these steps to define and run a live query:
+1.	Access the web interface for the server.
+2.	Navigate to Live Queries.
+ADD IMAGE
+3.	Specify the query to run in the Enter a query field.
+4.	Choose the nodes on which to run the query.
+5.	Optionally, assign tags to the query to run on associated nodes.
+6.	Click Submit Query.
+The query results are displayed.
+7.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
+
 
 
