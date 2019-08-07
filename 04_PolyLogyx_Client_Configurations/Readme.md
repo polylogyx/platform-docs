@@ -49,14 +49,14 @@ Perform these steps to view or edit defined filters:
 
    ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
 
-The page lists the predefined queries applied on the Windows endpoints. 
+    The page lists the predefined queries applied on the Windows endpoints. 
 
 7. Scroll down to view the Additional Config and Filters pane. 
 8. Select the Tree view to review the predefined values and filters. 
-![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
+   ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
 9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
-For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/tree/pooja-develop/05_Understanding_Filters) section.
+   For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/tree/pooja-develop/05_Understanding_Filters) section.
 
 10. Click Update to save your changes. 
 
