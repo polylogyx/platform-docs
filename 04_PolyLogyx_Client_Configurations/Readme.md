@@ -35,8 +35,10 @@ For the Windows operating system, PolyLogyx Extension is part of the agent and t
     a. Additional filtering criteria to eliminate <i>white noise</i> from the real-time telemetry. 
     b. Set of scheduled queries that captures all the process creation and network connections data from the endpoint. 
     The configurations are editable and the changes in the configuration are picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file.
-
-Perform these steps to view or edit this configuration:
+ 
+For more informtaion on sechduled queries, see  Manage Scheduled Queries(../blob/pooja-develop/Queries_and_packs/Readme.md). 
+    
+Perform these steps to view or edit defined filters:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT  > Config.
 
@@ -47,9 +49,7 @@ Perform these steps to view or edit this configuration:
 
    ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
 
-4. Review the predefined queries applied on the Windows endpoints. 
-5. Deselect a query to remove it from the applied client configuration. 
-6. Optionally, modify the interval for a query to specify how often the query is run. The time duration (in seconds) specifies the duration after which the query is run on the client and query results are pushed to the server.  
+The page lists the predefined queries applied on the Windows endpoints. 
 7. Scroll down to view the Additional Config and Filters pane. 
 8. Select the Tree view to review the predefined values and filters. 
 ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
