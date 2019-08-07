@@ -50,6 +50,7 @@ Perform these steps to view or edit defined filters:
    ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
 
 The page lists the predefined queries applied on the Windows endpoints. 
+
 7. Scroll down to view the Additional Config and Filters pane. 
 8. Select the Tree view to review the predefined values and filters. 
 ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
