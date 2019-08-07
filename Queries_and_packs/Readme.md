@@ -104,24 +104,64 @@ Here are the available packs. (NEED TO VALIDATE)
 •	user-creation-updation-pack
 
 ### Manage Existing Packs 
-Perform these steps to apply or review the existing packs.
-1.	Access the web interface for the server.
-2.	Navigate to View > Packs.
-ADD IMAGE
+Perform these steps to view and edit packs:
+1. Access the web interface for the server.
+2. Navigate to CONFIG MANAGEMENT  > Pack.
+  ![select_pack]https://github.com/preetpoly/test/blob/pooja/select_pack.png
+
 3.	Review the available packs.
 4.	Click a pack name to see the included queries.
-5.	Specify the tag associated with the relevant nodes on which to apply the pack. The pack of queries is applied to the nodes at the next config refresh interval. 
-6.	Click Run Live for a query to run it immediately. For more information, see Live queries. <add link>
+5.	To apply a pack, specify the tag associated with the relevant nodes. All queries in the pack are applied to the associated nodes at the next config refresh interval. 
 
 
 ### Define a new Pack
 Perform these steps to add a new query pack.
-1.	Access the web interface for the server.
-2.	Navigate to Add > Pack.
-ADD IMAGE
-3.	On the Upload a query Pack page, click the Browse button to specify the pack file. 
-For more information on how to create a pack file, review this page. 
-4.	Click Upload query Pack to save the configuration.
+1.Access the web interface for the server.
+2.Navigate to CONFIG MANAGEMENT  > Pack.
+  ![select_pack]https://github.com/preetpoly/test/blob/pooja/select_pack.png
+3. Click Add Pack.
+   The Add New Pack File dialog is displayed. 
+   ![add_pack]https://github.com/preetpoly/test/blob/pooja/add_pack.png
+4.	Select a  category from the list. 
+5. Click the Browse button to specify the pack file. 
+   For more information on how to create a pack file, review this [page](https://osquery.readthedocs.io/en/stable/deployment/configuration/#query-packs). 
+4.	Click Upload to create the pack.
 
+Queries
+--------------------
+By default, 8 predefined queries are included with your PolyLogyx configuration. These are defined but not assigned to any nodes by default. 
+
+Here are the seeded queries.
+•	auto exec
+•	certificates
+•	DeveloperMode
+•	FIM
+•	svchost.exe_incorrect_parent_process
+•	WebPaint
+•	win_registry_events
+
+### Manage Defined Queries 
+Perform these steps to view or run a predefined query.
+1.Access the web interface for the server.
+2.Navigate to CONFIG MANAGEMENT  > Pack.
+  ![select_query]https://github.com/preetpoly/test/blob/pooja/select_query.png
+3.	Click a query to review its details.
+4.	Click Run Live for a query to run it immediately. For more information, see Live queries. <add link>
+5.	Specify the nodes on which to run the query by adding relevant tags. 
+
+
+### Define a Custom Query
+Perform these steps to add a new query:
+1.Access the web interface for the server.
+2.Navigate to CONFIG MANAGEMENT  > Pack.
+  ![select_query]https://github.com/preetpoly/test/blob/pooja/select_query.png
+3. Click Add Query.
+   The Add Query page is displayed. 
+   ![add_query]https://github.com/preetpoly/test/blob/pooja/add_query.png
+3.	Enter the query details, such as name, query, interval, platform, and version.
+4.	VALUE?
+5. Optionally, select a pack from the Packs list to associate the query with a pack.
+6.	Optionally, assign tags to the query to run on associated nodes.
+7.	Click Add to save the query.
 
 
