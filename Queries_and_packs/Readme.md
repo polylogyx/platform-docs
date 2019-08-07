@@ -133,9 +133,9 @@ Perform these steps to view and edit packs:
 ### Define a new Pack
 Perform these steps to add a new query pack.
 
-1.Access the web interface for the server.
+1. Access the web interface for the server.
 
-2.Navigate to CONFIG MANAGEMENT  > Pack.
+2. Navigate to CONFIG MANAGEMENT  > Pack.
 
      ![select_pack](https://github.com/preetpoly/test/blob/pooja/select_pack.png)
   
@@ -172,9 +172,9 @@ Here are the seeded queries.
 
 ### Manage Defined Queries 
 Perform these steps to view or run a predefined query.
-1.Access the web interface for the server.
+1. Access the web interface for the server.
 
-2.Navigate to CONFIG MANAGEMENT  > Pack.
+2. Navigate to CONFIG MANAGEMENT  > Pack.
 
     ![select_query](https://github.com/preetpoly/test/blob/pooja/select_query.png)
   
@@ -187,9 +187,9 @@ Perform these steps to view or run a predefined query.
 
 ### Define a Custom Query
 Perform these steps to add a new query:
-1.Access the web interface for the server.
+1. Access the web interface for the server.
 
-2.Navigate to CONFIG MANAGEMENT  > Pack.
+2. Navigate to CONFIG MANAGEMENT  > Pack.
 
      ![select_query](https://github.com/preetpoly/test/blob/pooja/select_query.png)
   
@@ -210,7 +210,7 @@ Perform these steps to add a new query:
 
 
 Live Queries
-
+--------------------
 When you run a Live query, the data is fetched and displayed to you immediately. If needed, you can save the data in an Excel or CSV file.
 Perform these steps to define and run a live query:
 1.	Access the web interface for the server.
