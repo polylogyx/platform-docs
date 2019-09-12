@@ -161,7 +161,7 @@ server.
 9.  Log on to the server using the credentials provided above at step 5a.
 
 10.  Provision the clients. For more information, see [Provisioning the PolyLogyx
-    Client for Endpoints](#provisioning-the-polylogyx-client-for-endpoints).
+    Client for Endpoints](..blob/master/03_Provisioning_Polylogyx_Client/Readme.md).
 
 Uninstalling the Server 
 ------------------------
