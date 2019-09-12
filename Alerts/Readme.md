@@ -77,6 +77,6 @@ Perform these steps to close an alert:
 3. Click Resolve for an alert. 
    A message box is displayed. 
    
-   ![response_popup](https://github.com/preetpoly/test/blob/pooja/response_popup.png)
+   ![resolve_popup](https://github.com/preetpoly/test/blob/pooja/resolve_popup.png)
 4. Click Yes, Resolve it to remove the alert from the Alerts page. 
 
