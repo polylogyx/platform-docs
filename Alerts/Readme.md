@@ -3,18 +3,27 @@ Managing Alerts
 An alert indicates an important occurrence in the enterprise. An alert is generated when incoming event data matches a predefined rule or when event data (for last 24 hours) matches the Threat Intel feed. 
 
 The Alerts page is the central console that allows you to manage and review alerts. Click SOC Operations | Alerts to view the Alerts page.
+
 ![alerts_menu](https://github.com/preetpoly/test/blob/pooja/alerts_menu.png)
 
 Review Event Traffic
 --------------------
 On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details. Click the + button to zoom in and – button to zoom out. Use the arrow buttons to navigate the timeline. HOVER IS MISLEADING
 
+![alert_trend](https://github.com/preetpoly/test/blob/pooja/alert_trend.png)
+
 Review Alerts 
 --------------------
-Click the AlientVault OTX, IBM X-Force, Rule, and VirusTotal tabs on the page to review the alerts based on the source generating the alerts. For example, when you click the Rule tab only the alerts generated based on predefined rules matching event data are displayed. 
+Click the AlientVault OTX, IBM X-Force, Rule, and VirusTotal tabs on the page to review the alerts based on the source generating the alerts. For example, when you click the Rule tab only the alerts generated based on predefined rules matching event data are displayed.
+
+![rule_based](https://github.com/preetpoly/test/blob/pooja/rule_based.png)
+
 Perform these steps to review alert information:
 1.	Click the node name to view endpoint details. 
-    When you click a node, the recent activity page is displayed where you can run various queries to view node-specific information. 
+    When you click a node, the recent activity page is displayed where you can run various queries to view node-specific information. Click the recent activity link for the node to review details.
+   
+   ![recent_activity](https://github.com/preetpoly/test/blob/pooja/recent_activity.png)
+    
 2.	Review the severity information.
     For rule-based alerts severity values are none, info, warning, and critical. For alerts based on the Threat Intel data, severity values are low, medium, and high. 
 3.	Click Intel Data for an alert to view the source data based on which the alert was generated. 
@@ -27,6 +36,8 @@ Deep dive or investigate an alert to determine the actions you might need to tak
 Perform these steps to investigate an alert:
 1.	Click Investigate for an alert. 
     The Alert Data page is displayed. 
+    
+     ![alert_data](https://github.com/preetpoly/test/blob/pooja/alert_data.png)
 2.	Review alert details.
     1. View alert-related details, such as node, severity, alert type, source, and intel data.
     2.	For rule-based alerts, the rule name field displays the rule that was matched for the generated alert. Click the rule name to view or update the predefined rule. 
@@ -47,8 +58,12 @@ Based on the alert severtity and importance, you can take needed actiosn for an 
 Perform these steps to respond to an alert:
 1. Access the web interface for the server.
 2. Navigate to SOC Operations > Response. 
+
+   ![response_menu](https://github.com/preetpoly/test/blob/pooja/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 
    To respond to an alert, you can delete a file, terminate a process, or isolate an endpoint from the network.
+   
+   ![send_response](https://github.com/preetpoly/test/blob/pooja/send_response.png)
 4. Specify the details for the response and click Add.
 
 Closing Alerts
@@ -57,8 +72,11 @@ After you have processed an alert, close it to remove it from the Alerts page.
 Perform these steps to close an alert:
 1. Access the web interface for the server.
 2. Navigate to SOC Operations > Alerts.
+    
+   ![alerts_menu](https://github.com/preetpoly/test/blob/pooja/alerts_menu.png)
 3. Click Resolve for an alert. 
    A message box is displayed. 
+   
+   ![response_popup](https://github.com/preetpoly/test/blob/pooja/response_popup.png)
 4. Click Yes, Resolve it to remove the alert from the Alerts page. 
-
 
