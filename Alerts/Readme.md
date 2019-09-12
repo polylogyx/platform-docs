@@ -37,4 +37,26 @@ Perform these steps to investigate an alert:
     1.	View details in the various tabs. 
     2. Optionally, for node-specific information use the Search field available in the various tabs.
 5.	Click the Host Events tab to (TO BE ADDED- SIR)
-6. Run a [Live query](../Queries_and_packs#live-queries) to fetch immdiate results from the endpoint. 
+6. Run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results from the endpoint. 
+
+Responding to Alerts
+--------------------
+Based on the alert severtity and importance, you can take needed actiosn for an alert. You can choose to ignore it or act on it.  
+Perform these steps to respond to an alert:
+1. Access the web interface for the server.
+2. Navigate to SOC Operations > Response. 
+3. Click Add Response. The Send Response to Agent page is displayed. 
+   To respond to an alert, you can delete a file, terminate a process, or isolate an endpoint from the network.
+4. Specify the details for the response and click Add.
+
+Closing Alerts
+--------------------
+After you have processed an alert, close it to remove it from the Alerts page.
+Perform these steps to close an alert:
+1. Access the web interface for the server.
+2. Navigate to SOC Operations > Alerts.
+3. Click Resolve for an alert. 
+   A message box is displayed. 
+4. Click Yes, Resolve it to remove the alert from the Alerts page. 
+
+
