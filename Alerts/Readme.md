@@ -17,7 +17,7 @@ Perform these steps to review alert information:
     For rule-based alerts severity values are none, info, warning, and critical. For alerts based on the Threat Intel data, severity values are low, medium, and high. 
 3.	Click Intel Data for an alert to view the source data based on which the alert was generated. 
 4.	Click Alerted Entry for an alert to view the event associated with the alert.
-5.	Optionally, use the Search field to filter alerts based on a criteria. NEED SPECIFICS
+5.	Optionally, use the Search field to filter alerts based on a criteria. (NEED SPECIFICS)
 
 Investigating Alerts
 --------------------
@@ -36,4 +36,5 @@ Perform these steps to investigate an alert:
 4.	Click the Host State tab to view node-related information. The displayed tabs vary based on the alert information.  (SIR)
     1.	View details in the various tabs. 
     2. Optionally, for node-specific information use the Search field available in the various tabs.
-5.	Click the Host Events tab to 
+5.	Click the Host Events tab to (TO BE ADDED- SIR)
+6. Run a [Live query] (../Queries_and_packs/Readme.md) to fetch immdiate results from the endpoint. 
