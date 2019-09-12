@@ -37,7 +37,7 @@ Perform these steps to investigate an alert:
     1.	View details in the various tabs. 
     2. Optionally, for node-specific information use the Search field available in the various tabs.
 5.	Click the Host Events tab to (TO BE ADDED- SIR)
-6. Run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results from the endpoint. 
+6. Optionally, run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results for the endpoint. 
 
 Responding to Alerts
 --------------------
