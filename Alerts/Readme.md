@@ -31,8 +31,8 @@ Perform these steps to investigate an alert:
     3.	If needed, click the node name to view endpoint details and run various queries to get node-specific information. Click recent activity to view latest node details.  Additionally, for node-specific information use the Search field available in the various tabs.   
     4.	Optionally, click View Intel Data to view the source data based on which the alert was generated. 
 3.	Expand the Alerted Entry pane to view event-related details.
-    a.	Review event-related details, such as ID, action, target path, and time. 
-    b.	Optionally, click Alerted Entry to view the event. 
+    1.	Review event-related details, such as ID, action, target path, and time. 
+    2.	Optionally, click Alerted Entry to view the event. 
 4.	Click the Host State tab to view node-related information. 
-    a.	Click the uptime tab  
+    1.	Click the uptime tab  
 5.	Click the Host Events tab to 
