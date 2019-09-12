@@ -33,6 +33,7 @@ Perform these steps to investigate an alert:
 3.	Expand the Alerted Entry pane to view event-related details.
     1.	Review event-related details, such as ID, action, target path, and time. 
     2.	Optionally, click Alerted Entry to view the event. 
-4.	Click the Host State tab to view node-related information. 
-    1.	Click the uptime tab  
+4.	Click the Host State tab to view node-related information. The displayed tabs vary based on the alert information.  (SIR)
+    1.	View details in the various tabs. 
+    2. Optionally, for node-specific information use the Search field available in the various tabs.
 5.	Click the Host Events tab to 
