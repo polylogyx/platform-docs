@@ -26,7 +26,7 @@ Perform these steps to investigate an alert:
 1.	Click Investigate for an alert. 
     The Alert Data page is displayed. 
 2.	Review alert details.
-       a.	View alert-related details, such as node, severity, alert type, source, and intel data.
+        1. View alert-related details, such as node, severity, alert type, source, and intel data.
     b.	For rule-based alerts, the rule name field displays the rule that was matched for the generated alert. Click the rule name to view or update the predefined rule. 
     c.	If needed, click the node name to view endpoint details and run various queries to get node-specific information. Click recent activity to view latest node details.  Additionally, for node-specific information use the Search field available in the various tabs.   
     d.	Optionally, click View Intel Data to view the source data based on which the alert was generated. 
