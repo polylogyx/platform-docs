@@ -1,7 +1,9 @@
 Managing Alerts
 =================================== 
+
 An alert indicates an important occurrence in the enterprise. An alert is generated when incoming event data matches a predefined rule or when event data (for last 24 hours) matches the Threat Intel feed. 
-The Alerts page is the central console that allows you to manage and review alerts.  Click SOC Operations | Alerts to view the Alerts page.  
+The Alerts page is the central console that allows you to manage and review alerts.  Click SOC Operations | Alerts to view the Alerts page.
+
 Review Event Traffic
 --------------------
 On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details. Click the + button to zoom in and – button to zoom out. Use the arrow buttons to navigate the timeline. HOVER IS MISLEADING
