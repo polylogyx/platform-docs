@@ -51,6 +51,8 @@ following information.
 
 -   Docker and Docker Compose are required to install the PolyLogyx server.
 
+-   In-bound Ports 5000, 9000 and 443 are open on the system. Port 5000 is used for UI, 9000 and 443 for agent communication
+
 | Component      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Docker (18.03.1-CE)         | Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. To get started with Docker, review the information on their [website](https://docs.docker.com/install/overview/). Review instructions for [Docker CE](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce) or [Docker EE](https://docs.docker.com/install/linux/docker-ee/ubuntu/) to install Docker on Ubuntu. |
@@ -161,7 +163,7 @@ server.
 9.  Log on to the server using the credentials provided above at step 5a.
 
 10.  Provision the clients. For more information, see [Provisioning the PolyLogyx
-    Client for Endpoints](#provisioning-the-polylogyx-client-for-endpoints).
+    Client for Endpoints](../03_Provisioning_Polylogyx_Client/Readme.md).
 
 Uninstalling the Server 
 ------------------------
