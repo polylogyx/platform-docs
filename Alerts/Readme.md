@@ -49,8 +49,10 @@ Perform these steps to investigate an alert:
 4.	Click the Host State tab to view node-related information. The displayed tabs vary based on the alert information.  (SIR)
     1.	View details in the various tabs, such as scheduled_tasks, uptime, drivers, certificates, and patches. 
     2. Optionally, for node-specific information use the Search field available in the various tabs.
-5.	Click the Host Events tab to (TO BE ADDED- SIR)
-6. Optionally, run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results for the endpoint. 
+5.  Click the Host Events tab to review node-specifc event details.
+    1. Expand the Event Timelines pane. This depicts the node state around the time the event (associated with the alert) was generated. It provides a graphical view of events depicting event history for the node. The flashing bubble represents the event associated with the alert. By default, the time period for the event window is 30 seconds before and after the event is generated. Click the + button to zoom in and – button to zoom out. Click a bubble on the timeline to view the details for the associated events in the Event info pane.
+    2. Expand the Process Analysis pane. This depicts the process hierarchy of the process associated with the alert and its activities.
+6.  Optionally, run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results for the endpoint. 
 
 Responding to Alerts
 --------------------
