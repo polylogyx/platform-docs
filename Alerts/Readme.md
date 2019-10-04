@@ -8,7 +8,7 @@ The Alerts page is the central console that allows you to manage and review aler
 
 Review Event Traffic
 --------------------
-On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details. Click the + button to zoom in and – button to zoom out. Use the arrow buttons to navigate the timeline. HOVER IS MISLEADING
+On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details. Click the + button to zoom in and – button to zoom out. Use the arrow buttons to navigate the timeline.
 
 ![alert_trend](https://github.com/preetpoly/test/blob/pooja/alert_trend.png)
 
@@ -28,7 +28,7 @@ Perform these steps to review alert information:
     For rule-based alerts severity values are none, info, warning, and critical. For alerts based on the Threat Intel data, severity values are low, medium, and high. 
 3.	Click Intel Data for an alert to view the source data based on which the alert was generated. 
 4.	Click Alerted Entry for an alert to view the event associated with the alert.
-5.	Optionally, use the Search field to filter alerts based on a criteria. (NEED SPECIFICS)
+5.	Optionally, use the Search field to filter alerts based on a criteria.
 
 Investigating Alerts
 --------------------
@@ -47,7 +47,7 @@ Perform these steps to investigate an alert:
     1.	Review event-related details, such as ID, action, target path, and time. 
     2.	Optionally, click Alerted Entry to view the event. 
 4.	Click the Host State tab to view node-related information. The displayed tabs vary based on the alert information.  (SIR)
-    1.	View details in the various tabs. 
+    1.	View details in the various tabs, such as scheduled_tasks, uptime, drivers, certificates, and patches. 
     2. Optionally, for node-specific information use the Search field available in the various tabs.
 5.	Click the Host Events tab to (TO BE ADDED- SIR)
 6. Optionally, run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results for the endpoint. 
@@ -69,6 +69,7 @@ Perform these steps to respond to an alert:
 Closing Alerts
 --------------------
 After you have processed an alert, close it to remove it from the Alerts page.
+
 Perform these steps to close an alert:
 1. Access the web interface for the server.
 2. Navigate to SOC Operations > Alerts.
