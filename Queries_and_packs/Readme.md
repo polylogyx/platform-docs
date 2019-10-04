@@ -119,23 +119,7 @@ Perform these steps to add a new query pack.
 
 Queries
 --------------------
-By default, 8 predefined queries are included with your PolyLogyx configuration. These are defined but not assigned to any nodes by default. 
-
-Here are the seeded queries.
-
-• auto exec
-
-• certificates
-
-• DeveloperMode
-
-• FIM
-
-• svchost.exe_incorrect_parent_process
-
-• WebPaint
-
-• win_registry_events
+By default, multiple predefined queries are included with your PolyLogyx configuration. These are defined but not assigned to any nodes by default. 
 
 ### Manage Defined Queries 
 Perform these steps to view or run a predefined query.
