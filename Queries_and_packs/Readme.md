@@ -44,7 +44,7 @@ The following diagram depicts the high-level query workflow.
 3.	Query results can be viewed on the UI or by using APIs.
 Steps 1, 2 and 3 apply to scheduled queries, query packs, and queries. Step 2 isn’t performed for Live queries. 
 
-The client database can store up to 2500 events. If it receives more events, events older than an hour are deleted. These values are configurable. See <add link> for more information. 
+The client database can store up to 2500 events. If it receives more events, events older than an hour are deleted. These values are configurable. See [Configuring the PolyLogyx Client](../04_PolyLogyx_Client_Configurations/Readme.md) for more information. 
    
 Types of Queries
 -------------------- 
@@ -151,13 +151,11 @@ Perform these steps to add a new query:
    
 3.	Enter the query details, such as name, query, interval, platform, and version.
 
-4.	VALUE?
+4. Optionally, select a pack from the Packs list to associate the query with a pack.
 
-5. Optionally, select a pack from the Packs list to associate the query with a pack.
+5.	Optionally, assign tags to the query to run on associated nodes.
 
-6.	Optionally, assign tags to the query to run on associated nodes.
-
-7.	Click Add to save the query. 
+6.	Click Add to save the query. 
 
 
 Live Queries
