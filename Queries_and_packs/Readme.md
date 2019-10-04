@@ -79,35 +79,7 @@ Perform these steps to view or edit scheduled queries:
 
 Query Packs
 --------------------
-By default, 13 packs are included with your PolyLogyx configuration.  You can add more packs, as needed, to meet your requirements. 
-
-Here are the available packs. (NEED TO VALIDATE)
-
-• vuln-management
-
-• unwanted-chrome-extensions
-
-• it-compliance
-
-• osquery-monitoring
-
-• win-raw-events-pack
-
-• windows-attacks
-
-• binary-monitoring-pack
-
-• windows-hardening
-
-• incident-response
-
-• hardware-monitoring
-
-• all-events-pack
-
-• forensic-pack
-
-• user-creation-updation-pack
+By default, few packs are included with your PolyLogyx configuration.  You can add more packs, as needed, to meet your requirements. 
 
 ### Manage Existing Packs 
 Perform these steps to view and edit packs:
