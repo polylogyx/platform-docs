@@ -32,4 +32,6 @@ Perform these steps to take a response.
    
    ![target_network](https://github.com/preetpoly/test/blob/pooja/target_network.png)
    
- 4. Click Add.
+ 4. Click Add to apply the changes.
+    The response is created and listed on the Reponses page. 
+ 5. Review the response status to verify if the corresponding action was taken.  
