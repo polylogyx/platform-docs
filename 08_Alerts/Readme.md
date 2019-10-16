@@ -66,21 +66,12 @@ Perform these steps to investigate an alert:
     
     This depicts the process hierarchy of the process associated with the alert and its activities.
     
-6.  Optionally, run a [Live query](../Queries_and_packs#live-queries) to fetch immediate results for the endpoint. 
+6.  Optionally, run a [Live query](../06_Queries_and_packs#live-queries) to fetch immediate results for the endpoint. 
 
 Responding to Alerts
 --------------------
-Based on the alert severtity and importance, you can take needed actiosn for an alert. You can choose to ignore it or act on it.  
-Perform these steps to respond to an alert:
-1. Access the web interface for the server.
-2. Navigate to SOC Operations > Response. 
+Based on the alert severtity and importance, you can take needed actions for an alert. You can choose to ignore it or act on it. For more information, see [Responses](../11_Responses).  
 
-   ![response_menu](https://github.com/preetpoly/test/blob/pooja/response_menu.png)
-3. Click Add Response. The Send Response to Agent page is displayed. 
-   To respond to an alert, you can delete a file, terminate a process, or isolate an endpoint from the network.
-   
-   ![send_response](https://github.com/preetpoly/test/blob/pooja/send_response.png)
-4. Specify the details for the response and click Add.
 
 Closing Alerts
 --------------------
