@@ -1,7 +1,6 @@
 Response Actions
 =================================== 
-<span style="color:red">*Only available in the Enterprise Edition of the PolyLogyx ESP.* </span>
-<font color='red'>Only available in the Enterprise Edition of the PolyLogyx ESP.</font>
+<span style="color:red">**Only available in the Enterprise Edition of the PolyLogyx ESP.** </span>
 
 PolyLogyx platform provides the security administrator abilities to take certain controlled actions in response to the detection of an intrusion, or attempt of one. These actions can allow the admininstrator to:
 
@@ -13,7 +12,7 @@ c) Push a host firewall rule on the endpoint for containment, or limit, the netw
 
 The response actions are available on Windows endpoints only. 
 
-Perform these steps to respond to an alert:
+Perform these steps to take a response.
 1. Access the web interface for the server.
 2. Navigate to SOC Operations > Response. 
 
