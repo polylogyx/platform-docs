@@ -28,7 +28,7 @@ Perform these steps to take a response.
    
    ![target_process](https://github.com/preetpoly/test/blob/pooja/target_process.png)
    
-   3. To isolate an endpoint using Windows Host Firewall interface, set the Target value to network and specify the other values. For details on the other values, see this ![page](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc722141(v=ws.10)).
+   3. To isolate an endpoint using Windows Host Firewall interface, set the Target value to network and specify the other values. For details on the other values, see this [page](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc722141(v=ws.10)).
    
    ![target_network](https://github.com/preetpoly/test/blob/pooja/target_network.png)
    
