@@ -1,18 +1,26 @@
 File Acquisition (Carves)
 ======================
 
-For investigative purposes, you can fetch any file from the managed endpoints to the PolyLogyx server. You can fetch files by using queries. You can fetch a single file or a batch of files based on specified criteria. 
+For investigative purposes, you can fetch any file from the managed endpoints to the PolyLogyx server. You can fetch files by using Live queries. You can fetch a single file or a batch of files based on specified criteria. 
 
+Perform these steps to acquire files.
 
-Run a [Live query](../06_Queries_and_packs#live-queries) to acquire the needed files.
+1. Run a [Live query](../06_Queries_and_packs#live-queries). 
+2. On the Live Query Builder page, specify the query. 
 
-1. To fetch a single file from an endpoint, use the following syntax. 
+    1. To fetch a single file from an endpoint, use the following syntax to build yor query. 
 
-    ``` select * from carves where path like '/some/path/%' and carve=1;``` 
+    ``` select * from carves where path like '/file/path/%' and carve=1;``` 
+    
+    In the syntax, */file/path/%* represents the file path.
 
- 2. To fetch one or more files that meet a specified criteria, use the following syntax. 
+    2. To fetch one or more files that meet a specified criteria, use the following syntax to build your query. 
 
-    ``` select carve(path) from file where directory like '/Users/%/Downloads/' and mode='0755' and type == 'regular';``` 
+    ``` select carve(path) from file where directory like '/dir_path/%/Downloads/' and mode='0755' and type == 'regular';``` 
+    
+    In the syntax, */dir_path/%/Downloads/* represents the directory path, mode reprsents the file permissions on UNIX and type indicates the file type. You can use other file properties, as needed, to fetch the needed files. 
+    
+3. 
 
 Configuration to enable this functionality is included in the osquery.flags file. The following parameters are added to the file. 
 --disable_carver=false
