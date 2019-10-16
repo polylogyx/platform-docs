@@ -420,3 +420,7 @@ This release of the PolyLogyx Endpoint Platform embeds osquery v3.2.6. PolyLogyx
 will make a concerted effort to ensure that we leverage the latest, stable
 version of osquery. For more information on base osquery tables and schema,
 refer to <https://osquery.io/schema/>*.*
+
+|										|																							|
+|:---									|													   								    ---:|
+|[Previous << Responses](../11_Responses/Readme.md)  | [Next >> Rest APIs](../13_Rest_API/Readme.md)|
