@@ -8,7 +8,7 @@ Perform these steps to acquire files.
 1. Run a [Live query](../06_Queries_and_packs#live-queries). 
 2. On the Live Query Builder page, specify the query. 
 
-    1. To fetch a single file from an endpoint, use the following syntax to build yor query. 
+    1. To fetch a single file from an endpoint, use the following syntax to build your query. 
 
     ``` select * from carves where path like '/file/path/%' and carve=1;``` 
     
@@ -18,9 +18,10 @@ Perform these steps to acquire files.
 
     ``` select carve(path) from file where directory like '/dir_path/%/Downloads/' and mode='0755' and type == 'regular';``` 
     
-    In the syntax, */dir_path/%/Downloads/* represents the directory path, mode reprsents the file permissions on UNIX and type indicates the file type. You can use other file properties, as needed, to fetch the needed files. 
+    In the syntax, */dir_path/%/Downloads/* represents the directory path, mode represents the file permissions on UNIX and type indicates the file type. You can use other file properties, as needed, to fetch the files. 
     
-3. 
+3. Navigate to the SOC Operations | Carves to open the Carves page.
+4. Review the acquired files. Click a file name to download the file.    
 
 Configuration to enable this functionality is included in the osquery.flags file. The following parameters are added to the file. 
 --disable_carver=false
