@@ -180,4 +180,4 @@ Event filtering is supported on following tables (and fields or columns).
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Client Configurations](../04_PolyLogyx_Client_Configurations/Readme.md)  | [Next >> Detection Rules](../06_Detection_Rules/Readme.md)|
+|[Previous << Client Configurations](../04_PolyLogyx_Client_Configurations/Readme.md)  | [Next >> Queries and Packs](../06_Queries_and_packs/Readme.md)|
