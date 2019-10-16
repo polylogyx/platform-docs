@@ -1,8 +1,8 @@
 Using Queries
 ===================================
 A query is a request for data or information from a database table or combination of tables. 
-After the PolyLogyx client is provisioned, seeded queries are run on the managed endpoints and the fetched data is stored in the database on the PolyLogyx server. This data stored in [various tables](../08_Tables/Readme.md) and can be viewed or searched.
-You can review, push, and and manage queries from the UI or by using APIs. This topic describes how to manage queries using the UI. For more information on managing queries using API, see [Rest APIs](../09_Rest_API/Readme.md).
+After the PolyLogyx client is provisioned, seeded queries are run on the managed endpoints and the fetched data is stored in the database on the PolyLogyx server. This data stored in [various tables](../12_Tables/Readme.md) and can be viewed or searched.
+You can review, push, and and manage queries from the UI or by using APIs. This topic describes how to manage queries using the UI. For more information on managing queries using API, see [Rest APIs](../13_Rest_API/Readme.md).
    
 Query Structure
 --------------------
