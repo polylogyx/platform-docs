@@ -36,3 +36,7 @@ Perform these steps to take a response.
  
     The response is created and listed on the Reponses page. 
  5. Review the response status to verify if the corresponding action was taken.  
+ 
+ |										|																							|
+|:---									|													   								    ---:|
+|[Previous << Using Recon Data](../10_Using_Recon_Data/Readme.md)  | [Next >> Tables](../12_Tables/Readme.md)|
