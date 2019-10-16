@@ -90,3 +90,6 @@ Perform these steps to close an alert:
    ![resolve_popup](https://github.com/preetpoly/test/blob/pooja/resolve_popup.png)
 4. Click Yes, Resolve it to remove the alert from the Alerts page. 
 
+|										|																							|
+|:---									|													   								    ---:|
+|[Previous << Detection Rules](../07_Detection_Rules/Readme.md)  | [Next >> Carves](../09_Carves/Readme.md)|
