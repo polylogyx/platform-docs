@@ -23,7 +23,7 @@ Perform these steps to acquire files.
 3. Navigate to the SOC Operations | Carves to open the Carves page.
 4. Review the acquired files. Click a file name to download the file.    
 
-Configuration to enable this functionality is included in the osquery.flags file. The following parameters are added to the file. 
+Note: Configuration to enable this functionality is included in the osquery.flags file. The following parameters are added to the file. 
  ```
  --disable_carver=false
 --carver_block_size=300000
