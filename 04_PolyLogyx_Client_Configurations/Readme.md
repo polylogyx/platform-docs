@@ -36,7 +36,7 @@ For the Windows operating system, PolyLogyx Extension is part of the agent and t
     b. Set of scheduled queries that captures all the process creation and network connections data from the endpoint. 
     The configurations are editable and the changes in the configuration are picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file.
  
-For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/tree/pooja-develop/Queries_and_packs#scheduled-queries). 
+For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/tree/pooja-develop/06_Queries_and_packs#scheduled-queries). 
     
 Perform these steps to view or edit defined filters:
 1. Access the web interface for the server.
