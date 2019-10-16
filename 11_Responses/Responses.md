@@ -18,11 +18,19 @@ Perform these steps to take a response.
 
    ![response_menu](https://github.com/preetpoly/test/blob/pooja/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 
-   To respond to an alert, you can delete a file, terminate a process, or isolate an endpoint from the network.
+   On thid page, you can delete a file, terminate a process, or isolate an endpoint from the network.
    
-   ![send_response](https://github.com/preetpoly/test/blob/pooja/send_response.png)
-   1. To delete a file, specify the full file name in the input text box, with the optional MD5 hash of the file, and the target endpoint.
-   2. To terminate a process, specify the PID (process ID) and target endpoint.
-   3. To isolate an endpoint and contain the endpoint, by pushing down a rule to filter the network traffic permitted to enter the computer from the network, and also control what network traffic the computer is allowed to send to the network. On the endpoint, this capability is implemented by leveraging the Windows Host Firewall interface. For details on the internals of Windows Firewall, please visit: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc722141(v=ws.10)
+   1. To delete a file, set the Target value to file, specify the full file name in the input text box, with the optional MD5 hash of the file, and the target endpoint.
+   
+   ![target_file](https://github.com/preetpoly/test/blob/pooja/target_file.png)
+   
+   2. To terminate a process, set the Target value to process, specify the PID (process ID) and target endpoint.
+   
+   ![target_process](https://github.com/preetpoly/test/blob/pooja/target_process.png)
+   
+   3. To isolate an endpoint using Windows Host Firewall interface, set the Target value to network specify the other values. For details on the internals of Windows Firewall, please visit: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc722141(v=ws.10)
+   
+   ![target_network](https://github.com/preetpoly/test/blob/pooja/target_network.png)
+   
    
 4. Specify the details for the response and click Add.
