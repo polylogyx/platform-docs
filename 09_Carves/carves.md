@@ -24,12 +24,13 @@ Perform these steps to acquire files.
 4. Review the acquired files. Click a file name to download the file.    
 
 Configuration to enable this functionality is included in the osquery.flags file. The following parameters are added to the file. 
---disable_carver=false
+ ```
+ --disable_carver=false
 --carver_block_size=300000
 --carver_start_endpoint=/start_uploads
 --carver_continue_endpoint=/upload_blocks
 --carver_disable_function=false
-
+ ```
 
 
 
