@@ -28,4 +28,6 @@ fetched data provides insight and visibility on these aspects.
 | Windows programs                | Lists the Windows programs installed or running on your system. |                                                                                                                                                                                                                                     
 | Windows services                | A Windows service is a program that operates in the background and is often loaded automatically on start-up. Lists the services running on your system.  |                                                                                                                      
 
- 
+ |										|																							|
+|:---									|													   								    ---:|
+|[Previous << Carves](../09_Carves/Readme.md)  | [Next >> Responses](../11_Responses/Readme.md)|
