@@ -50,8 +50,7 @@ Before you define filters, review the following guidelines:
         conflict. So, if an include and exclude filter match the same event,
         information for the file is not captured.
 
-    -   Include filters take precedence over exclude filters when rules do not
-        conflict.
+    -   When multiple include filters are defined for an event type, an OR condition is used across filters to match the events.    
 
 Adding Filters
 --------------
