@@ -188,4 +188,6 @@ Perform these steps to define and run a live query:
 7.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
 
 
-
+|										|																							|
+|:---									|													   								    ---:|
+|[Previous << Understanding Filters](../05_Understanding_Filters/Readme.md)  | [Next >> Detection_Rules](../07_Detection_Rules/Readme.md)|
