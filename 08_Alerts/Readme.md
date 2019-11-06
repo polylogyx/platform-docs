@@ -32,7 +32,9 @@ Perform these steps to review alert information:
 
 Investigating Alerts
 --------------------
-<span style="color:red">**Only available in the Enterprise Edition of the PolyLogyx ESP.** </span>
+```diff
+! Only available in the Enterprise Edition of the PolyLogyx ESP. !
+```
 
 Deep dive or investigate an alert to determine the actions you might need to take. 
 Perform these steps to investigate an alert:
