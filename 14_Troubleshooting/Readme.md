@@ -1,4 +1,4 @@
-Trouble shooting the known issues
+Troubleshooting Known Issues
 =================================
 1. Restarting the server - If for any maintenance reasons, the PolyLogyx Server is required to be restarted, perform the following options after the restart.
 
