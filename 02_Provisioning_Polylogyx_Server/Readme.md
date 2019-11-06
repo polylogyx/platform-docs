@@ -104,8 +104,8 @@ server.
     ENROLL_SECRET=<secret value>
     POLYLOGYX_USER=<user login name> 
     POLYLOGYX_PASSWORD=<login password> 
-    *RSYSLOG_FORWARDING=true
-    *LOGSTASH_FORWARDING=true
+    RSYSLOG_FORWARDING=true
+    LOGSTASH_FORWARDING=true
     VT_API_KEY=<VirusTotal Api Key> 
     IBMxForceKey=<IBMxForce Key> 
     IBMxForcePass=<IBMxForce Pass>
