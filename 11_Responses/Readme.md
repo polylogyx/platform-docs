@@ -1,6 +1,10 @@
 Response Actions
 =================================== 
-<span style="color:red">**Only available in the Enterprise Edition of the PolyLogyx ESP.** </span>
+
+```diff
+! Only available in the Enterprise Edition of the PolyLogyx ESP. !
+```
+
 
 PolyLogyx platform provides the security administrator abilities to take certain controlled actions in response to the detection of an intrusion, or attempt of one. These actions can allow the admininstrator to:
 

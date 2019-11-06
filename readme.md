@@ -1,7 +1,9 @@
 PolyLogyx Endpoint Platform - Endpoint Monitoring at scale
 ===========================================================
 
-The PolyLogyx Endpoint Visibility and Control Platform is a sophisticated, flexible and extensbile endpoint monitoring and response platform. It can be deployed in cloud or on-prem with equal ease. It provides endpoint monitoring and visibility, threat detection and incident response for Security operating Centres (SOCs). To request a trial copy of the platform, please email to open@polylogyx.com
+The PolyLogyx Endpoint Visibility and Control Platform is a sophisticated, flexible and extensbile endpoint monitoring and response platform. It can be deployed in cloud or on-prem with equal ease. It provides endpoint monitoring and visibility, threat detection and incident response for Security operating Centres (SOCs). 
+
+The Polylogyx platform is available in two variants, Enterprise Edition and Community Edition. All topics in this guide apply to the Enterprise Edition. Notes in the guide indicate topics that do not apply to the Community Edition. To request a trial copy of the platform, please email to open@polylogyx.com.
 
 Intended Audience 
 ------------------
@@ -49,7 +51,7 @@ events:
 
 -   File Acquistion
 
-For more information on the type of information, see https://github.com/polylogyx/osq-ext-bin
+For more information on the type of information, see https://github.com/polylogyx/osq-ext-bin.
 
 ### Intrusion detection
 

@@ -1,6 +1,6 @@
 Managing Alerts
 =================================== 
-An alert indicates an important occurrence in the enterprise. An alert is generated when incoming event data matches a predefined rule or when event data (for last 24 hours) matches the Threat Intel feed. 
+An alert indicates an important occurrence in the enterprise. An alert is generated when incoming event data matches a predefined rule or IOC, or when event data (for last 24 hours) matches the Threat Intel feed. 
 
 The Alerts page is the central console that allows you to manage and review alerts. Click SOC Operations | Alerts to view the Alerts page.
 
@@ -32,7 +32,9 @@ Perform these steps to review alert information:
 
 Investigating Alerts
 --------------------
-<span style="color:red">**Only available in the Enterprise Edition of the PolyLogyx ESP.** </span>
+```diff
+! Only available in the Enterprise Edition of the PolyLogyx ESP. !
+```
 
 Deep dive or investigate an alert to determine the actions you might need to take. 
 Perform these steps to investigate an alert:
