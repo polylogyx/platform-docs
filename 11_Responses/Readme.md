@@ -1,8 +1,7 @@
 Response Actions
 =================================== 
-<span style="color:red">**Only available in the Enterprise Edition of the PolyLogyx ESP.** </span>
+
 ```diff
-- Only available in the Enterprise Edition of the PolyLogyx ESP.
 ! Only available in the Enterprise Edition of the PolyLogyx ESP. !
 ```
 
