@@ -40,7 +40,8 @@ The following diagram depicts the high-level query workflow.
 ![query_workflow](https://github.com/preetpoly/test/blob/pooja/query_workflow.png)
 
 1.	Query is pushed to the relevant nodes at the next configuration refresh interval. 
-            Typically, queries (and packs) are applied using tags that are identifiers to help you logically group hosts. You can define tags using the Tag page and assign created tags to nodes using the Hosts page. 
+            
+Typically, queries (and packs) are applied using tags that are identifiers to help you logically group hosts. You can define tags using the Tag page and assign created tags to nodes using the Hosts page. 
 2.	Query result is sent from the client database to the server database.  
 3.	Query results can be viewed on the UI or by using APIs.
 Steps 1, 2 and 3 apply to scheduled queries, query packs, and queries. Step 2 isn’t performed for Live queries. 
