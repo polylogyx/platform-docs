@@ -13,8 +13,6 @@ server offers:
 
 -   Incident response, including proactive threat hunting and remediation
 
-`#213456`
-
 This chapter includes these topics:
 
 -   [Before you Begin](#before-you-begin)
