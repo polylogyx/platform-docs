@@ -3,6 +3,7 @@ Response Actions
 
 ```diff
 ! Only available in the Enterprise Edition of the PolyLogyx ESP. !
+! Only available on the Windows operating system. !
 ```
 
 
