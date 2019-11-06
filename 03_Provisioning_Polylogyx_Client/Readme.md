@@ -3,10 +3,7 @@ Provisioning the PolyLogyx Client for Endpoints
 
 The PolyLogyx client that is a part of the PolyLogyx endpoint platform,
 leverages osquery, a multi-platform operating system monitoring and
-instrumentation framework. Typically, deploying osquery and running it across
-your fleet can be a daunting and complicated task. Using CPT makes it easy to
-deploy and communicate with management server. Here are the features the
-PolyLogyx client offers:
+instrumentation framework. Here are the features the PolyLogyx client offers:
 
 -   Compliance (PCI, HIPAA)
 
@@ -19,6 +16,8 @@ PolyLogyx client offers:
 -   Host intrusion detection
 
 -   Performance and operational troubleshooting
+
+Typically, deploying osquery and running it across your fleet can be a daunting and complicated task, because of its large configuration surface and option.  To simplify the deployment of PolyLogyx osquery based agent, the platform is shipped with a Client Provisioning Tool (CPT) that wraps all the necessary configuration and makes the client provisioning process extremely simplified. 
 
 This chapter includes these topics:
 
@@ -49,6 +48,9 @@ Installing the PolyLogyx client involves these steps:
 
 Before you begin installation, ensure you complete the following prerequisites.
 
+-   Procure the needed software by requesting the access from the [PolyLogyx
+    site](https://polylogyx.com/downloads).
+
 -   Provision a PolyLogyx server using a docker image. For more information, see
     [Provisioning the PolyLogyx Server](#getting-started).
 
@@ -59,7 +61,7 @@ Before you begin installation, ensure you complete the following prerequisites.
 
     -   Support 64-bit architecture
 
-    -   Have Windows 7 or later operating system installed
+    -   Windows 7 or later operating system installed as specified [here](https://github.com/polylogyx/osq-ext-bin)
 
     -   Do not have these installed:
 
@@ -71,13 +73,6 @@ Before you begin installation, ensure you complete the following prerequisites.
         interfere with a remote installation
 
     -   Allow outbound TCP traffic on port 9000
-
--   Procure the needed software by downloading the following from the [PolyLogyx
-    site](https://polylogyx.com/download).
-
-    -   CPT utility
-
-    -   Public key file
 
 ### Deploying the PolyLogyx Client
 
@@ -91,21 +86,21 @@ PSEXEC or WMIC command line utilities) with administrative privileges.
 
 Here is the syntax to execute the installation command.
 
-```plgx_cpt.exe -i <ip address> | -h <hostname> -k <server's public key file> [-p <port number>] [-v <osquery version>] [-o <download directory>]```
+```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-v <osquery version>] [-o <download directory>]```
 
 Here is the syntax description.
 
 | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \-p  | Signifies the option for provisioning the client                                                                                                                          |
 | \-i or -h | Specify one of the following. This is a required parameter. -i represents the IP address of the PolyLogyx management server (x.x.x.x format). -h represents the fully qualified domain name to the management server in the format a.b.c. You don’t need to https.                                                                                                                              |
 | \-k       | Indicates the full path to the server public key file. This is a required parameter.                                                                                                         |
-| \-p       | Represents the server port. This is an optional parameter and defaults to 9000.                                                                                                              |
 | \-v       | Represents the osquery version to be installed. Currently, only version 3.2.6 is supported. This is an optional parameter. If you do not specify a version, the latest version is installed. |
 | \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            |
 
 Here is an example of a remote command execution using PSEXEC.
 
-```psexec \\101.101.1.101 -u Administrator cmd /c dir C:\Users\Administrator\plgx_cpt.exe -i 11.111.111.11 -k c:\certificate.crt```
+```psexec \\101.101.1.101 -u Administrator cmd /c dir C:\Users\Administrator\plgx_cpt.exe -p -i 11.111.111.11 -k c:\certificate.crt```
 
 The installation begins and the CPT utility brings the required artefacts on the
 endpoints. After installation is complete, the Osquery 3.2.4 and PolyLogyx
@@ -242,7 +237,7 @@ Follow these steps to upgrade the PolyLogyx client.
 
     Here is the syntax to execute the upgrade command.
 
-```plgx_cpt.exe -i <ip address> | -h <hostname> -k <server's public key file> [-g {<f> <update flagsfile>} | {<x> <update extension binary alone>} | {<a> <update osquery full>} | {<o> <update osquery only without extension>} | {<c> <update cpt>]}```
+```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-g {<f> <update flagsfile>} | {<x> <update extension binary alone>} | {<a> <update osquery full>} | {<o> <update osquery only without extension>} | {<c> <update cpt>]}```
 
 The -g parameter is used to upgrade the agent and cannot be combined with any
 other options. With the –g option, you must use one of these options:
