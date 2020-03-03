@@ -108,18 +108,10 @@ extensions are deployed and the osqueryd service starts. Also, CPT is installed 
 displayed if the command is successful.
 
 ```
-Downloading Files needed for install. Depending on your network connection, it might take some time. Please wait..
-Osquery successfully installed.
-Configuring client..Please wait..
-Service stopped successfully
-Osquery stopped
-Client configuration..Ready to go in 5 seconds..
+Provisioning Polylogyx agent
+plgx_osqueryd service installed successfully
 Service start pending...
-Service started successfully.
-CPT Service installed successfully
-Service start pending...
-Service started successfully.
-=== PolyLogyx osquery client installed Successfully ===
+Service plgx_osqueryd started successfully.
 ```
 
 
