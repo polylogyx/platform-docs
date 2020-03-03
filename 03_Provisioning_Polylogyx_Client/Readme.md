@@ -339,24 +339,6 @@ Downloading files from Server failed
 
 **Resolution**: To resolve this error, execute the command with a valid
 certificate.
-
-### Failed to configure Osquery
-
-If you try to install the PolyLogyx client when osquery already installed, the
-following error message is displayed.
-
-``` Osquery is already installed, please uninstall before proceeding. Using plgx_cpt.exe -u <d/s> option```
-
-**Resolution**: Follow these steps to resolve the issue:
-
-1.  If osquery is already installed, use tool with -u option to uninstall
-    osquery. For more information, see [Uninstalling the
-    Client](#uninstalling-the-client).
-
-2.  Execute the command to install the PolyLogyx client with administrative
-    rights and a valid certificate. For more information, see [Deploying the
-    PolyLogyx Client](#deploying-the-polylogyx-client).
-
 	
 |										|																							|
 |:---									|													   								    ---:|
