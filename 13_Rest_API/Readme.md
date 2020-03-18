@@ -839,7 +839,7 @@ Example Request
 Response
 
  {
- 	"message": "Imported query pack process_query_pack",
+    "message": "Imported query pack process_query_pack",
     "status": "success"
  }
 
@@ -880,7 +880,7 @@ Example Request
  
 Response
  {
- 	"message": "Successfully added the tags",
+    "message": "Successfully added the tags",
     "status": "success"
  }
 
@@ -900,7 +900,7 @@ Example Request
 
 Response
  {
- 	"message": "Successfully modified the tag(s)",
+    "message": "Successfully modified the tag(s)",
     "status": "success"
  }
 
