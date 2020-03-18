@@ -1429,6 +1429,8 @@ Response
 	]
  }
 
+```
+
 ### Search on managing node's activity
 
 Searches throughout the managing node's recent activity.
