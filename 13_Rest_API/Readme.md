@@ -516,7 +516,7 @@ Example Response
 
 ### Update a Config on the Server 
 
-Use this API to modify information for a specific config based on its ID.
+Use this API to modify information for a specific config based on its Platform.
 
 ```
 URL: https://<Base URL>/configs/<platform>
