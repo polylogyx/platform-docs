@@ -176,13 +176,6 @@ Example Response
 
 ```
 
-### Fetch Detailed Information for all Managed Nodes
-
-Fetch detailed information for all endpoint nodes managed by the PolyLogyx
-server.
-
-TO BE ADDED - GETDETAILEDNODEINFO
-
 ### Fetch Details for Specific Managed Node
 
 Lists information and properties for a specific managed endpoint based on
