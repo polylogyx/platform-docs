@@ -151,7 +151,7 @@ Response:
 
 ```
 
-Change User's password
+User's data Management
 ----------------------
 
 ### Change user's and password
@@ -180,10 +180,7 @@ Response:
 
 ```
 
-Update/Add PolyLogyx Server Options
------------------------------------
-
-### Update Options
+### Update/Add PolyLogyx Server Options
 
 Add or Update Options used by PolyLogyx Server.
 
@@ -226,9 +223,6 @@ Response:
 
 ```
 
-List Threat Intel Keys
-----------------------
-
 ### View Threat Intel Keys
 
 List Threat Intel API keys used by PolyLogyx Server.
@@ -255,9 +249,6 @@ Response:
 }
 
 ```
-
-Update Threat Intel keys
-------------------------
 
 ### Update Threat Intel Keys
 
@@ -290,6 +281,37 @@ Response:
 				"key":"69f922502ee0ea958fa0ead2979257bd084fa012c283ef9540176ce857ac6f2c"
 				}
 			}
+}
+
+```
+
+### Configure email sender and recipients for alerts
+
+```
+URL: https://<Base URL> /email/configure
+Request Type: POST
+ 
+Example request:
+{
+  "emalRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
+  "email": "johndoe@xyzcomp.com",
+  "smtpAddress": "smtp2.gmail.com",
+  "password": "a",
+  "smtpPort": 445
+}
+
+Response
+{
+	"data": {
+		"email": "johndoe@xyzcomp.com",
+		"emailRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
+		"emails": "jimdoe@abccorp.com",
+		"password": "YQ==\n",
+		"smtpAddress": "smtp2.gmail.com",
+		"smtpPort": 445
+	},
+	"message": "Successfully updated the details",
+	"status": "success"
 }
 
 ```
@@ -408,9 +430,6 @@ Example Response
 
 ```
 
-Export Node Details
----------------------
-
 ### Export Details of all Managed Nodes
 
 Exports all endpoint nodes managed by the PolyLogyx server and their properties.
@@ -422,9 +441,6 @@ Request Type: GET
 Response: A CSV file of nodes and their properties. 
  
 ```
-
-Node Schedule Query Results
----------------------------
 
 ### List schedule query results of managing node
 
@@ -484,9 +500,6 @@ Response:
 }
  
 ```
-
-Node Schedule Query results search export
------------------------------------------
 
 ### Export schedule query results of managing node for search applied
 
@@ -548,6 +561,8 @@ Example Request
 Response: A file of a node schedule query results for a specific query.
  
 ```
+OSQuery Tables Schema
+---------------------
 
 ### Get Schema Info for all OSQuery Tables 
 
@@ -604,6 +619,8 @@ Example Response
 }
 
 ```
+Config Section
+--------------
 
 ### Get All Available Configs from Server
 
@@ -1061,6 +1078,9 @@ Response
 
 ```
 
+Query Packs Section
+-------------------
+
 ### List all Packs
 Use this API to list all defined packs on the server. 
 
@@ -1252,11 +1272,11 @@ Response
 	“data”: [
 		{
 		"id": 1,
-		"value": "atul"
+		"value": "foo"
 		},
 		{
 		"id": 9,
-		"value": "t"
+		"value": "foobar"
 		}
 	]
 }
@@ -1286,6 +1306,31 @@ Response
 
 ```
 
+### List Tags for a Query
+view tags for a query.
+
+```
+URL: https://<Base URL> /queries/<query_id>/tags
+Request Type: GET
+ 
+Response
+ {
+	“status”: ”success”,
+	“message”: “Successfully fetched the tag(s)”
+	“data”: [
+		{
+		"id": 1,
+		"value": "foo"
+		},
+		{
+		"id": 9,
+		"value": "foobar"
+		}
+	]
+}
+
+```
+
 ### Modify Tags on a Pack
 Add and remove tags on a pack.
 
@@ -1305,6 +1350,32 @@ Response
     "message": "Successfully modified the tag(s)",
     "status": "success"
  }
+
+```
+
+
+### List Tags for a Pack
+view tags for a pack.
+
+```
+URL: https://<Base URL> /packs/<pack_name>/tags
+Request Type: GET
+ 
+Response
+ {
+	“status”: ”success”,
+	“message”: “Successfully fetched the tag(s)”
+	“data”: [
+		{
+		"id": 1,
+		"value": "foo"
+		},
+		{
+		"id": 9,
+		"value": "foobar"
+		}
+	]
+}
 
 ```
 
@@ -1672,36 +1743,8 @@ Response
 
 ```
 
-### Configure email sender and recipients for alerts
-
-```
-URL: https://<Base URL> /email/configure
-Request Type: POST
- 
-Example request:
-{
-  "emalRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
-  "email": "johndoe@xyzcomp.com",
-  "smtpAddress": "smtp2.gmail.com",
-  "password": "a",
-  "smtpPort": 445
-}
-
-Response
-{
-	"data": {
-		"email": "johndoe@xyzcomp.com",
-		"emailRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
-		"emails": "jimdoe@abccorp.com",
-		"password": "YQ==\n",
-		"smtpAddress": "smtp2.gmail.com",
-		"smtpPort": 445
-	},
-	"message": "Successfully updated the details",
-	"status": "success"
-}
-
-```
+Carves Section
+--------------
 
 ### Carves
 
@@ -1749,6 +1792,9 @@ Request Type: GET
 Response: A carve file object.
 
 ```
+
+Search over Schedule queries data through conditions or hashes
+--------------------------------------------------------------
 
 ### Hunt on managing nodes
 
@@ -1929,6 +1975,9 @@ Response
  }
 
 ```
+
+Yara Files section
+------------------
 
 ### List yara files
 
