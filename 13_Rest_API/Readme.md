@@ -16,7 +16,7 @@ REST Based API
 
 -   Uses standard HTTP error responses to describe errors
 
--   Authentication provided using API keys in the HTTP Authorization header
+-   Authentication provided using access token in the HTTP Authorization header
 
 -   Requests and responses are in JSON format.
 
@@ -50,15 +50,13 @@ https://\<server\>:\<port\>/services/api/v0/
 Authentication
 --------------
 
-The PolyLogyx API requires all requests to present a valid API key
-(x-access-token: API Key) specified in the HTTP Authorization header for every
-HTTP request. If the API key is missing or invalid, a 401 unauthorized response
+The PolyLogyx API requires all requests to present a valid access token
+(x-access-token) specified in the HTTP Authorization header for every
+HTTP request. If the access token key is missing or invalid, a 401 unauthorized response
 code is returned.
 
-The API key (token) has the privileges associated with an administrator account
-and does not automatically expire. If you believe your API key is compromised,
-you can generate a new one. This ensures that the older API key can no longer be
-used to authenticate to the server.
+The access token has the privileges associated with an administrator account
+and does not automatically expire. 
 
 Transport Security
 ------------------
@@ -96,7 +94,7 @@ to indicate API errors.
 | Code | Description                                                         |
 |------|---------------------------------------------------------------------|
 | 400  | Malformed or bad JSON Request                                       |
-| 401  | API access without authentication or invalid API key                |
+| 401  | API access without or invalid access token                          |
 | 404  | Resource not found                                                  |
 | 422  | Request can be parsed. But, has invalid content                     |
 | 429  | Too many requests. Server has encountered rate limits               |
@@ -105,20 +103,199 @@ to indicate API errors.
 | 500  | Internal server error                                               |
 | 503  | Service currently unavailable                                       |
 
-Request Debugging
+Login
 -----------------
 
-The request ID will always be present in every API response and can be used for
-debugging. The following header is set in each response:
+### Fetch access token using username and password
 
-`X-PolyLogyx-Request-Id - The unique identifier for the API request`
+Use the admin login username and password to get an access token
 
-`HTTP/1.1 200 OK`
 
-`X-PolyLogyx-Request-Id: reqVy8wsvmBQN27h4soUE3ZEnA`
+```
+URL: https://<Base URL>/login
+ 
+Request Type: POST
+
+Example Request
+ 
+ {
+   "username":"foo",
+   "password":"foo"
+ } 
+
+Response:
+{
+  "x-access-token":
+  "eyJhbGciOiJIUzUxMiIsImlhdCI6MTU2NzY3MjcyMCwiZXhwIjoxNTY3NjczMzIwfQ.eyJpZCI6MX0.7jklhAly5ZO6xr1t0Y2ahkZvEEMnrescGK9nszqFhMAProwbjOHaiRO3tBS5I2g dmVSqKqBHynveAFbmor7TA"
+ }
+
+```
+
+Logout
+------
+
+### Logout from the PolyLogyx Server session
+
+Expires the server session for the current user.
+
+```
+URL: https://<Base URL>/logout
+ 
+Request Type: POST
+
+Response:
+{
+  "status": "success",
+  "message": "user logged out successfully"
+}
+
+```
+
+Change User's password
+----------------------
+
+### Change user's and password
+
+Use old password to change password of the current user.
+
+```
+URL: https://<Base URL>/changepw
+ 
+Request Type: POST
+
+Example Request
+ 
+ {
+   "old_password":"foobar",
+   "new_password":"foo",
+   "confirm_new_password":"foo"
+ } 
+
+Response:
+
+{
+   "status":"success",
+   "message":"password is updated successfully"
+}
+
+```
+
+Update/Add PolyLogyx Server Options
+-----------------------------------
+
+### Update Options
+
+Add or Update Options used by PolyLogyx Server.
+
+```
+URL: https://<Base URL>/options/add
+ 
+Request Type: POST
+
+Example Request:
+
+{
+"option":{
+	"custom_plgx_EnableLogging": "true",
+	"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
+	"custom_plgx_LogLevel": "1",
+	"custom_plgx_LogModeQuiet": "0",
+	"custom_plgx_ServerPort": "443",
+	"custom_plgx_enable_respserver": "true",
+	"schedule_splay_percent": 10
+	}
+}
+
+Response:
+
+{
+	"status": "success",
+	"message": “options are updated successfully“,
+	"data": {
+		"option":{
+			"custom_plgx_EnableLogging": "true",
+			"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
+			"custom_plgx_LogLevel": "1",
+			"custom_plgx_LogModeQuiet": "0",
+			"custom_plgx_ServerPort": "443",
+			"custom_plgx_enable_respserver": "true",
+			"schedule_splay_percent": 10
+			}
+		}
+}
+
+```
+
+List Threat Intel Keys
+----------------------
+
+### View Threat Intel Keys
+
+List Threat Intel API keys used by PolyLogyx Server.
+
+```
+URL: https://<Base URL>/apikeys
+
+Request Type: GET
+
+Response:
+
+{
+	"status": "success",
+	"message": "API keys are fetched successfully",
+	"data": {
+		"ibmxforce": {
+			"key": "304020f8-99fd-4a17-9e72-80033278810a",
+			"pass": "6710f119-9966-4d94-a7ad-9f98e62373c8"
+				},
+		"virustotal": {
+				"key":"69f922502ee0ea958fa0ead2979257bd084fa012c283ef9540176ce857ac6f2c"
+				}
+			}
+}
+
+```
+
+Update Threat Intel keys
+------------------------
+
+### Update Threat Intel Keys
+
+Updates Threat Intel API keys used by PolyLogyx Server.
+
+
+```
+URL: https://<Base URL>/apikeys
+ 
+Request Type: POST
+
+Example Request
+ 
+ {
+	"IBMxForceKey":"304020f8-99fd-4a17-9e72-80033278810a",
+	"IBMxForcePass":"6710f119-9966-4d94-a7ad-9f98e62373c8",
+	"vt_key":"69f922502ee0ea958fa0ead2979257bd084fa012c283ef9540176ce857ac6f2c"
+ }
+
+Response:
+{
+	"status": "success",
+	"message": "API keys were updated successfully",
+	"data": {
+		"ibmxforce": {
+			"key": "304020f8-99fd-4a17-9e72-80033278810a",
+			"pass": "6710f119-9966-4d94-a7ad-9f98e62373c8"
+				},
+		"virustotal": {
+				"key":"69f922502ee0ea958fa0ead2979257bd084fa012c283ef9540176ce857ac6f2c"
+				}
+			}
+}
+
+```
 
 Fetching Node Details
------------------
+---------------------
 
 ### Fetch Details for all Managed Nodes
 
@@ -128,7 +305,7 @@ Lists all endpoint nodes managed by the PolyLogyx server and their properties.
 URL: https://<Base URL>/nodes
  
 Request Type: GET
-Response: A JSON Array of nodes and their properties.  
+Response: A JSON Array of nodes and their properties. 
  
 Example Response
 
@@ -185,7 +362,7 @@ host_identifier.
 URL: https://<Base URL>/nodes/<host_identifier>
  
 Request Type: GET
-Response: A node with its properties.  
+Response: A node with its properties.
  
 Example Response
  
@@ -231,8 +408,146 @@ Example Response
 
 ```
 
-Managing Configs
------------------
+Export Node Details
+---------------------
+
+### Export Details of all Managed Nodes
+
+Exports all endpoint nodes managed by the PolyLogyx server and their properties.
+
+```
+URL: https://<Base URL>/nodes_csv
+ 
+Request Type: GET
+Response: A CSV file of nodes and their properties. 
+ 
+```
+
+Node Schedule Query Results
+---------------------------
+
+### List schedule query results of managing node
+
+Lists schedule query results of a managing node for a query name.
+
+```
+URL: https://<Base URL>/nodes/schedule_query/results
+ 
+Request Type: POST
+
+{
+	“host_identifier”:”"216F6B87-8922-4BAE-A68A-0E5EB11ACA1C”,
+	“query_name”: “win_file_events”,
+	“start”: 1,
+	“limit”: 20
+}
+
+Response: 
+	
+{
+	“status”: ”success”,
+	“message”: “Successfully received node schedule query results”
+	“data”: [{
+			"id": 4439993,
+			"name": "win_dns_response_events",
+			"timestamp": "2019-06-07T14:52:11",
+			"action": "added",
+			"columns": {
+				"eid": "3B7C7A62-6D3C-404D-924C-E77F51000000",
+				"pid": "1308",
+				"time": "1559919087",
+				"action": "",
+				"utc_time": "Fri Jun 7 14:51:27 2019 UTC",
+				"event_type": "DNS_RESPONSE",
+				"domain_name": ".ec2messages.ap-south-1.amazonaws.com",
+				"remote_port": "53",
+				"resolved_ip": "52.95.80.172",
+				"request_type": "1",
+				"request_class": "1",
+				"remote_address": "172.31.0.2"
+				},
+			"node_id": 16,
+			"node": {
+				"id": 16,
+				"host_identifier": "EC2A1F1D-0C6E-072D-C830-392246FCBAAE",
+				"node_key": "9c7a7086-8f0f-4d45-abd2-68b1d3149439",
+				"last_checkin": "2019-06-13T12:01:32.839308",
+				"enrolled_on": "2019-04-23T09:52:43.761165",
+				"tags": [
+					{
+					"id": 5,
+					"value": "Windows"
+					}
+					]
+				}
+			}]
+}
+ 
+```
+
+Node Schedule Query results search export
+-----------------------------------------
+
+### Export schedule query results of managing node for search applied
+
+Export schedule query results of managing node for conditions given.
+
+```
+URL: https://<Base URL>/nodes/search/export
+ 
+Request Type: POST
+
+{
+	"conditions":{
+		"condition": "OR",
+		"rules": [
+				{
+				"id": "name",
+				"field": "name",
+				"type": "string",
+				"input": "text",
+				"operator": "contains",
+				"value": "EC2"
+				},
+				{
+				"id": "name",
+				"field": "name",
+				"type": "string",
+				"input": "text",
+				"operator": "equal",
+				"value": "pc"
+				}
+				],
+		"valid": true
+		},
+	“host_identifier”:”EC241E83-BDC2-CAFC-BF9F-28C22B37A7F0”
+}
+
+Response: 
+	
+A CSV file of schedule query results for the payload given.
+
+```
+
+### Export Schedule Query Results
+
+Exports schedule query results of a specific managed node.
+
+``` 
+URL: https://<Base URL>/schedule_query/export
+ 
+Request Type: POST
+
+Example Request
+
+{
+	“query_name”: “win_registry_events”,
+	“host_identifier”:”EC259C26-B72F-553F-A2B3-FD9517DAE7D2”
+}
+
+Response: A file of a node schedule query results for a specific query.
+ 
+```
 
 ### Get Schema Info for all OSQuery Tables 
 
@@ -269,6 +584,7 @@ Example Response
   "message": "Successfully fetched the schema",
   "status": "success"
 }
+
 ```
 
 ### Get Schema info for Specific OSQuery Table from Server
@@ -288,6 +604,7 @@ Example Response
 }
 
 ```
+
 ### Get All Available Configs from Server
 
 Lists all available configs that can be applied to managed nodes based on their platform.
@@ -516,7 +833,7 @@ Example Response
 
 ### Update a Config on the Server 
 
-Use this API to modify information for a specific config based on its ID.
+Use this API to modify information for a specific config based on its Platform.
 
 ```
 URL: https://<Base URL>/configs/<platform>
@@ -641,6 +958,14 @@ Response
 
 ```
 
+### View Live Query Results 
+Live query results are streamed over a websocket. You can use any websocket client. Query results will expire, if not retrieved in 10 minutes.
+
+```
+URL: wss://<IP_ADDRESS:PORT>/distributed/result
+Send the query id as a message after connect
+```
+
 ### Define a Scheduled Query
 
 Define and assign a scheduled query.
@@ -735,11 +1060,12 @@ Response
  }
 
 ```
+
 ### List all Packs
 Use this API to list all defined packs on the server. 
 
 ```
-URL: https://<Base URL> /packs
+URL: https://<Base URL>/packs
 Request Type: GET
  
 Response
@@ -778,6 +1104,7 @@ Response
 
 ### List a Specific Pack
 Get details for a specific query pack defined on the server based on its ID.
+
 ```
 URL: https://<Base URL> /packs/<pack_id>
 Request Type: GET
@@ -815,6 +1142,7 @@ Response
 ```
 ### Define a Pack
 A group of scheduled queries is known as a pack. Use this API to define a new pack.
+
 ```
 URL: https://<Base URL> /packs/add
 Request Type: POST
@@ -839,11 +1167,12 @@ Example Request
 Response
 
  {
- 	"message": "Imported query pack process_query_pack",
+    "message": "Imported query pack process_query_pack",
     "status": "success"
  }
 
 ```
+
 Managing Tags
 -----------------
 
@@ -869,6 +1198,7 @@ Example Response
 
 ### Add Tags
 Tags are a mechanism to logically group or associate elements such as nodes, packs, and so on. Add one or more tags.
+
 ```
 URL: https://<Base URL> /tags/add
 Request Type: POST
@@ -880,13 +1210,15 @@ Example Request
  
 Response
  {
- 	"message": "Successfully added the tags",
+    "message": "Successfully added the tags",
     "status": "success"
  }
 
 ```
+
 ### Modify Tags for a Node
 Add or remove tags for a node.
+
 ```
 URL: https://<Base URL> /nodes/tag/edit
 Request Type: POST
@@ -900,13 +1232,41 @@ Example Request
 
 Response
  {
- 	"message": "Successfully modified the tag(s)",
+    "message": "Successfully modified the tag(s)",
     "status": "success"
  }
 
 ```
+
+### List Tags for a Node
+view tags for a node.
+
+```
+URL: https://<Base URL> /nodes/<host_identifier>/tags
+Request Type: GET
+ 
+Response
+ {
+	“status”: ”success”,
+	“message”: “Successfully fetched the tag(s)”
+	“data”: [
+		{
+		"id": 1,
+		"value": "atul"
+		},
+		{
+		"id": 9,
+		"value": "t"
+		}
+	]
+}
+
+```
+
 ### Modify Tags for a Query
+
 Add or remove tags on a query.
+
 ```
 URL: https://<Base URL> /queries/tag/edit
 Request Type: POST
@@ -925,8 +1285,10 @@ Response
  }
 
 ```
+
 ### Modify Tags on a Pack
 Add and remove tags on a pack.
+
 ```
 URL: https://<Base URL> /packs/tag/edit
 Request Type: POST
@@ -945,6 +1307,7 @@ Response
  }
 
 ```
+
 Monitoring and Viewing Fleet Activity
 -------------------------------------
 
@@ -1015,13 +1378,6 @@ Example Response:
 
 ```
 
-### View Live Query Results 
-Live query results are streamed over a websocket. You can use any websocket client. Query results will expire, if not retrieved in 10 minutes.
-
-```
-URL: wss://<IP_ADDRESS:PORT>/distributed/result
-Send the query id as a message after connect
-```
 Managing Rules for Alerts
 -------------------------------------
 
@@ -1058,6 +1414,12 @@ Response
 				],
 				"valid": true
 			},
+			"type": "MITRE",
+			"tactics": [
+				"persistence",
+				"defense-evasion"
+				],
+			"technique_id": "T1197",
 			"description": "Adult websites test",
 			"id": 1,
 			"name": "Adult websites test",
@@ -1101,6 +1463,12 @@ Response
 			],
 			"valid": true
 		},
+		"type": "MITRE",
+		"tactics": [
+			"persistence",
+			"defense-evasion"
+		],
+		"technique_id": "T1197",
 		"description": "Adult websites test",
 		"id": 1,
 		"name": "Adult websites test",
@@ -1112,6 +1480,7 @@ Response
 }
 
 ```
+
 ### Add a Rule
 Define a rule to for a new alert.
 
@@ -1121,30 +1490,34 @@ Request Type: POST
  
 Example request:
 {
-  "alerters": [
-    "email","splunk"
-  ],
+  	"alerters": [
+    	"email","splunk"
+  	],
+	"type": "MITRE",
+	"tactics": [
+		"persistence",
+		"defense-evasion"
+		],
+	"technique_id": "T1197",
 	"name":"Adult website test",
-"description":"Rule for finding adult websites",
-  "conditions": {
-    "condition": "AND",
-  
-  "rules": [
-    {
-      "id": "column",
-      "type": "string",
-      "field": "column",
-      "input": "text",
-      "value": [
-        "issuer_name",
-        "Polylogyx.com(Test)"
-      ],
-      "operator": "column_contains"
-    }
-  ],
-  "valid": true
-}
-
+	"description":"Rule for finding adult websites",
+  	"conditions": {
+    	"condition": "AND",
+  		"rules": [
+    		{
+      		"id": "column",
+      		"type": "string",
+      		"field": "column",
+      		"input": "text",
+      		"value": [
+      		  "issuer_name",
+      		  "Polylogyx.com(Test)"
+      			],
+      		"operator": "column_contains"
+    		}
+  		],
+  		"valid": true
+		}
 }
 
 Response
@@ -1167,33 +1540,38 @@ Request Type: POST
 Example request:
 
 {
-  "alerters": [
-    "email",
-    "debug"
-  ],
-  "conditions": {
-    "condition": "AND",
-    "rules": [
-      {
-        "field": "column",
-        "id": "column",
-        "input": "text",
-        "operator": "column_contains",
-        "type": "string",
-        "value": [
-          "domain_names",
-          "89.com"
-        ]
-      }
-    ],
-    "valid": true
-  },
-  "description": "Adult websites test",
-  "name": "Adult websites test",
-  "status": "ACTIVE"
+  	"alerters": [
+    	"email","splunk"
+  	],
+	"type": "MITRE",
+	"tactics": [
+		"persistence",
+		"defense-evasion"
+		],
+	"technique_id": "T1197",
+	"name":"Adult website test",
+	"description":"Rule for finding adult websites",
+  	"conditions": {
+    	"condition": "AND",
+  		"rules": [
+    		{
+      		"id": "column",
+      		"type": "string",
+      		"field": "column",
+      		"input": "text",
+      		"value": [
+      		  "issuer_name",
+      		  "Polylogyx.com(Test)"
+      			],
+      		"operator": "column_contains"
+    		}
+  		],
+  		"valid": true
+		}
 }
 
 Response:
+
 {
 	"data": {
 		"alerters": [
@@ -1217,6 +1595,12 @@ Response:
 			],
 			"valid": true
 		},
+		"type": "MITRE",
+		"tactics": [
+			"persistence",
+			"defense-evasion"
+			],
+		"technique_id": "T1197",
 		"description": "Adult websites test",
 		"id": 1,
 		"name": "Adult websites test",
@@ -1233,7 +1617,7 @@ Response:
 List alerts based on node, query_name, and rule_id.
 
 ```
-URL: https://<Base URL> /alerts
+URL: https://<Base URL>/alerts
 Request Type: POST
  
 Example Request:
@@ -1322,6 +1706,7 @@ Response
 ### Carves
 
 List all the carve sessions. Host identifier is optional.
+
 ```
 URL: https://<Base URL> /carves
 Request Type: POST
@@ -1354,9 +1739,21 @@ Response
 
 ```
 
+### Get/Download a Carve
+
+Returns a carve session.
+
+```
+URL: https://<Base URL> /carves/download/<session_id>
+Request Type: GET
+Response: A carve file object.
+
+```
+
 ### Hunt on managing nodes
 
 Searches throughout the managing nodes for the file hashes provided through text file.
+
 ```
 URL: https://<Base URL> /hunt-upload
 Request Type: POST
@@ -1427,6 +1824,7 @@ Response
 ### Search on managing node's activity
 
 Searches throughout the managing node's recent activity.
+
 ```
 URL: https://<Base URL> /search
 Request Type: POST
@@ -1530,8 +1928,228 @@ Response
 	]
  }
 
+```
+
+### List yara files
+
+lists all yara file names.
+
+```
+URL: https://<Base URL>/yara/
+Request Type: GET
+
+Response
+
+{
+	"status": "success",
+	"message": "Successfully fetched the yara files“,
+	“data”:[“data.txt”,”sample.txt”]
+}
+ 
+```
+
+### Upload yara file
+
+Add an yara file.
+```
+URL: https://<Base URL>/yara/add
+Request Type: POST
+
+Example request
+
+{
+	“file”:”an yara file object here”
+}
+
+Response
+
+{
+	"status": "success",
+	"message": "Successfully uploaded the file“
+}
+ 
+```
+
+### List iocs
+
+Lists iocs.
+
+```
+URL: https://<Base URL>/iocs/
+Request Type: GET
+
+Response
+
+{
+	"status": "success",
+	"message": "Successfully fetched the iocs",
+	"data": [
+		{
+		"type": "hello_name",
+		"intel type": "self","value": "dummy_testing_rr.com",
+		"threat name": "test-intel_domain_name"
+		}
+		]
+}
 
 ```
 
+### Add iocs
+
+Add iocs.
+
+```
+URL: https://<Base URL> /iocs/add
+Request Type: POST
+
+Example Request
+
+{
+	“file”:”an iocs file object here”
+}
+
+Response
+
+{
+	"status": "success",
+	"message": "Successfully updated the intel from the file uploaded“
+}
+
+```
+
+Response Action -- Only Avaiable for Enterprise Edition
+---------------
+
+### List all Response Actions performed
+
+Lists All response actions performed by server on agent.
+
+```
+URL: https://<Base URL>/response?start=0&limit=1
+Request Type: GET
+
+Response:
+{
+"status": "success",
+"message": "successfully fetched the responses info",
+"data": {
+		"count":12,
+		"results":[
+			{
+			"id": 1,
+			"action": "delete",
+			"command": {"action": "delete", 
+						"actuator":{"endpoint": "polylogyx_vasp"}, 
+						"target": {
+							"file": {
+								"device":{"hostname": "DESKTOP-QIRBS33"}, 
+								"hashes": {}, 
+								"name": "C:\\\\Users\\\\Default\\\\Downloads\\\\malware.txt"
+								}
+							}
+						},
+			"command_id": "2c92808a69099f17016910516100000a",
+			"message": "FILE_NOT_DELETED",
+			"status": "failure",
+			"data": null,
+			"hostname": "DESKTOP-QIRBS33",
+			“target”:”file”
+			}
+			]
+		}
+}
+
+```
+
+### List a Response Action performed
+
+List a Response Action performed for the command id provided.
+
+```
+URL: https://<Base URL>/response/<command_id>
+Request Type: GET
+
+Response:
+{
+	"status": "success",
+	"message": “Successfully received the command status”,
+	"data": {
+			"id": 1,
+			"action": "delete",
+			"command": {"action": "delete", 
+						"actuator":{"endpoint": "polylogyx_vasp"}, 
+						"target": {
+							"file": {
+								"device":{"hostname": "DESKTOP-QIRBS33"}, 
+								"hashes": {}, 
+								"name": "C:\\\\Users\\\\Default\\\\Downloads\\\\malware.txt"
+								}
+							}
+						},
+			"command_id": "2c92808a69099f17016910516100000a",
+			"message": "FILE_NOT_DELETED",
+			"status": "failure",
+			"data": null,
+			"hostname": "DESKTOP-QIRBS33",
+			“target”:”file”
+			}
+}
+
+```
+
+### Take an Action on a windows managing node
+
+Take an Action on a windows managing node against a file/process/ip_adress.
+
+```
+URL: https://<Base URL>/response/add
+Request Type: POST
+	
+Example Request:
+
+a) File Delete:
+	{
+  		"action": "delete",
+  		"actuator_id": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113",
+  		"target": "file",
+		"file_name": "C:\\Users\\Default\\Downloads\\malware.txt",
+		"file_hash": "<file hash(md5) here>"
+	}
+	Required Payload paramaters: action, actuator_id, target, file_name/file_hash
+b) Process Stop:
+	{
+  		"action": "stop",
+  		"actuator_id": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113",
+  		"target": "process",
+		"process_name": "",
+		"pid": “pid here”
+	}
+	Required Payload paramaters: action, actuator_id, target, process_name, pid
+
+c)Network Response:
+	{
+  		"action": "contain",
+  		"actuator_id": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113",
+  		"target": "ip_connection",
+      	"rule_name": "foo",
+      	"rule_group": "foo",
+      	"src_port": "ANY",
+      	"dst_port": "ANY",
+      	"dst_addr": "*",
+      	"application": "chrome.exe",
+      	"direction": 1,
+      	"layer4_protocol": "256"
+	}
+
+Response Format:
+
+{
+	"status": "success",
+	"message": “Successfully sent the response command”,
+	“command_id”:"2c92808a69099f17016910516100000a"
+}
+
+```
+	
 
 [Previous << Tables](../12_Tables/Readme.md)  
