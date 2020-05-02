@@ -65,9 +65,7 @@ Before you begin installation, ensure you complete the following prerequisites.
 
     -   Do not have these installed:
 
-        -   osquery
-
-        -   older version of PolyLogyx client
+        -   PolyLogyx client version older than 1.17.5
 
     -   Do not have host-based firewalls or other security tools that might
         interfere with a remote installation
@@ -86,13 +84,13 @@ PSEXEC or WMIC command line utilities) with administrative privileges.
 
 Here is the syntax to execute the installation command.
 
-```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-o <download directory>]```
+```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-o <download directory>] [-y <yara refresh interval>]```
 
 Here is the syntax description.
 
 | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| \-p  | Signifies the option for provisioning the client                                                                                                                          |
+| \-p       | Signifies the option for provisioning the client                                                                                                                          |
 | \-i or -h | Specify one of the following. This is a required parameter. -i represents the IP address of the PolyLogyx management server (x.x.x.x format). -h represents the fully qualified domain name to the management server in the format a.b.c. You don’t need to https.                                                                                                                              |
 | \-k       | Indicates the full path to the server public key file. This is a required parameter.                                                                                                         |
 | \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            |
@@ -142,7 +140,9 @@ Follow these steps to check if the required processes are running.
 
 1.  Open a command window with administrative privileges.
 
-2.  Run the following command to check the state of software stack, including
+2.  Switch to "c:\Program Files\plgx_osquery" folder in command prompt.
+
+3.  Run the following command to check the state of software stack, including
     osquery, PolyLogyx Extension and associated services.
 
 ```plgx_cpt.exe –c```
@@ -186,9 +186,13 @@ Follow these steps to uninstall the PolyLogyx client.
 
 2.  Close any open instances of the osqueryd, vast, and vastnw services.
 
-3.  Close installation directory c:\Program Files\plgx_osquery if opened in Explorer view.
+3.  Close installation directory "c:\Program Files\plgx_osquery" if opened in Explorer view or command prompt.
 
-4.  Run the uninstall command.
+4.  Close Event Viewer. 
+
+5.  In command prompt, go to the folder (Note: This is not the installation directory) where CPT tool was downloaded for provisioning client.
+
+    Run the uninstall command.
 
     Here is the syntax to execute the installation command.
 
@@ -231,7 +235,9 @@ Follow these steps to upgrade the PolyLogyx client.
 
 1.  Open a command window with administrative privileges.
 
-2.  Run the upgrade command.
+2.  In command prompt, go to the folder (Note: This is not the installation directory) where CPT tool was downloaded for provisioning client.
+
+3.  Run the upgrade command.
 
     Here is the syntax to execute the upgrade command.
 
