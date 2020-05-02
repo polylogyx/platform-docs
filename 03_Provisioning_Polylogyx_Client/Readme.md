@@ -171,7 +171,7 @@ Service plgx_cpt up and running.
 
 6.  Verify that process status is set to Running.
 
-    ![process](https://github.com/preetpoly/test/blob/master/process.png)
+    ![process](https://github.com/himypoly/dump/blob/master/task_manager.PNG)
 
 Uninstalling the Client
 -----------------------
