@@ -105,7 +105,8 @@ endpoints. After installation is complete, the Polylogyx Osqueryd service and Po
 extension are deployed and the osqueryd service starts. Also, PolyLogyx Agent is installed as a Windows service and it acts as a watcher for osqueryd service. If the osqueryd service stops, the PolyLogyx Agent service restarts it. The following output is
 displayed if the command is successful.
 
-``` ########### Installation operation started ###########
+```
+########### Installation operation started ###########
 Downloading files...Done
 Installing files...Done
 Verifying PolyLogyx Endpoint Platform services are up and running....
@@ -205,7 +206,8 @@ Here are command examples.
 
 The following output is displayed if the `plgx_cpt.exe -u d` command is successful.
 
-```########### Deep uninstall started ###########
+```
+########### Deep uninstall started ###########
 Stopping Polylogyx Endpoint Platform services...Done
 Deleting Install directory...Done
 Deleting other files...Done
@@ -214,7 +216,8 @@ Deleting other files...Done
 
 The following output is displayed if the `plgx_cpt.exe -u s` command is successful.
 
-``` ########### Shallow uninstall started ###########
+```
+########### Shallow uninstall started ###########
 Stopping Polylogyx Endpoint Platform services...Done
 Cleaning installed files...Done
 Deleting other files...Done
@@ -293,13 +296,11 @@ channel](https://osquery-slack.herokuapp.com/).
 When you run a command with incorrect server details, such as invalid host name, 
 the UI shows message below and will redirect to a log file path.
 
-```No such host is known.
-```
+```No such host is known.```
 
 See log file for following error details.
 
-```Error: (11001)(No such host is known.)
-```
+```Error: (11001)(No such host is known.)```
 
 **Resolution**: To resolve this issue, execute the command with correct server details.
 
@@ -308,13 +309,11 @@ See log file for following error details.
 When you run a command with incorrect server details, such as invalid IP, 
 the UI shows message below and will redirect to a log file path.
 
-``` Invalid IP Address: <IP>
-```
+``` Invalid IP Address: <IP>```
 
 See log file for following error details.
 
-``` Invalid IP Address: <IP>
-```
+``` Invalid IP Address: <IP>```
 
 **Resolution**: To resolve this issue, execute the command with correct IP format.
 
@@ -324,12 +323,12 @@ See log file for following error details.
 When you run a command with incorrect server details, such as unreachable IP, 
 the UI shows message below and will redirect to a log file path.
 
-```Downloadng files from server failed.
-```
+```Downloadng files from server failed.```
 
 See log file for following error details.
 
-```Transfer failed for [c:\plgx-temp\plgx_osqueryd.exe] , Error Code: (7)(Couldn't connect to server).
+```
+Transfer failed for [c:\plgx-temp\plgx_osqueryd.exe] , Error Code: (7)(Couldn't connect to server).
 Downloadng files from Server failed.
 ```
 
@@ -340,8 +339,7 @@ Downloadng files from Server failed.
 The following error message is displayed when you run a command without
 administrative privileges or sufficient arguments.
 
-```Insufficient privileges. Need Adimistrator privileges to run the tool.
-```
+```Insufficient privileges. Need Adimistrator privileges to run the tool.```
 
 **Resolution**: To resolve this issue, execute the command with administrative
 privileges and sufficient arguments.
@@ -351,13 +349,11 @@ privileges and sufficient arguments.
 If you execute the command to install the PolyLogyx client with an incorrect
 certificate path, the UI show message below and will redirect to a log file path.
 
-```Failed to read server's public key from input file: <cert_path>
-```
+```Failed to read server's public key from input file: <cert_path>```
 
 See log file for following error details.
 
-```Error occured in reading PubKey cert. Error: (2)(The system cannot find the file specified.
-```
+```Error occured in reading PubKey cert. Error: (2)(The system cannot find the file specified.```
 
 **Resolution**: To resolve this error, execute the command with the correct path.
 
@@ -366,13 +362,11 @@ See log file for following error details.
 If you execute the command to install the PolyLogyx client with administrative
 privileges but with an invalid certificate, the UI show message below and will redirect to a log file path.
 
-``` Downloadng files from server failed.
-```
+``` Downloadng files from server failed.```
 
 See log file for following error details.
 
-```Downloadng files from Server failed. Error (60)(Peer certificate cannot be authenticated with given CA certificates).
-```
+```Downloadng files from Server failed. Error (60)(Peer certificate cannot be authenticated with given CA certificates).```
 
 **Resolution**: To resolve this error, execute the command with a valid certificate.
 
@@ -381,9 +375,11 @@ See log file for following error details.
 If you try to install the PolyLogyx client when osquery already installed, the
 following error message is displayed.
 
-``` Polylogyx Agent is already installed, please uninstall before proceeding.
+```
+Polylogyx Agent is already installed, please uninstall before proceeding.
 Use plgx_cpt -u <d / s> option for uninstall.
-Refer help for options, or, log file C:\plgx-temp\plgx_cpt.log.<hostname>.<date_timestamp> for error details.
+Refer help for options, or, log file C:\plgx-temp\plgx_cpt.log.<hostname>.<date_timestamp> 
+for error details.
 ```
 
 **Resolution**: Follow these steps to resolve the issue:
