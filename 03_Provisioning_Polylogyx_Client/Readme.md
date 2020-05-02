@@ -84,7 +84,7 @@ PSEXEC or WMIC command line utilities) with administrative privileges.
 
 Here is the syntax to execute the installation command.
 
-```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-o <download directory>] [-y <yara refresh interval>]```
+``` plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-o <download directory>] [-y <yara refresh interval>]```
 
 Here is the syntax description.
 
@@ -98,15 +98,14 @@ Here is the syntax description.
 
 Here is an example of a remote command execution using PSEXEC.
 
-```psexec \\101.101.1.101 -u Administrator cmd /c dir C:\Users\Administrator\plgx_cpt.exe -p -i 11.111.111.11 -k c:\certificate.crt```
+``` psexec \\101.101.1.101 -u Administrator cmd /c dir C:\Users\Administrator\plgx_cpt.exe -p -i 11.111.111.11 -k c:\certificate.crt```
 
 The installation begins and the CPT utility brings the required artefacts on the
 endpoints. After installation is complete, the Polylogyx Osqueryd service and PolyLogyx
 extension are deployed and the osqueryd service starts. Also, PolyLogyx Agent is installed as a Windows service and it acts as a watcher for osqueryd service. If the osqueryd service stops, the PolyLogyx Agent service restarts it. The following output is
 displayed if the command is successful.
 
-```
-########### Installation operation started ###########
+``` ########### Installation operation started ###########
 Downloading files...Done
 Installing files...Done
 Verifying PolyLogyx Endpoint Platform services are up and running....
@@ -144,6 +143,7 @@ Follow these steps to check if the required processes are running.
 
 The command output lists the current state of the osqueryd, vast, and vastnw
 services.
+
 ```Service vast up and running.
 Service vastnw up and running.
 Service plgx_osqueryd up and running.
@@ -203,7 +203,8 @@ other options. With the –u option, you must use one of these options:
 
 Here are command examples.
 
-The following output is displayed if the `plgx_cpt.exe -u d` command is successful. 
+The following output is displayed if the `plgx_cpt.exe -u d` command is successful.
+
 ```########### Deep uninstall started ###########
 Stopping Polylogyx Endpoint Platform services...Done
 Deleting Install directory...Done
@@ -212,6 +213,7 @@ Deleting other files...Done
 ```   
 
 The following output is displayed if the `plgx_cpt.exe -u s` command is successful.
+
 ``` ########### Shallow uninstall started ###########
 Stopping Polylogyx Endpoint Platform services...Done
 Cleaning installed files...Done
@@ -243,6 +245,7 @@ other options. With the –g option, you must use one of these options:
 | s         | This will only upgrade software and not delete any data files.                                                                                                                               |
 
 The following output is displayed if the `plgx_cpt.exe -g d` command is successful. 
+
 ```
 ########### Upgrade started ###########
 ########### Deep uninstall started ###########
@@ -259,7 +262,9 @@ PolyLogyx Endpoint Platform services initialized.
 ########### Upgrade completed successfully ###########
 ```
 
-The following output is displayed if the `plgx_cpt.exe -g s` command is successful. 
+The following output is displayed if the `plgx_cpt.exe -g s` command is successful.
+
+```
 ########### Upgrade started ###########
 ########### Shallow uninstall started ###########
 Stopping Polylogyx Endpoint Platform services...Done
@@ -273,6 +278,7 @@ Verifying PolyLogyx Endpoint Platform services are up and running....
 PolyLogyx Endpoint Platform services initialized.
 ########### Installation operation completed successfully ###########
 ########### Upgrade completed successfully ###########
+```
 
 Troubleshooting Client Installation Issues
 ------------------------------------------
@@ -286,39 +292,48 @@ channel](https://osquery-slack.herokuapp.com/).
 
 When you run a command with incorrect server details, such as invalid host name, 
 the UI shows message below and will redirect to a log file path.
-``` No such host is known.
+
+```No such host is known.
 ```
 
 See log file for following error details.
+
 ```Error: (11001)(No such host is known.)
 ```
+
+**Resolution**: To resolve this issue, execute the command with correct server details.
 
 ### Incorrect IP format
 
 When you run a command with incorrect server details, such as invalid IP, 
 the UI shows message below and will redirect to a log file path.
+
 ``` Invalid IP Address: <IP>
 ```
 
 See log file for following error details.
+
 ``` Invalid IP Address: <IP>
 ```
+
+**Resolution**: To resolve this issue, execute the command with correct IP format.
+
 
 ### Incorrect IP address
 
 When you run a command with incorrect server details, such as unreachable IP, 
 the UI shows message below and will redirect to a log file path.
 
-``` Downloadng files from server failed.
+```Downloadng files from server failed.
 ```
 
- See log file for following error details.
-``` Transfer failed for [c:\plgx-temp\plgx_osqueryd.exe] , Error Code: (7)(Couldn't connect to server).
+See log file for following error details.
+
+```Transfer failed for [c:\plgx-temp\plgx_osqueryd.exe] , Error Code: (7)(Couldn't connect to server).
 Downloadng files from Server failed.
 ```
 
-**Resolution**: To resolve this issue, execute the command with correct server
-details.
+**Resolution**: To resolve this issue, execute the command with correct IP address.
 
 ### Insufficient privileges
 
@@ -340,6 +355,7 @@ certificate path, the UI show message below and will redirect to a log file path
 ```
 
 See log file for following error details.
+
 ```Error occured in reading PubKey cert. Error: (2)(The system cannot find the file specified.
 ```
 
@@ -354,11 +370,11 @@ privileges but with an invalid certificate, the UI show message below and will r
 ```
 
 See log file for following error details.
+
 ```Downloadng files from Server failed. Error (60)(Peer certificate cannot be authenticated with given CA certificates).
 ```
 
-**Resolution**: To resolve this error, execute the command with a valid
-certificate.
+**Resolution**: To resolve this error, execute the command with a valid certificate.
 
 ### Failed to configure Osquery
 
