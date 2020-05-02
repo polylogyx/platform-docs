@@ -109,13 +109,8 @@ displayed if the command is successful.
 ########### Installation operation started ###########
 Downloading files...Done
 Installing files...Done
-Installing Polylogyx Osqueryd service...Done
-Starting Polylogyx Osqueryd service...Done
-Starting Polylogyx Agent...Done
-Service plgx_osqueryd is running.
-Service plgx_cpt is running.
-Service vast is running.
-Service vastnw is running.
+Verifying PolyLogyx Endpoint Platform services are up and running....
+PolyLogyx Endpoint Platform services initialized.
 ########### Installation operation completed successfully ###########
 ```
 
@@ -209,10 +204,8 @@ other options. With the –u option, you must use one of these options:
 Here are command examples.
 
 The following output is displayed if the `plgx_cpt.exe -u d` command is successful. 
-``` ########### Deep uninstall started ###########
-Stopping Polylogyx Agent...Done
-Stopping Polylogyx Osqueryd service...Done
-Removing Polylogyx Osqueryd service...Done
+```########### Deep uninstall started ###########
+Stopping Polylogyx Endpoint Platform services...Done
 Deleting Install directory...Done
 Deleting other files...Done
 ########### Deep uninstall completed successfully ###########
@@ -220,9 +213,7 @@ Deleting other files...Done
 
 The following output is displayed if the `plgx_cpt.exe -u s` command is successful.
 ``` ########### Shallow uninstall started ###########
-Stopping Polylogyx Agent...Done
-Stopping Polylogyx Osqueryd service...Done
-Removing Polylogyx Osqueryd service...Done
+Stopping Polylogyx Endpoint Platform services...Done
 Cleaning installed files...Done
 Deleting other files...Done
 ########### Shallow uninstall completed successfully ###########
@@ -255,25 +246,33 @@ The following output is displayed if the `plgx_cpt.exe -g d` command is successf
 ```
 ########### Upgrade started ###########
 ########### Deep uninstall started ###########
-Stopping Polylogyx Agent...Done
-Stopping Polylogyx Osqueryd service...Done
-Removing Polylogyx Osqueryd service...Done
+Stopping Polylogyx Endpoint Platform services...Done
 Deleting Install directory...Done
 Deleting other files...Done
 ########### Deep uninstall completed successfully ###########
 ########### Installation operation started ###########
 Downloading files...Done
 Installing files...Done
-Installing Polylogyx Osqueryd service...Done
-Starting Polylogyx Osqueryd service...Done
-Starting Polylogyx Agent...Done
-Service plgx_osqueryd is running.
-Service plgx_cpt is running.
-Service vast is running.
-Service vastnw is running.
+Verifying PolyLogyx Endpoint Platform services are up and running....
+PolyLogyx Endpoint Platform services initialized.
 ########### Installation operation completed successfully ###########
 ########### Upgrade completed successfully ###########
 ```
+
+The following output is displayed if the `plgx_cpt.exe -g s` command is successful. 
+########### Upgrade started ###########
+########### Shallow uninstall started ###########
+Stopping Polylogyx Endpoint Platform services...Done
+Cleaning installed files...Done
+Deleting other files...Done
+########### Shallow uninstall completed successfully ###########
+########### Installation operation started ###########
+Downloading files...Done
+Installing files...Done
+Verifying PolyLogyx Endpoint Platform services are up and running....
+PolyLogyx Endpoint Platform services initialized.
+########### Installation operation completed successfully ###########
+########### Upgrade completed successfully ###########
 
 Troubleshooting Client Installation Issues
 ------------------------------------------
@@ -285,10 +284,37 @@ channel](https://osquery-slack.herokuapp.com/).
 
 ### Incorrect server details
 
-When you run a command with incorrect server details, such as IP address or host name, 
-the UI will redirect to a log file path. See log file for following error details.
+When you run a command with incorrect server details, such as invalid host name, 
+the UI shows message below and will redirect to a log file path.
+``` No such host is known.
+```
 
-``` Error: (11001)(No such host is known.)
+See log file for following error details.
+```Error: (11001)(No such host is known.)
+```
+
+### Incorrect IP format
+
+When you run a command with incorrect server details, such as invalid IP, 
+the UI shows message below and will redirect to a log file path.
+``` Invalid IP Address: <IP>
+```
+
+See log file for following error details.
+``` Invalid IP Address: <IP>
+```
+
+### Incorrect IP address
+
+When you run a command with incorrect server details, such as unreachable IP, 
+the UI shows message below and will redirect to a log file path.
+
+``` Downloadng files from server failed.
+```
+
+ See log file for following error details.
+``` Transfer failed for [c:\plgx-temp\plgx_osqueryd.exe] , Error Code: (7)(Couldn't connect to server).
+Downloadng files from Server failed.
 ```
 
 **Resolution**: To resolve this issue, execute the command with correct server
@@ -308,10 +334,13 @@ privileges and sufficient arguments.
 ### Incorrect certificate file name or path
 
 If you execute the command to install the PolyLogyx client with an incorrect
-certificate path, the UI will redirect to a log file path.
-See log file for following error details.
+certificate path, the UI show message below and will redirect to a log file path.
 
-```Error occured reading pem buff. Error (2)(The system cannot find the file specified.)
+```Failed to read server's public key from input file: <cert_path>
+```
+
+See log file for following error details.
+```Error occured in reading PubKey cert. Error: (2)(The system cannot find the file specified.
 ```
 
 **Resolution**: To resolve this error, execute the command with the correct path.
@@ -319,9 +348,13 @@ See log file for following error details.
 ### Invalid certificate
 
 If you execute the command to install the PolyLogyx client with administrative
-privileges but with an invalid certificate, the following error is displayed.
+privileges but with an invalid certificate, the UI show message below and will redirect to a log file path.
 
-``` Error Code: 60 (Peer certificate cannot be authenticated with given CA certificates)
+``` Downloadng files from server failed.
+```
+
+See log file for following error details.
+```Downloadng files from Server failed. Error (60)(Peer certificate cannot be authenticated with given CA certificates).
 ```
 
 **Resolution**: To resolve this error, execute the command with a valid
