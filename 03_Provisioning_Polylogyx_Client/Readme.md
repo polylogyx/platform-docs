@@ -65,9 +65,7 @@ Before you begin installation, ensure you complete the following prerequisites.
 
     -   Do not have these installed:
 
-        -   osquery
-
-        -   older version of PolyLogyx client
+        -   PolyLogyx client version older than 1.17.5
 
     -   Do not have host-based firewalls or other security tools that might
         interfere with a remote installation
@@ -86,40 +84,34 @@ PSEXEC or WMIC command line utilities) with administrative privileges.
 
 Here is the syntax to execute the installation command.
 
-```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-v <osquery version>] [-o <download directory>]```
+``` plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-o <download directory>] [-y <yara refresh interval>]```
 
 Here is the syntax description.
 
 | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| \-p  | Signifies the option for provisioning the client                                                                                                                          |
+| \-p       | Signifies the option for provisioning the client                                                                                                                          |
 | \-i or -h | Specify one of the following. This is a required parameter. -i represents the IP address of the PolyLogyx management server (x.x.x.x format). -h represents the fully qualified domain name to the management server in the format a.b.c. You don’t need to https.                                                                                                                              |
 | \-k       | Indicates the full path to the server public key file. This is a required parameter.                                                                                                         |
-| \-v       | Represents the osquery version to be installed. Currently, only version 3.2.6 is supported. This is an optional parameter. If you do not specify a version, the latest version is installed. |
 | \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            |
+| \-y       | Indicates the yara refresh interval in seconds for downloading signature files from server.                                                                            |
 
 Here is an example of a remote command execution using PSEXEC.
 
-```psexec \\101.101.1.101 -u Administrator cmd /c dir C:\Users\Administrator\plgx_cpt.exe -p -i 11.111.111.11 -k c:\certificate.crt```
+``` psexec \\101.101.1.101 -u Administrator cmd /c dir C:\Users\Administrator\plgx_cpt.exe -p -i 11.111.111.11 -k c:\certificate.crt```
 
 The installation begins and the CPT utility brings the required artefacts on the
-endpoints. After installation is complete, the Osquery 3.2.4 and PolyLogyx
-extensions are deployed and the osqueryd service starts. Also, CPT is installed as a Windows service and it acts as a watcher for osqueryd service starts. If the osqueryd service stops, the CPT service restarts it. The following output is
+endpoints. After installation is complete, the Polylogyx Osqueryd service and PolyLogyx
+extension are deployed and the osqueryd service starts. Also, PolyLogyx Agent is installed as a Windows service and it acts as a watcher for osqueryd service. If the osqueryd service stops, the PolyLogyx Agent service restarts it. The following output is
 displayed if the command is successful.
 
 ```
-Downloading Files needed for install. Depending on your network connection, it might take some time. Please wait..
-Osquery successfully installed.
-Configuring client..Please wait..
-Service stopped successfully
-Osquery stopped
-Client configuration..Ready to go in 5 seconds..
-Service start pending...
-Service started successfully.
-CPT Service installed successfully
-Service start pending...
-Service started successfully.
-=== PolyLogyx osquery client installed Successfully ===
+########### Installation operation started ###########
+Downloading files...Done
+Installing files...Done
+Verifying PolyLogyx Endpoint Platform services are up and running....
+PolyLogyx Endpoint Platform services initialized.
+########### Installation operation completed successfully ###########
 ```
 
 
@@ -127,7 +119,7 @@ Service started successfully.
 
 After you deploy the PolyLogyx client, complete these steps to verify the
 installation. When the PolyLogyx client is installed successfully, the following
-processes start:
+processes/services start:
 
 1.  osqueryd service
 
@@ -135,7 +127,7 @@ processes start:
 
 3.  vastnw service
 
-4.  Plgx_win_extension.exe process
+4.  Plgx_win_extension.ext.exe process
 
 Installation is not successful if any of these fail to start.
 
@@ -143,30 +135,28 @@ Follow these steps to check if the required processes are running.
 
 1.  Open a command window with administrative privileges.
 
-2.  Run the following command to check the state of software stack, including
+2.  Switch to "c:\Program Files\plgx_osquery" folder in command prompt.
+
+3.  Run the following command to check the state of software stack, including
     osquery, PolyLogyx Extension and associated services.
 
 ```plgx_cpt.exe –c```
 
 The command output lists the current state of the osqueryd, vast, and vastnw
 services.
-```osqueryd service up and running
-===================================================
-||           Query Execution Output              ||
-===================================================
+
+```Service vast up and running.
+Service vastnw up and running.
+Service plgx_osqueryd up and running.
+============== Query Execution Output ==============
 name : plgx_win_extension
-path : \\.\pipe\osquery.em.3694
-sdk_version : 1.0.0
+path : \\.\pipe\plgx_osquery.em.10020
+sdk_version : 0.0.0
 type : extension
-uuid : 3694
-version : 1.0.0
-
-===================================================
-||          Query Execution Finished             ||
-===================================================
-
-vast service up and running
-vastnw service up and running  
+uuid : 10020
+version : 1.0.40
+============== Query Execution Finished ==============
+Service plgx_cpt up and running.  
 ```
 
 1.  Review the output to verify if the required services are running.
@@ -181,7 +171,7 @@ vastnw service up and running
 
 6.  Verify that process status is set to Running.
 
-    ![process](https://github.com/preetpoly/test/blob/master/process.png)
+    ![process](https://github.com/himypoly/dump/blob/master/task_manager_1.PNG)
 
 Uninstalling the Client
 -----------------------
@@ -192,7 +182,13 @@ Follow these steps to uninstall the PolyLogyx client.
 
 2.  Close any open instances of the osqueryd, vast, and vastnw services.
 
-3.  Run the uninstall command.
+3.  Close installation directory "c:\Program Files\plgx_osquery" if opened in Explorer view or command prompt.
+
+4.  Close Event Viewer. 
+
+5.  In command prompt, go to the folder (Note: This is not the installation directory) where CPT tool was downloaded for provisioning client.
+
+    Run the uninstall command.
 
     Here is the syntax to execute the installation command.
 
@@ -208,22 +204,24 @@ other options. With the –u option, you must use one of these options:
 
 Here are command examples.
 
-The following output is displayed if the `plgx_cpt.exe -u d` command is successful. 
-``` uninstall_osq, will remove everything osquery , db and all folders
-Stopping services. Please wait for a few second. As they say, Patience is a Virtue
-Services stopped successfully !!
-Uninstalling Polylogxy osquery client successful. Removing all the services..
-Service stopped successfully
-Removing files..
+The following output is displayed if the `plgx_cpt.exe -u d` command is successful.
+
+```
+########### Deep uninstall started ###########
+Stopping Polylogyx Endpoint Platform services...Done
+Deleting Install directory...Done
+Deleting other files...Done
+########### Deep uninstall completed successfully ###########
 ```   
 
 The following output is displayed if the `plgx_cpt.exe -u s` command is successful.
-``` uninstall_osq_shallow, will only uninstall osquery but keep database untouched
-Detected existing installation of osquery..
-Service stopped successfully
-Uninstalling osquery successful
-Service stopped successfully
-Trying to remove C:\ProgramData\osquery\plgx_win_extension.ext.exe
+
+```
+########### Shallow uninstall started ###########
+Stopping Polylogyx Endpoint Platform services...Done
+Cleaning installed files...Done
+Deleting other files...Done
+########### Shallow uninstall completed successfully ###########
 ```                                                                                                                                                                                                                                                                              
 
 Upgrading the Client 
@@ -233,51 +231,56 @@ Follow these steps to upgrade the PolyLogyx client.
 
 1.  Open a command window with administrative privileges.
 
-2.  Run the upgrade command.
+2.  In command prompt, go to the folder (Note: This is not the installation directory) where CPT tool was downloaded for provisioning client.
+
+3.  Run the upgrade command.
 
     Here is the syntax to execute the upgrade command.
 
-```plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-g {<f> <update flagsfile>} | {<x> <update extension binary alone>} | {<a> <update osquery full>} | {<o> <update osquery only without extension>} | {<c> <update cpt>]}```
+```plgx_cpt.exe -g {<d> full-upgrade | <s> shallow-upgrade}```
 
 The -g parameter is used to upgrade the agent and cannot be combined with any
 other options. With the –g option, you must use one of these options:
 
 | Parameter | Description                                                                                                                                                                                  |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| f       | Upgrades only the osquery.flags file.                                                                                                                                    |
-| x       | Upgrades only the plgx_win_extension.ext.exe.                                                                                                         |
-| a       | Upgrades osquery (flags file and osqueryd.exe file) and the PolyLogyx extension (plgx_win_extension.ext.exe).                                                                                                              |
-| o       | Upgrades only the osquery (osqueryd.exe) file.   |
-| c       | Upgrades the plgx_cpt.exe file.                                                                            |
+| d         | This will completely replace agent and old data files and bring the system to a new-installation state.                                                                                      |
+| s         | This will only upgrade software and not delete any data files.                                                                                                                               |
 
-The following output is displayed if the `plgx_cpt.exe -g a` command is successful. 
+The following output is displayed if the `plgx_cpt.exe -g d` command is successful. 
+
 ```
-Server URL: server.yourorg.com
-Trying to upgrade osquery in full mode including extension bins..Please wait..
-Service stopped successfully
-Osquery stopped
-Service stopped successfully
-Service stopped successfully
-Osquery is alreday installed, Uninstalling it in shallow mode
-Detected existing installation of osquery..
-Service is already stopped.
-Uninstalling osquery successful
-Service stopped successfully
-Service stopped successfully
-Service is already stopped.
-Trying to remove C:\ProgramData\osquery\plgx_win_extension.ext.exe
-Downloading Files needed for install. Depending on your network connection, it might take some time. Please wait..
-Osquery successfully installed.
-Configuring client..Please wait..
-Service stopped successfully
-Osquery stopped
-Client configuration..Ready to go in 5 seconds..
-Service start pending...
-Service started successfully.
-CPT Service installed successfully
-Service start pending...
-Service started successfully.
-=== PolyLogyx osquery client installed Successfully ===
+########### Upgrade started ###########
+########### Deep uninstall started ###########
+Stopping Polylogyx Endpoint Platform services...Done
+Deleting Install directory...Done
+Deleting other files...Done
+########### Deep uninstall completed successfully ###########
+########### Installation operation started ###########
+Downloading files...Done
+Installing files...Done
+Verifying PolyLogyx Endpoint Platform services are up and running....
+PolyLogyx Endpoint Platform services initialized.
+########### Installation operation completed successfully ###########
+########### Upgrade completed successfully ###########
+```
+
+The following output is displayed if the `plgx_cpt.exe -g s` command is successful.
+
+```
+########### Upgrade started ###########
+########### Shallow uninstall started ###########
+Stopping Polylogyx Endpoint Platform services...Done
+Cleaning installed files...Done
+Deleting other files...Done
+########### Shallow uninstall completed successfully ###########
+########### Installation operation started ###########
+Downloading files...Done
+Installing files...Done
+Verifying PolyLogyx Endpoint Platform services are up and running....
+PolyLogyx Endpoint Platform services initialized.
+########### Installation operation completed successfully ###########
+########### Upgrade completed successfully ###########
 ```
 
 Troubleshooting Client Installation Issues
@@ -290,27 +293,53 @@ channel](https://osquery-slack.herokuapp.com/).
 
 ### Incorrect server details
 
-The following error mesaage is displayed when you run a command with incorrect
-server details, such as IP address or host name.
+When you run a command with incorrect server details, such as invalid host name, 
+the UI shows message below and will redirect to a log file path.
 
-``` Downloading Files needed for install. Depending on your network connection, it might take some time. Please wait..
-Transfer failed for [c:\plgx-temp\osquery.flags] , Error Code: 7 (Couldn't connect to server)
-Downloading files from Server failed
+```No such host is known.```
+
+See log file for following error details.
+
+```Error: (11001)(No such host is known.)```
+
+**Resolution**: To resolve this issue, execute the command with correct server details.
+
+### Incorrect IP format
+
+When you run a command with incorrect server details, such as invalid IP, 
+the UI shows message below and will redirect to a log file path.
+
+``` Invalid IP Address: <IP>```
+
+See log file for following error details.
+
+``` Invalid IP Address: <IP>```
+
+**Resolution**: To resolve this issue, execute the command with correct IP format.
+
+
+### Incorrect IP address
+
+When you run a command with incorrect server details, such as unreachable IP, 
+the UI shows message below and will redirect to a log file path.
+
+```Downloadng files from server failed.```
+
+See log file for following error details.
+
+```
+Transfer failed for [c:\plgx-temp\plgx_osqueryd.exe] , Error Code: (7)(Couldn't connect to server).
+Downloadng files from Server failed.
 ```
 
-**Resolution**: To resolve this issue, execute the command with correct server
-details.
+**Resolution**: To resolve this issue, execute the command with correct IP address.
 
 ### Insufficient privileges
 
 The following error message is displayed when you run a command without
 administrative privileges or sufficient arguments.
 
-``` ##########################################
-## Insufficient Privileges ###############
-## Need Administrator privileges to run CPT#
-##########################################
-```
+```Insufficient privileges. Need Adimistrator privileges to run the tool.```
 
 **Resolution**: To resolve this issue, execute the command with administrative
 privileges and sufficient arguments.
@@ -318,34 +347,40 @@ privileges and sufficient arguments.
 ### Incorrect certificate file name or path
 
 If you execute the command to install the PolyLogyx client with an incorrect
-certificate path, the following error is displayed.
+certificate path, the UI show message below and will redirect to a log file path.
 
-``` Failed to open Server's public key file c:\Users\user1\certificate.crt , Error: 2
-Failed to read server's public key from input file [c]
-```
-**Resolution**: To resolve this error, execute the command with the correct
-path.
+```Failed to read server's public key from input file: <cert_path>```
+
+See log file for following error details.
+
+```Error occured in reading PubKey cert. Error: (2)(The system cannot find the file specified.```
+
+**Resolution**: To resolve this error, execute the command with the correct path.
 
 ### Invalid certificate
 
 If you execute the command to install the PolyLogyx client with administrative
-privileges but with an invalid certificate, the following error is displayed.
+privileges but with an invalid certificate, the UI show message below and will redirect to a log file path.
 
-``` Downloading Files needed for install. Depending on your network connection, it might take some time. Please wait..
-Transfer failed for [c:\plgx-temp\osquery.msi] , Error Code: 60 (Peer certificate cannot be authenticated with given CA certificates)
-Downloading files from Server failed
-=== Failed to configure  ===
-```
+``` Downloadng files from server failed.```
 
-**Resolution**: To resolve this error, execute the command with a valid
-certificate.
+See log file for following error details.
+
+```Downloadng files from Server failed. Error (60)(Peer certificate cannot be authenticated with given CA certificates).```
+
+**Resolution**: To resolve this error, execute the command with a valid certificate.
 
 ### Failed to configure Osquery
 
 If you try to install the PolyLogyx client when osquery already installed, the
 following error message is displayed.
 
-``` Osquery is already installed, please uninstall before proceeding. Using plgx_cpt.exe -u <d/s> option```
+```
+Polylogyx Agent is already installed, please uninstall before proceeding.
+Use plgx_cpt -u <d / s> option for uninstall.
+Refer help for options, or, log file C:\plgx-temp\plgx_cpt.log.<hostname>.<date_timestamp> 
+for error details.
+```
 
 **Resolution**: Follow these steps to resolve the issue:
 
