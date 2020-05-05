@@ -36,27 +36,27 @@ For the Windows operating system, PolyLogyx Extension is part of the agent and t
     b. Set of scheduled queries that captures all the process creation and network connections data from the endpoint. 
     The configurations are editable and the changes in the configuration are picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file.
  
-For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/tree/pooja-develop/06_Queries_and_packs#scheduled-queries). 
+For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/06_Queries_and_packs#scheduled-queries). 
     
 Perform these steps to view or edit defined filters:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT  > Config.
 
-   ![configs_menu](https://github.com/preetpoly/test/blob/pooja/configs_menu.png)
+   ![configs_menu](../images/configs_menu.png)
 
    The page lists the predefined queries available for Windows, Linux, and Apple.  
 3. Select an operating system, such as Windows.
 
-   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
+   ![configs_list_new](../images/configs_list_new2.png)
 
     The page lists the predefined queries applied on the Windows endpoints. 
 
 7. Scroll down to view the Additional Config and Filters pane. 
 8. Select the Tree view to review the predefined values and filters. 
-   ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
+   ![tree_view1](../images/tree_view1.png)
 9. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
-   For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/tree/pooja-develop/05_Understanding_Filters) section.
+   For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/05_Understanding_Filters) section.
 
 10. Click Update to save your changes. 
 
@@ -70,11 +70,11 @@ Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT > Options.
 
-   ![options_menu1](https://github.com/preetpoly/test/blob/pooja/options_menu1.png)
+   ![options_menu1](../images/options_menu1.png)
 
 3. Review the listed options. 
 
-   ![poly_options1](https://github.com/preetpoly/test/blob/pooja/poly_options1.png)
+   ![poly_options1](../images/poly_options1.png)
 
 4. Edit the option values, as needed, and click <b>update option</b>.
    Here are the options descriptions. 

@@ -20,21 +20,21 @@ Perform these steps to take a response.
 1. Access the web interface for the server.
 2. Navigate to SOC Operations > Response. 
 
-   ![response_menu](https://github.com/preetpoly/test/blob/pooja/response_menu.png)
+   ![response_menu](../images/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 
    On thid page, you can delete a file, terminate a process, or isolate an endpoint from the network.
    
    1. To delete a file, set the Target value to file, specify the full file name in the input text box, with the optional MD5 hash of the file, and the target endpoint.
    
-   ![target_file](https://github.com/preetpoly/test/blob/pooja/target_file.png)
+   ![target_file](../images/target_file.png)
    
    2. To terminate a process, set the Target value to process, specify the PID (process ID) and target endpoint.
    
-   ![target_process](https://github.com/preetpoly/test/blob/pooja/target_process.png)
+   ![target_process](../images/target_process.png)
    
    3. To isolate an endpoint using Windows Host Firewall interface, set the Target value to network and specify the other values. For details on the other values, see this [page](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc722141(v=ws.10)).
    
-   ![target_network](https://github.com/preetpoly/test/blob/pooja/target_network.png)
+   ![target_network](../images/target_network.png)
    
  4. Click Add to apply the changes.
  
@@ -43,4 +43,4 @@ Perform these steps to take a response.
  
  |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Using Recon Data](../10_Using_Recon_Data/Readme.md)  | [Next >> Tables](../12_Tables/Readme.md)|
+|[Previous << Carves](../09_Carves/Readme.md)  | [Next >> Tables](../11_Tables/Readme.md)|
