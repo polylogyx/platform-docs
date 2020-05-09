@@ -59,13 +59,15 @@ Before you begin installation, ensure you complete the following prerequisites.
 
 -   Make sure the endpoints meet the following system requirements.
 
-    -   Support 64-bit architecture
+    -   Support 64-bit architecture on Windows 7 and above, Linux and MacOS
 
-    -   Windows 7 or later operating system installed as specified [here](https://github.com/polylogyx/osq-ext-bin)
+		-   For Windows 7 or later operating system installed as specified [here](https://github.com/polylogyx/osq-ext-bin)
 
+	-   Support 32-bit architecture on Windows platforms only (Windows 7 and above)
+	
     -   Do not have these installed:
 
-        -   PolyLogyx client version older than 1.17.5
+        -   PolyLogyx client version not older than the one with 1.0.35.15
 
     -   Do not have host-based firewalls or other security tools that might
         interfere with a remote installation
@@ -121,7 +123,7 @@ After you deploy the PolyLogyx client, complete these steps to verify the
 installation. When the PolyLogyx client is installed successfully, the following
 processes/services start:
 
-1.  osqueryd service
+1.  plgx_osqueryd service
 
 2.  vast service
 
