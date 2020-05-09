@@ -178,7 +178,11 @@ existing Docker images and containers.
 Upgrading the Server
 --------------------
 
-Upgrading the PolyLogyx server is manual process. Complete these steps to perform an upgrade:
+PolyLogyx ESP CE can be upgraded from the earlier releases (v 1.17.5 onwards) through an upgrade script.
+
+The upgrade_script.sh script is part of the platform bundle.
+
+PolyLogyx ESP could also be upgraded manually. Complete these steps to perform an upgrade:
 
 1. Back up the certificate.crt and private.key files stored in the nginx directory in the installation
 directory. 
