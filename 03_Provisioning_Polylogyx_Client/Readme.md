@@ -67,14 +67,27 @@ Before you begin installation, ensure you complete the following prerequisites.
 	
     -   Do not have these installed:
 
-        -   PolyLogyx client version not older than the one with 1.0.35.15
+        -   PolyLogyx Extension version older than 1.0.35.15 on Windows
+		-   Osquery agent on Linux/MacOS
 
     -   Do not have host-based firewalls or other security tools that might
         interfere with a remote installation
 
     -   Allow outbound TCP traffic on port 9000
 
-### Deploying the PolyLogyx Client
+
+### PolyLogyx Client Provisioning Tool (CPT)
+
+To simplify the provisioning of the endpoints with osquery agent and PolyLogyx Extension (as applicable), 
+PolyLogyx ESP provides a simplified tool known as CPT. The CPT for individual operating system could be
+downloaded from the web interface of the PolyLogyx ESP.
+
+![cpt](../images/download_cpt.png)
+
+The following sections provide details on deploying the agent using CPT on different platforms.
+
+	
+### Deploying the PolyLogyx Client on Windows
 
 Use the PolyLogyx Client Provisioning Tool (CPT) utility to deploy the PolyLogyx
 client on endpoints. After you identify endpoints on which to deploy the client,
@@ -284,6 +297,15 @@ PolyLogyx Endpoint Platform services initialized.
 ########### Installation operation completed successfully ###########
 ########### Upgrade completed successfully ###########
 ```
+
+
+### Deploying the PolyLogyx Client on Linux/MacOS
+
+Use the PolyLogyx Client Provisioning Tool (CPT) shell script to deploy the PolyLogyx
+client on endpoints. The following command can be invoked to deploy the client.
+
+sudo bash plgx_cpt.sh -p -i < SERVER_IP(x.x.x.x) >
+
 
 Troubleshooting Client Installation Issues
 ------------------------------------------
