@@ -178,7 +178,7 @@ existing Docker images and containers.
 Upgrading the Server
 --------------------
 
-PolyLogyx ESP CE can be upgraded from the earlier releases (v 1.17.5 onwards) through an upgrade script.
+PolyLogyx ESP can be upgraded from the earlier supported release through an upgrade script.
 
 The upgrade_script.sh script is part of the platform bundle.
 
