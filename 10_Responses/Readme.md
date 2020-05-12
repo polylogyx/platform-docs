@@ -14,6 +14,8 @@ b) Terminate a process on the endpoint
 
 c) Push a host firewall rule on the endpoint for containment, or limit, the network access
 
+d) Re-Start an agent remotely
+
 The response actions are available on Windows endpoints only. 
 
 Perform these steps to take a response.
