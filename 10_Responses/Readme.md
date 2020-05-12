@@ -14,6 +14,8 @@ b) Terminate a process on the endpoint
 
 c) Push a host firewall rule on the endpoint for containment, or limit, the network access
 
+d) Re-Start an agent remotely
+
 The response actions are available on Windows endpoints only. 
 
 Perform these steps to take a response.
@@ -41,6 +43,8 @@ Perform these steps to take a response.
     The response is created and listed on the Reponses page. 
  5. Review the response status to verify if the corresponding action was taken.  
  
+    ![response_status](../images/response_action_page.png)
+
  |										|																							|
 |:---									|													   								    ---:|
 |[Previous << Carves](../09_Carves/Readme.md)  | [Next >> Tables](../11_Tables/Readme.md)|
