@@ -634,217 +634,238 @@ Response: List all the configs available.
  
 Example Response
  
- {
- 	"status": "success",
- 	"message": "Successfully fetched the configs",
- 	"data": {
- 		"windows": {
- 			"queries": {
- 				"win_remote_thread_events": {
- 					"id": 124,
- 					"query": "select * from win_remote_thread_events;",
- 					"interval": 90,
- 					"platform": "windows",
- 					"version": null,
- 					"description": "Remote Thread Events",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
-					"status": true
- 					},
- 				"powershell_events": {
- 					"id": 125,
- 					"query": "select * from powershell_events;",
- 					"interval": 300,
- 					"platform": "windows",
- 					"version": null,
- 					"description": "Power Shell Events",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 					}
- 				},
- 			"filters": {
- 				"feature_vectors": {
- 					"character_frequencies": []
- 					},
- 				"win_include_paths": {
- 					"all_files": [
- 						"*"
- 						]
- 					},
-				"plgx_event_filters": {
- 					"win_file_events": {
- 						"target_path": {
- 							"exclude": {
- 								"values": [
- 									"C:\\Windows\\system32\\DriverStore\\Temp\\*",
- 									"C:\\Windows\\system32\\wbem\\Performance*"
- 									]
- 							},
- 							"include": {
- 								"values": [
- 									"*\\Start Menu*",
-									"*\\Startup\\*"
- 									]
- 							}
- 						},
- 					}
- 				}
- 			}
- 		},
- 		"linux": {
- 			"queries": {
- 				"process_events": {
- 					"id": 1,
- 					"query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
- 					"interval": 10,
- 					"platform": "linux",
- 					"version": null,
- 					"description": null,
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"osquery_info": {
- 					"id": 31,
- 					"query": "SELECT * FROM osquery_info;",
- 					"interval": 86400,
- 					"platform": "linux",
- 					"version": null,
- 					"description": "Information about the running osquery configuration",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"events": {
- 					"disable_subscribers": [
-						"user_events"
- 					]
- 				},
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%",
- 						"/usr/sbin/%%"
- 					]
- 				}
- 			}
-		},
- 		"darwin": {
- 			"queries": {
- 				"authorized_keys": {
- 					"id": 45,
- 					"query": "SELECT * FROM users JOIN authorized_keys USING (uid);",
- 					"interval": 28800,
- 					"platform": "darwin",
- 					"version": null,
- 					"description": "List authorized_keys for each user on the system",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"wireless_networks": {
- 					"id": 94,
- 					"query": "SELECT ssid, network_name, security_type, last_connected, captive_portal, possibly_hidden, roaming, roaming_profile FROM wifi_networks;",
- 					"interval": 28800,
- 					"platform": "darwin",
- 					"version": null,
-					"description": "OS X known/remembered Wi-Fi networks list.",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%"
- 						"/opt/sbin/%%"
- 					],
-					"configuration": [
- 						"/etc/%%"
- 					]
- 				}
- 			}
- 		}
- 	}
+  {
+  "status": "success",
+  "message": "Successfully fetched the configs",
+  "data": {
+    "linux": {
+      "x86_64": {
+        "0": {
+          "queries": {
+            "process_events": {
+              "id": 1,
+              "query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
+              "interval": 10,
+              "platform": "linux",
+              "version": null,
+              "description": null,
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "socket_events": {
+              "id": 2,
+              "query": "SELECT action, auid, family, local_address, local_port, path, pid, remote_address, remote_port, success, time,eid FROM socket_events WHERE success=1 AND path NOT IN ('/usr/bin/hostname') AND remote_address NOT IN ('127.0.0.1', '169.254.169.254', '', '0000:0000:0000:0000:0000:0000:0000:0001', '::1', '0000:0000:0000:0000:0000:ffff:7f00:0001', 'unknown', '0.0.0.0', '0000:0000:0000:0000:0000:0000:0000:0000');",
+              "interval": 10,
+              "platform": "linux",
+              "version": null,
+              "description": null,
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {
+            "events": {
+              "disable_subscribers": [
+                "user_events"
+              ]
+            },
+            "file_paths": {
+              "binaries": [
+                "/usr/bin/%%",
+                "/usr/local/sbin/%%"
+              ],
+              "configuration": [
+                "/etc/passwd",
+                "/etc/rsyslog.conf"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "windows": {
+      "x86_64": {
+        "1": {
+          "queries": {
+            "win_remote_thread_events": {
+              "id": 125,
+              "query": "select * from win_remote_thread_events;",
+              "interval": 90,
+              "platform": "windows",
+              "version": null,
+              "description": "Remote Thread Events",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": false
+            },
+            "appcompat_shims": {
+              "id": 95,
+              "query": "select ach.*,(select sha1 from win_hash wh where wh.path=ach.path limit 1 ) as sha1 from appcompat_shims ach;",
+              "interval": 3600,
+              "platform": "windows",
+              "version": null,
+              "description": "Windows scheduled_tasks",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {
+            "plgx_event_filters": {
+              "win_ssl_events": {
+                "process_name": {
+                  "exclude": {
+                    "values": [
+                      "*\\osqueryd.exe"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "2": {
+          "queries": {
+            "win_process_events": {
+              "id": 126,
+              "query": "select * from win_process_events  where action='PROC_CREATE';",
+              "interval": 30,
+              "platform": "windows",
+              "version": null,
+              "description": "Windows Process Events",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "win_file_events": {
+              "id": 127,
+              "query": "select * from win_file_events;",
+              "interval": 180,
+              "platform": "windows",
+              "version": null,
+              "description": "File Integrity Monitoring",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": false,
+          "filters": {
+            "feature_vectors": {
+              "character_frequencies": [
+                0,
+                0,
+                0
+              ]
+            },
+            "win_include_paths": {
+              "all_files": [
+                "*"
+              ]
+            }
+            }
+          }
+        },
+      "x86": {
+        "0": {
+          "queries": {
+            "appcompat_shims": {
+              "id": 157,
+              "query": "SELECT * FROM appcompat_shims WHERE description!='EMET_Database' AND executable NOT IN ('setuphost.exe','setupprep.exe','iisexpress.exe');",
+              "interval": 3600,
+              "platform": "windows",
+              "version": null,
+              "description": "Appcompat shims (.sdb files) installed on Windows hosts.",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": false
+            },
+            "certificates": {
+              "id": 158,
+              "query": "SELECT * FROM certificates WHERE path!='Other People';",
+              "interval": 3600,
+              "platform": "windows",
+              "version": null,
+              "description": "List all certificates in the trust store",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": false
+            }
+          },
+          "status": true,
+          "filters": {}
+        }
+      }
+    },
+    "darwin": {
+      "x86_64": {
+        "0": {
+          "queries": {
+            "authorized_keys": {
+              "id": 45,
+              "query": "SELECT * FROM users JOIN authorized_keys USING (uid);",
+              "interval": 28800,
+              "platform": "darwin",
+              "version": null,
+              "description": "List authorized_keys for each user on the system",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "boot_efi_hash": {
+              "id": 46,
+              "query": "SELECT path, md5 FROM hash WHERE path='/System/Library/CoreServices/boot.efi';",
+              "interval": 28800,
+              "platform": "darwin",
+              "version": null,
+              "description": "MD5 hash of boot.efi",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {
+            "file_paths": {
+              "binaries": [
+                "/usr/bin/%%",
+                "/usr/sbin/%%"
+              ],
+              "configuration": [
+                "/etc/%%"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
  }
 
-```
-### Get Details for Specific Config from Server
-
-Each configuration available at the server is identified by the platform. Use
-this API to fetch information for a specific config based on its platform.
-
-```
-URL: https://<Base URL>/configs/<platform>
- 
-Request Type: GET
- 
-Example Response
- 
- {
- 	"status": "success",
- 	"message": "Successfully fetched the config",
- 	"data": {
- 		"linux": {
- 			"queries": {
- 				"process_events": {
- 					"id": 1,
- 					"query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
- 					"interval": 10,
- 					"platform": "linux",
- 					"version": null,
- 					"description": null,
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"osquery_info": {
- 					"id": 31,
- 					"query": "SELECT * FROM osquery_info;",
- 					"interval": 86400,
- 					"platform": "linux",
- 					"version": null,
- 					"description": "Information about the running osquery configuration",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"events": {
- 					"disable_subscribers": [
-						"user_events"
- 					]
- 				},
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%",
- 						"/usr/sbin/%%"
- 					]
- 				}
- 			}
-		}
- 	}
- }
 
 ```
 
@@ -855,20 +876,21 @@ Use this API to modify information for a specific config based on its Platform.
 ```
 URL: https://<Base URL>/configs/<platform>
  
-Request Type: POST
+Request Type: PUT
  
 Example Request
  
  {
- 	"platform": "linux",
+ 	"platform": "windows",
  	“arch”:”x86_64”,
+	"type":"shallow",
  	"queries": {
- 		"process_events": {
+ 		"win_process_events": {
  			"interval": 10,
  			"platform": "linux",
  			"status": true
  		},
- 		"osquery_info": {
+ 		"win_file_events": {
  			"interval": 86400,
  			"platform": "linux",
  			"status": true
@@ -883,11 +905,7 @@ Example Request
  		"file_paths": {
  			"binaries": [
  				"/usr/bin/%%",
- 				"/usr/sbin/%%",
- 				"/bin/%%",
- 				"/sbin/%%",
- 				"/usr/local/bin/%%",
- 				"/usr/local/sbin/%%"
+ 				"/usr/sbin/%%"
  			]
  		}
  	}
