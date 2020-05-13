@@ -1,7 +1,7 @@
 Configuring the PolyLogyx Client
 ================================================
 
-After the PolyLogyx client is provisioned, the default and seeded configuration comes into play. If needed, you can customize the various configuration settings defined for the PolyLogyx client. 
+After the PolyLogyx client is provisioned, the default and seeded configuration comes into play. If needed, you can customize the various configuration settings defined for the PolyLogyx client. The documentation covered in this chapter assumes Windows x64 as the client operating system as PolyLogyx ESP provides maximum number of configuration choices for Windows x64 based clients. Similar steps can be used for clients based on other supported operating systems.
 
 To customize the configuration settings, you can modify the following:
 
@@ -11,54 +11,58 @@ To customize the configuration settings, you can modify the following:
 
 The osquery.flags File
 --------------------------------
-The osquery.flags file includes all the parameters needed for osquery initialization and functioning. By default, this file is stored in the <i>C:\programdata\osquery</i> folder. 
+The osquery.flags file includes all the parameters needed for osquery initialization and functioning. By default, this file is stored in the <i>C:\Program Files\plgx_osquery</i> folder. 
 
 Although this file contains all the flags supported by osquery, in this section, we will discuss only the key flags that are relevant for the PolyLogyx platform. 
 
-Update the parameters to configure the deployment environment to meet your specific needs. Note that modifying these values may significantly alter the performance of the endpoint agent. These configured values are passed to the endpoint agent during the [client provisioning](https://github.com/preetpoly/test/tree/pooja/Doc/Provisioning_Polylogyx_Client#provisioning-the-polylogyx-client-for-endpoints) through the osquery.flags file.
+Update the parameters to configure the deployment environment to meet your specific needs. Note that modifying these values may significantly alter the performance of the endpoint agent. These configured values are passed to the endpoint agent during the [client provisioning](https://github.com/polylogyx/platform-docs/03_Provisioning_Polylogyx_Client#provisioning-the-polylogyx-client-for-endpoints) through the osquery.flags file.
 
 
 | Flag | Description                                                                                                                                                                                 |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| extensions_autoload=C:\programdata\osquery\extensions.load | Informs the osquery agent to load an extension during osquery initialization. The extensions.load contains the location to the PolyLogyx Extension file. We recommended that you DO NOT change this flag.                                                                                                                                  |
+| extensions_autoload=C:\Program Files\plgx_osquery\extensions.load | Informs the osquery agent to load an extension during osquery initialization. The extensions.load contains the location to the PolyLogyx Extension file. We recommended that you DO NOT change this flag.                                                                                                                                  |
 | extensions_interval=10 <br> extensions_timeout=90 <br> extensions_require=plgx_win_extension <br> allow_unsafe | Control the extension loading behavior of the osquery agent. We recommended that you DO NOT change this flag. |
 | disable_watchdog=true <br> watchdog_level=-1 | PolyLogyx Extension is a real-time event monitor on the endpoint. Real time monitoring can be voluminous and query paths to the tables where those events are recorded could surpass the default performance constraints imposed by osquery on its child processes and threads. It is therefore recommended to turn off those constraints for better stability.|
-| events_max=2500 <br> events_expiry=3600 | Manage the history of real time events recorded on the endpoint. By default, up to 2500 events are recorded and when the count is hit, all the events that are older than 3600 seconds are purged from the local database. Altering these values can cause performance impact on queries. | 
+| events_max=1500 <br> events_expiry=3600 | Manage the history of real time events recorded on the endpoint. By default, up to 2500 events are recorded and when the count is hit, all the events that are older than 3600 seconds are purged from the local database. Altering these values can cause performance impact on queries. | 
 | config_tls_refresh=300 | Controls the refresh interval for agent configuration. Any changes to the agent configuration (as defined below) will get picked by the agent after this interval.|
 
 
 Predefined filters and queries
 ---------------
-As soon as an agent checks-in with the server, a default configuration is applied to the agent based on the operating system of the endpoint. The configuration contains the list of scheduled queries and filters that are applied on the agent. 
+As soon as an agent checks-in with the server, a default configuration is applied to the agent based on the operating system of the endpoint. The configuration contains the list of scheduled queries and filters that are applied on the agent.
 
 For the Windows operating system, PolyLogyx Extension is part of the agent and therefore the configuration includes the following:
     a. Additional filtering criteria to eliminate <i>white noise</i> from the real-time telemetry. 
     b. Set of scheduled queries that captures all the process creation and network connections data from the endpoint. 
     The configurations are editable and the changes in the configuration are picked up by the endpoint based on the <i>config_tls_refresh</i> value in the osquery.flags file.
- 
-For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/tree/pooja-develop/06_Queries_and_packs#scheduled-queries). 
+
+For Windows x64 systems, PolyLogyx ESP is shipped with 2 types of pre-baked configurations, called as "Deep" and "Shallow". Deep is representative of a configuration designed for more aggressive data collection from endpoints than Shallow. Each configuration provides a default set of scheduled queries and filters and at any point only on of them is "active". The "active" one is also highlighted by the green dot and the other with a red dot.
+
+![deep_shallow_config](../images/config_deep_shallow.png)
+
+For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/06_Queries_and_packs#scheduled-queries). 
     
 Perform these steps to view or edit defined filters:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT  > Config.
 
-   ![configs_menu](https://github.com/preetpoly/test/blob/pooja/configs_menu.png)
+   ![configs_menu](../images/configs_menu.png)
 
    The page lists the predefined queries available for Windows, Linux, and Apple.  
 3. Select an operating system, such as Windows.
 
-   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
+   ![configs_list_new](../images/configs_list_new2.png)
 
-    The page lists the predefined queries applied on the Windows endpoints. 
+4. Click the tab for Shallow or Deep, if the agent is running on a Window x64 system.
 
-7. Scroll down to view the Additional Config and Filters pane. 
-8. Select the Tree view to review the predefined values and filters. 
-   ![tree_view1](https://github.com/preetpoly/test/blob/pooja/tree_view1.png)
-9. Optionally, switch to the Code view to edit or define new filters, as needed.      
+5. Scroll down to view the Additional Config and Filters pane. 
+6. Select the Tree view to review the predefined values and filters. 
+   ![tree_view1](../images/tree_view1.png)
+7. Optionally, switch to the Code view to edit or define new filters, as needed.      
  
-   For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/tree/pooja-develop/05_Understanding_Filters) section.
+   For more information on filters, review the  [Understanding Filters](https://github.com/polylogyx/platform-docs/05_Understanding_Filters) section.
 
-10. Click Update to save your changes. 
+8. Click Update to save your changes. 
 
 PolyLogyx configuration options
 ---------------------
@@ -70,11 +74,11 @@ Perform these steps to view or edit this configuration:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT > Options.
 
-   ![options_menu1](https://github.com/preetpoly/test/blob/pooja/options_menu1.png)
+   ![options_menu1](../images/options_menu1.png)
 
 3. Review the listed options. 
 
-   ![poly_options1](https://github.com/preetpoly/test/blob/pooja/poly_options1.png)
+   ![poly_options1](../images/poly_options1.png)
 
 4. Edit the option values, as needed, and click <b>update option</b>.
    Here are the options descriptions. 

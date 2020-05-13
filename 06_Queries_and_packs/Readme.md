@@ -37,7 +37,7 @@ Here is an example.
 Query Workflow
 --------------------
 The following diagram depicts the high-level query workflow. 
-![query_workflow](https://github.com/preetpoly/test/blob/pooja/query_workflow.png)
+![query_workflow](../images/query_workflow.png)
 
 1.	Query is pushed to the relevant nodes at the next configuration refresh interval. 
             
@@ -68,12 +68,12 @@ Perform these steps to view or edit scheduled queries:
 1. Access the web interface for the server.
 2. Navigate to CONFIG MANAGEMENT  > Config.
 
-   ![configs_menu](https://github.com/preetpoly/test/blob/pooja/configs_menu.png)
+   ![configs_menu](../images/configs_menu.png)
 
    The page lists the predefined queries available for Windows, Linux, and Apple.  
 3. Select an operating system, such as Windows.
 
-   ![configs_list_new](https://github.com/preetpoly/test/blob/pooja/configs_list_new2.png)
+   ![configs_list_new](../images/configs_list_new2.png)
 
 4. Review the predefined queries applied on the Windows endpoints. 
 5. Deselect a query to remove it from the applied client configuration. 
@@ -90,7 +90,7 @@ Perform these steps to view and edit packs:
 
 2. Navigate to CONFIG MANAGEMENT  > Pack.
 
-    ![select_pack](https://github.com/preetpoly/test/blob/pooja/select_pack.png)
+    ![select_pack](../images/select_pack.png)
 
 3.	Review the available packs.
 
@@ -106,12 +106,12 @@ Perform these steps to add a new query pack.
 
 2. Navigate to CONFIG MANAGEMENT  > Pack.
 
-     ![select_pack](https://github.com/preetpoly/test/blob/pooja/select_pack.png)
+     ![select_pack](../images/select_pack.png)
   
 3. Click Add Pack.
    The Add New Pack File dialog is displayed. 
    
-      ![add_pack](https://github.com/preetpoly/test/blob/pooja/add_pack.png)
+      ![add_pack](../images/add_pack.png)
    
 4.	Select a  category from the list. 
 
@@ -130,7 +130,7 @@ Perform these steps to view or run a predefined query.
 
 2. Navigate to CONFIG MANAGEMENT  > Pack.
 
-    ![select_query](https://github.com/preetpoly/test/blob/pooja/select_query.png)
+    ![select_query](../images/select_query.png)
   
 3.	Click a query to review its details.
 
@@ -145,12 +145,12 @@ Perform these steps to add a new query:
 
 2. Navigate to CONFIG MANAGEMENT  > Pack.
 
-     ![select_query](https://github.com/preetpoly/test/blob/pooja/select_query.png)
+     ![select_query](../images/select_query.png)
   
 3. Click Add Query.
    The Add Query page is displayed. 
    
-      ![add_query](https://github.com/preetpoly/test/blob/pooja/add_query.png)
+      ![add_query](../images/add_query.png)
    
 3.	Enter the query details, such as name, query, interval, platform, and version.
 
@@ -169,17 +169,17 @@ Perform these steps to define and run a live query:
 
 2.	Navigate to SOC Operations > Live Queries.
 
-      ![select_live_query](https://github.com/preetpoly/test/blob/pooja/select_live_query.png)
+      ![select_live_query](../images/select_live_query.png)
    
       The Live Query Builder page is displayed.
    
 3.	Specify the query to run in the Type your query here field.
 
-    ![live_query_builder](https://github.com/preetpoly/test/blob/pooja/live_query_builder.png)
+    ![live_query_builder](../images/live_query_builder.png)
     
 4.	Click Device Target to specify the nodes on which to run the query. 
 
-      ![device_target](https://github.com/preetpoly/test/blob/pooja/device_target.png)
+      ![device_target](../images/device_target.png)
       
       You can select the nodes based on the node names or tags. 
       
