@@ -19,7 +19,7 @@ d) Custom Action (Execute powershell/batch/shell scripts) on the endpoint
 
 Perform these steps to take a response.
 1. Access the web interface for the server.
-2. Navigate to SOC Operations > Response. 
+2. Navigate to Response. 
 
    ![response_menu](../images/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 
