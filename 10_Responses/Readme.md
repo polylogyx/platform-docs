@@ -12,15 +12,14 @@ a) Delete a file from the endpoint
 
 b) Terminate a process on the endpoint
 
-c) Push a host firewall rule on the endpoint for containment, or limit, the network access
+c) Push a host firewall rule on the endpoint for containment, or limit, the network access (Available on Windows endpoints only)
 
-d) Re-Start an agent remotely
+d) Custom Action (Execute powershell/batch/shell scripts) on the endpoint
 
-The response actions are available on Windows endpoints only. 
 
 Perform these steps to take a response.
 1. Access the web interface for the server.
-2. Navigate to SOC Operations > Response. 
+2. Navigate to Response. 
 
    ![response_menu](../images/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 
@@ -37,6 +36,10 @@ Perform these steps to take a response.
    3. To isolate an endpoint using Windows Host Firewall interface, set the Target value to network and specify the other values. For details on the other values, see this [page](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc722141(v=ws.10)).
    
    ![target_network](../images/target_network.png)
+   
+   4. To execute custom script, upload the script content or script file, select script type and target endpoint.
+   
+   ![target_custom_response](../images/target_custom_response.png)
    
  4. Click Add to apply the changes.
  
