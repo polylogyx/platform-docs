@@ -2,13 +2,13 @@ Managing Alerts
 =================================== 
 An alert indicates an important occurrence in the enterprise. An alert is generated when incoming event data matches a predefined rule or IOC, or when event data (for last 24 hours) matches the Threat Intel feed. 
 
-The Alerts page is the central console that allows you to manage and review alerts. Click SOC Operations | Alerts to view the Alerts page.
+The Alerts page is the central console that allows you to manage and review alerts. Click Alerts to view the Alerts page.
 
 ![alerts_menu](../images/alerts_menu.png)
 
 Review Event Traffic
 --------------------
-On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details. Click the + button to zoom in and – button to zoom out. Use the arrow buttons to navigate the timeline.
+On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details.
 
 ![alert_trend](../images/alert_trend.png)
 
@@ -52,7 +52,7 @@ Perform these steps to investigate an alert:
     
     ![alerted_entry](../images/alerted_entry.png)
     2.	Optionally, click Alerted Entry to view the event. 
-4.	Click the Host State tab to view node-related information. The displayed tabs vary based on the alert information.  (SIR)
+4.	Click the Host State tab to view node-related information. The displayed tabs vary based on the alert information.
     1.	View details in the various tabs, such as scheduled_tasks, uptime, drivers, certificates, and patches. 
     
     ![host_state](../images/host_state.png)
@@ -83,7 +83,7 @@ After you have processed an alert, close it to remove it from the Alerts page.
 
 Perform these steps to close an alert:
 1. Access the web interface for the server.
-2. Navigate to SOC Operations > Alerts.
+2. Navigate to Alerts.
     
    ![alerts_menu](../images/alerts_menu.png)
 3. Click Resolve for an alert. 
