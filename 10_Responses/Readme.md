@@ -39,6 +39,8 @@ Perform these steps to take a response.
    
    4. To execute custom script, upload the script content or script file, select script type and target endpoint.
    
+   ![target_custom_response](../images/target_custom_response.png)
+   
  4. Click Add to apply the changes.
  
     The response is created and listed on the Reponses page. 
