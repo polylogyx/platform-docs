@@ -142,7 +142,7 @@ processes/services start:
 
 3.  vastnw service
 
-4.  Plgx_win_extension.ext.exe process
+4.  plgx_win_extension.ext.exe process
 
 Installation is not successful if any of these fail to start.
 
@@ -297,9 +297,29 @@ PolyLogyx Endpoint Platform services initialized.
 ########### Installation operation completed successfully ###########
 ########### Upgrade completed successfully ###########
 ```
+### Deploying the PolyLogyx Client on Linux
 
+Use the PolyLogyx Client Provisioning Tool (CPT) utility to deploy the PolyLogyx
+client on endpoints. After you identify endpoints on which to deploy the client,
+push the CPT utility and public key file to the endpoints using any standard
+mechanism.
 
-### Deploying the PolyLogyx Client on Linux/MacOS
+Run the installation command with root privileges.
+
+Here is the syntax to execute the installation command.
+
+``` plgx_cpt.exe -p -i <ip address> | -h <hostname> -k <server's public key file> [-o <download directory>] ```
+
+Here is the syntax description.
+
+| Parameter | Description                                                                                                                                                                                  |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \-p       | Signifies the option for provisioning the client                                                                                                                          |
+| \-i or -h | Specify one of the following. This is a required parameter. -i represents the IP address of the PolyLogyx management server (x.x.x.x format). -h represents the fully qualified domain name to the management server in the format a.b.c. You don’t need to https.                                                                                                                              |
+| \-k       | Indicates the full path to the server public key file. This is a required parameter.                                                                                                         |
+| \-o       | Indicates the location at which to download. The default value is c:\\plgx-temp\\. This is an optional parameter.                                                                            |
+
+### Deploying the PolyLogyx Client on MacOS
 
 Use the PolyLogyx Client Provisioning Tool (CPT) shell script to deploy the PolyLogyx
 client on endpoints. The following command can be invoked to deploy the client.
