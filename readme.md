@@ -86,5 +86,7 @@ activities:
 
 -   Network isolation
 
+-   Custom Response(Execute powershell/batch/shell scripts)
+
 
 [Next >> Architecture Overview](01_Architecture/Readme.md)
