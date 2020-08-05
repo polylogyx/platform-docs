@@ -68,7 +68,7 @@ Before you begin installation, ensure you complete the following prerequisites.
     -   Do not have these installed:
 
         -   PolyLogyx Extension version older than 1.0.35.15 on Windows
-		-   Osquery agent on Linux/MacOS
+		-   Osquery agent on MacOS
 
     -   Do not have host-based firewalls or other security tools that might
         interfere with a remote installation

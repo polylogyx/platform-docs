@@ -1,7 +1,7 @@
 Configuring the PolyLogyx Client
 ================================================
 
-After the PolyLogyx client is provisioned, the default and seeded configuration comes into play. If needed, you can customize the various configuration settings defined for the PolyLogyx client. The documentation covered in this chapter assumes Windows x64 as the client operating system as PolyLogyx ESP provides maximum number of configuration choices for Windows x64 based clients. Similar steps can be used for clients based on other supported operating systems.
+After the PolyLogyx client is provisioned, the default and seeded configuration comes into play. If needed, you can customize the various configuration settings defined for the PolyLogyx client. The documentation covered in this chapter assumes Windows x64 and Linux as the client operating system.
 
 To customize the configuration settings, you can modify the following:
 
@@ -91,7 +91,7 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_LogLevel | Indicates the logging level for the PolyLogyx Response Action. Possible values are 0 (Trace), 1 (Debug), 2 (Info), 3 (Warning), and 4 (Error). By default, this is set to 1 (Debug).  |
 | custom_plgx_LogModeQuiet | Specifies whether the log messages are printed on console or not. Relevant only when running osquery as a console application. |
 | custom_plgx_ServerPort | Specifies the port on which the PolyLogyx server is listening. By default, this is set to 443 and should not be changed. |
-| custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
+| custom_plgx_EnableRespServer | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
  
 5. Click Update to save your changes. 
