@@ -1,7 +1,7 @@
 Configuring the PolyLogyx Client
 ================================================
 
-After the PolyLogyx client is provisioned, the default and seeded configuration comes into play. If needed, you can customize the various configuration settings defined for the PolyLogyx client. The documentation covered in this chapter assumes Windows x64 as the client operating system as PolyLogyx ESP provides maximum number of configuration choices for Windows x64 based clients. Similar steps can be used for clients based on other supported operating systems.
+After the PolyLogyx client is provisioned, the default and seeded configuration comes into play. If needed, you can customize the various configuration settings defined for the PolyLogyx client. The documentation covered in this chapter assumes Windows x64 and Linux as the client operating system.
 
 To customize the configuration settings, you can modify the following:
 
