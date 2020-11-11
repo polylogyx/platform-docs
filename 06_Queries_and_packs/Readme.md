@@ -177,18 +177,14 @@ Perform these steps to define and run a live query:
 
     ![live_query_builder](../images/live_query_builder.png)
     
-4.	Click Device Target to specify the nodes on which to run the query. 
+4.	Select  hosts/tags to specify the nodes on which to run the query. 
 
-      ![device_target](../images/device_target.png)
       
-      You can select the nodes based on the node names or tags. 
-      
-5. Click Close to retun to the Live Query Builder page.   
 
-6.	Click Run Query.
+5.	Click Run Query.
    The query results are displayed.
    
-7.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
+6.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
 
 
 |										|																							|

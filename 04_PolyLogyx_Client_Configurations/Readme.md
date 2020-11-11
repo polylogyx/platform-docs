@@ -40,7 +40,7 @@ For Windows x64 systems, PolyLogyx ESP is shipped with 2 types of pre-baked conf
 
 ![deep_shallow_config](../images/config_deep_shallow.png)
 
-For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/06_Queries_and_packs#scheduled-queries). 
+For more information on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/06_Queries_and_packs#scheduled-queries). 
     
 Perform these steps to view or edit defined filters:
 1. Access the web interface for the server.
@@ -93,7 +93,11 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_ServerPort | Specifies the port on which the PolyLogyx server is listening. By default, this is set to 443 and should not be changed. |
 | custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
- 
+| custom_plgx_EnableWatcher  |  This flag enables the watch dog functionality of the agent. The watchdog functionality shuts the performance heavy operation of the agent if the memory limits are breached.   |  
+| custom_plgx_MemoryLimit  |  This flag provides for the memory usage of the agent, at the breach of which the watch dog functionality (if enabled) gets triggered.   | 
+| custom_plgx_LogFileNameLinux  |  Specifies the name and location of the log file on linux systems.   |  
+| custom_plgx_SaveCustomResponseScript  |  Setting this flag will save the response command to a file on the target system before executing it.   |  
+
 5. Click Update to save your changes. 
 
 
