@@ -8,17 +8,17 @@ You can define rules using the web interface. Perform these steps to view or edi
 1. Access the web interface for the server.
 2. Navigate to Soc Operations  > Rule.
 
-     ![add_rule_menu1](https://github.com/preetpoly/test/blob/pooja/add_rule_menu1.png)
+     ![add_rule_menu1](../images/add_rule_menu1.png)
 
   The Rules page is displayed. 
   
 3. Select a rule in the list to review its details in the right pane.  
 
-4. Click Edit Rule (![edit_rule](https://github.com/preetpoly/test/blob/pooja/edit_rule.png)) for a rule to modify it. Click Update when done.
+4. Click Edit Rule (![edit_rule](../images/edit_rule.png)) for a rule to modify it. Click Update when done.
 
 5. Click Add Rule to open the Add Rule page to define a new rule. Click Add when done. 
 
-  ![add_rule_dialog1](https://github.com/preetpoly/test/blob/pooja/add_rule_dialog1.png)
+  ![add_rule_dialog1](../images/add_rule_dialog1.png)
   
  
 |										|																							|
