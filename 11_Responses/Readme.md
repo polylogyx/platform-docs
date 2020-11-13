@@ -52,9 +52,9 @@ Perform these steps to take a response.
     
  5. Review the response status to verify if the corresponding action was taken.  
  
-    ![response_status](../images/response_action_page_.png)
+    ![response_status](../images/response_action_page.png)
 
-    ![response_status_view](../images/response_action_page_view_.png)
+    ![response_status_view](../images/response_action_page_view.png)
 
  |										|																							|
 |:---									|													   								    ---:|
