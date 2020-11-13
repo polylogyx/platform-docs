@@ -41,4 +41,4 @@ PolyLogyx ESP can auto purge the data beyond the specified data retention interv
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Provisioning the PolyLogyx Client](../03_Provisioning_Polylogyx_Client/Readme.md)  | [Next >> Configuring the filters](../05_Understanding_Filters/Readme.md)|
+|[Previous << Provisioning the PolyLogyx Client](../03_Provisioning_Polylogyx_Client/Readme.md)  | [Next >> Configuring the agent](../05_PolyLogyx_Client_Configurations/Readme.md)|

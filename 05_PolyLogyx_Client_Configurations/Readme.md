@@ -103,4 +103,4 @@ Perform these steps to view or edit this configuration:
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Provisioning the PolyLogyx Client](../03_Provisioning_Polylogyx_Client/Readme.md)  | [Next >> Configuring the filters](../05_Understanding_Filters/Readme.md)|
+|[Previous << Configuring the server](../04_Polylogyx_Server_Configurations/Readme.md)  | [Next >> Configuring the filters](../06_Understanding_Filters/Readme.md)|

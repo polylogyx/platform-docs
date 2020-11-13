@@ -23,6 +23,6 @@ You can define rules using the web interface. Perform these steps to view or edi
  
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Queries and Packs](../06_Queries_and_packs/Readme.md)  | [Next >> Alerts](../08_Alerts/Readme.md)|
+|[Previous << Queries and Packs](../07_Queries_and_packs/Readme.md)  | [Next >> Alerts](../09_Alerts/Readme.md)|
  
  

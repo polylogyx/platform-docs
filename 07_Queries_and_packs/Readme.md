@@ -189,4 +189,4 @@ Perform these steps to define and run a live query:
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Understanding Filters](../05_Understanding_Filters/Readme.md)  | [Next >> Detection_Rules](../07_Detection_Rules/Readme.md)|
+|[Previous << Understanding Filters](../06_Understanding_Filters/Readme.md)  | [Next >> Detection_Rules](../08_Detection_Rules/Readme.md)|

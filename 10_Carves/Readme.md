@@ -34,7 +34,7 @@ Perform these steps to acquire files.
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Alerts](../08_Alerts/Readme.md)  | [Next >> Using Response Action](../10_Responses/Readme.md)|
+|[Previous << Alerts](../09_Alerts/Readme.md)  | [Next >> Using Response Action](../11_Responses/Readme.md)|
 
 
 

@@ -98,4 +98,4 @@ Perform these steps to close an alert:
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Detection Rules](../07_Detection_Rules/Readme.md)  | [Next >> Carves](../09_Carves/Readme.md)|
+|[Previous << Detection Rules](../08_Detection_Rules/Readme.md)  | [Next >> Carves](../10_Carves/Readme.md)|
