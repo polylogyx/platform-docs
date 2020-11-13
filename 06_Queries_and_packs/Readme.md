@@ -167,7 +167,7 @@ When you run a Live query, the data is fetched and displayed to you immediately.
 Perform these steps to define and run a live query:
 1.	Access the web interface for the server.
 
-2.	Navigate to SOC Operations > Live Queries.
+2.	Navigate to Live Queries.
 
       ![select_live_query](../images/select_live_query.png)
    

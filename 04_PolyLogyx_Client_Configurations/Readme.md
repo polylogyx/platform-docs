@@ -93,10 +93,10 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_ServerPort | Specifies the port on which the PolyLogyx server is listening. By default, this is set to 443 and should not be changed. |
 | custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
-| custom_plgx_EnableWatcher  |  This flag enables the watch dog functionality of the agent. The watchdog functionality shuts the performance heavy operation of the agent if the memory limits are breached.   |  
-| custom_plgx_MemoryLimit  |  This flag provides for the memory usage of the agent, at the breach of which the watch dog functionality (if enabled) gets triggered.   | 
-| custom_plgx_LogFileNameLinux  |  Specifies the name and location of the log file on linux systems.   |  
-| custom_plgx_SaveCustomResponseScript  |  Setting this flag will save the response command to a file on the target system before executing it.   |  
+| custom_plgx_EnableWatcher  |  This flag enables Memory Watcher functionality of the agent. The entails disabling agent's memory intensive operations if its memory limit is breached,allowing agent memory to recover and enable again when memory range is within acceptable limit.   |  
+| custom_plgx_MemoryLimit  |  This flag defines maximum memory usage of the agent, exceeding it would trigger Memory watcher functionality.   | 
+| custom_plgx_LogFileNameLinux  |  This flag specifies name and location of log file on linux systems.   |  
+| custom_plgx_SaveCustomResponseScript  | Setting this flag will save the response command to a file on the target system before executing it.   |  
 
 5. Click Update to save your changes. 
 

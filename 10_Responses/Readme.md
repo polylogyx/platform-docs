@@ -16,11 +16,15 @@ c) Push a host firewall rule on the endpoint for containment, or limit, the netw
 
 d) Re-Start an agent remotely
 
-The response actions are available on Windows endpoints only. 
+e) Execute a shell command on linux and powershell/cmd command on windows systems
+
+The response actions are available on Windows and Linux endpoints only. 
+**Note:** Response command can be sent to an offline host.
+
 
 Perform these steps to take a response.
 1. Access the web interface for the server.
-2. Navigate to SOC Operations > Response. 
+2. Navigate to Response. 
 
    ![response_menu](../images/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 

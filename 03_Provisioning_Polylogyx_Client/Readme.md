@@ -307,7 +307,7 @@ client on endpoints. The following command can be invoked to deploy the client.
 
 sudo  ./plgx_cpt -p -i < SERVER_IP(x.x.x.x) > -k <Full path to the certificate file>
 
-**NOTE**: Execution permission may require before executing the above command. 
+**NOTE**: Execution permission is required before executing the above command.
 
 ### Deploying the PolyLogyx Client on MacOS
 
