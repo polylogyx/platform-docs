@@ -16,7 +16,7 @@ c) Push a host firewall rule on the endpoint for containment, or limit, the netw
 
 d) Re-Start an agent remotely
 
-e) Execute a shell command on linux and powershell/cmd command on windows systems
+d) Execute a shell command on linux and powershell/cmd command on windows systems
 
 The response actions are available on Windows and Linux endpoints only. 
 **Note:** Response command can be sent to an offline host.
@@ -28,7 +28,7 @@ Perform these steps to take a response.
 
    ![response_menu](../images/response_menu.png)
 3. Click Add Response. The Send Response to Agent page is displayed. 
-   On thid page, you can delete a file, terminate a process, or isolate an endpoint from the network.
+   On this page, you can delete a file, terminate a process, isolate an endpoint from the network or execute a script.
    
    1. To delete a file, set the Target value to file, specify the full file name in the input text box, with the optional MD5 hash of the file, and the target endpoint.
    
@@ -42,12 +42,19 @@ Perform these steps to take a response.
    
    ![target_network](../images/target_network.png)
    
+   3. To execute a powershell/batch/shell script, provide the content or upload the script file.
+   
+   ![target_network](../images/target_script.png)
+   
  4. Click Add to apply the changes.
  
     The response is created and listed on the Reponses page. 
+    
  5. Review the response status to verify if the corresponding action was taken.  
  
-    ![response_status](../images/response_action_page.png)
+    ![response_status](../images/response_action_page_.png)
+
+    ![response_status_view](../images/response_action_page_view_.png)
 
  |										|																							|
 |:---									|													   								    ---:|
