@@ -423,4 +423,4 @@ refer to <https://osquery.io/schema/>*.*
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Responses](../10_Responses/Readme.md)  | [Next >> Rest APIs](../12_Rest_API/Readme.md)|
+|[Previous << Responses](../11_Responses/Readme.md)  | [Next >> Rest APIs](../13_Rest_API/Readme.md)|

@@ -40,7 +40,7 @@ For Windows x64 systems, PolyLogyx ESP is shipped with 2 types of pre-baked conf
 
 ![deep_shallow_config](../images/config_deep_shallow.png)
 
-For more informtaion on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/06_Queries_and_packs#scheduled-queries). 
+For more information on scheduled queries, see  [Scheduled Queries](https://github.com/polylogyx/platform-docs/06_Queries_and_packs#scheduled-queries). 
     
 Perform these steps to view or edit defined filters:
 1. Access the web interface for the server.
@@ -93,10 +93,14 @@ Perform these steps to view or edit this configuration:
 | custom_plgx_ServerPort | Specifies the port on which the PolyLogyx server is listening. By default, this is set to 443 and should not be changed. |
 | custom_plgx_enable_respserver | This option allows you to enable or disable the response feature. By default, this is enabled. |
 | schedule_splay_percent  |  Specifies the percentage to splay the config times for scheduled queries.   |  
- 
+| custom_plgx_EnableWatcher  |  This flag enables Memory Watcher functionality of the agent. The entails disabling agent's memory intensive operations if its memory limit is breached,allowing agent memory to recover and enable again when memory range is within acceptable limit.   |  
+| custom_plgx_MemoryLimit  |  This flag defines maximum memory usage of the agent, exceeding it would trigger Memory watcher functionality.   | 
+| custom_plgx_LogFileNameLinux  |  This flag specifies name and location of log file on linux systems.   |  
+| custom_plgx_SaveCustomResponseScript  | Setting this flag will save the response command to a file on the target system before executing it.   |  
+
 5. Click Update to save your changes. 
 
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Provisioning the PolyLogyx Client](../03_Provisioning_Polylogyx_Client/Readme.md)  | [Next >> Configuring the filters](../05_Understanding_Filters/Readme.md)|
+|[Previous << Configuring the server](../04_PolyLogyx_Server_Configurations/Readme.md)  | [Next >> Configuring the filters](../06_Understanding_Filters/Readme.md)|

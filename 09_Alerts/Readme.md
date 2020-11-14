@@ -2,13 +2,17 @@ Managing Alerts
 =================================== 
 An alert indicates an important occurrence in the enterprise. An alert is generated when incoming event data matches a predefined rule or IOC, or when event data (for last 24 hours) matches the Threat Intel feed. 
 
-The Alerts page is the central console that allows you to manage and review alerts. Click SOC Operations | Alerts to view the Alerts page.
+The Alerts page is the central console that allows you to manage and review alerts. Click Alerts to view the Alerts page.
 
 ![alerts_menu](../images/alerts_menu.png)
 
-Review Event Traffic
+Review Alerts Traffic
 --------------------
-On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of events. Hover over a cluster to see its details. Click the + button to zoom in and – button to zoom out. Use the arrow buttons to navigate the timeline.
+
+```diff
+! Only available in the Enterprise Edition of the PolyLogyx ESP. !
+```
+On the Alerts page, review the event timeline for your enterprise on the top bar to review the traffic trend. Each cluster on the timeline represents a collection of alerts. Hover over a cluster to see its details. Click on the event cluster to see the alerts present in that cluster.
 
 ![alert_trend](../images/alert_trend.png)
 
@@ -83,7 +87,7 @@ After you have processed an alert, close it to remove it from the Alerts page.
 
 Perform these steps to close an alert:
 1. Access the web interface for the server.
-2. Navigate to SOC Operations > Alerts.
+2. Navigate to Alerts.
     
    ![alerts_menu](../images/alerts_menu.png)
 3. Click Resolve for an alert. 
@@ -94,4 +98,4 @@ Perform these steps to close an alert:
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Detection Rules](../07_Detection_Rules/Readme.md)  | [Next >> Carves](../09_Carves/Readme.md)|
+|[Previous << Detection Rules](../08_Detection_Rules/Readme.md)  | [Next >> Carves](../10_Carves/Readme.md)|

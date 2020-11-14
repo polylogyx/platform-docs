@@ -167,7 +167,7 @@ When you run a Live query, the data is fetched and displayed to you immediately.
 Perform these steps to define and run a live query:
 1.	Access the web interface for the server.
 
-2.	Navigate to SOC Operations > Live Queries.
+2.	Navigate to Live Queries.
 
       ![select_live_query](../images/select_live_query.png)
    
@@ -177,20 +177,16 @@ Perform these steps to define and run a live query:
 
     ![live_query_builder](../images/live_query_builder.png)
     
-4.	Click Device Target to specify the nodes on which to run the query. 
+4.	Select  hosts/tags to specify the nodes on which to run the query. 
 
-      ![device_target](../images/device_target.png)
       
-      You can select the nodes based on the node names or tags. 
-      
-5. Click Close to retun to the Live Query Builder page.   
 
-6.	Click Run Query.
+5.	Click Run Query.
    The query results are displayed.
    
-7.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
+6.	Click Excel or CSV to save the data in Excel or CSV format, respectively.
 
 
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Understanding Filters](../05_Understanding_Filters/Readme.md)  | [Next >> Detection_Rules](../07_Detection_Rules/Readme.md)|
+|[Previous << Understanding Filters](../06_Understanding_Filters/Readme.md)  | [Next >> Detection_Rules](../08_Detection_Rules/Readme.md)|

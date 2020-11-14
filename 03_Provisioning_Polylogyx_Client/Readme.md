@@ -207,7 +207,7 @@ Follow these steps to uninstall the PolyLogyx client.
 
     Here is the syntax to execute the installation command.
 
-```plgx_cpt.exe -u {\<d\> full-uninstall \| \<s\> shallow-uninstall}```
+```plgx_cpt -u <d / s>```
 
 The -u parameter is used to uninstall the agent and cannot be combined with any
 other options. With the –u option, you must use one of these options:
@@ -252,7 +252,7 @@ Follow these steps to upgrade the PolyLogyx client.
 
     Here is the syntax to execute the upgrade command.
 
-```plgx_cpt.exe -g {<d> full-upgrade | <s> shallow-upgrade}```
+```plgx_cpt.exe -g <d / s>```
 
 The -g parameter is used to upgrade the agent and cannot be combined with any
 other options. With the –g option, you must use one of these options:
@@ -298,8 +298,16 @@ PolyLogyx Endpoint Platform services initialized.
 ########### Upgrade completed successfully ###########
 ```
 
+### Deploying the PolyLogyx Client on Linux
 
-### Deploying the PolyLogyx Client on Linux/MacOS
+Use the PolyLogyx Client Provisioning Tool (CPT) binary to deploy the PolyLogyx
+client on endpoints. The following command can be invoked to deploy the client.
+
+sudo  ./plgx_cpt -p -i < SERVER_IP(x.x.x.x) > -k < Full path to the certificate file >
+
+**NOTE**: Execution permission is required before executing the above command.
+
+### Deploying the PolyLogyx Client on MacOS
 
 Use the PolyLogyx Client Provisioning Tool (CPT) shell script to deploy the PolyLogyx
 client on endpoints. The following command can be invoked to deploy the client.
@@ -419,4 +427,4 @@ for error details.
 	
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Provisioning the PolyLogyx Server](../02_Provisioning_Polylogyx_Server/Readme.md)  | [Next >> Configuring the client](../04_PolyLogyx_Client_Configurations/Readme.md)|
+|[Previous << Provisioning the PolyLogyx Server](../02_Provisioning_Polylogyx_Server/Readme.md)  | [Next >> Configuring the server](../04_PolyLogyx_Server_Configurations/Readme.md)|

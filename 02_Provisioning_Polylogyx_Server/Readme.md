@@ -45,7 +45,7 @@ following information.
 
 -   Contact PolyLogyx to procure the following:
 
-    -   Server Docker image (plgx_docker.zip)
+    -   Server Docker image (plgx-esp.zip)
 
     -   Clean-up script (docker-cleanup.sh)
 
@@ -72,23 +72,25 @@ server.
 
 **Note:** This will clean **all** the images and containers.
 
-2.  Unzip the plgx_docker.zip file on the local server.
+2.  Unzip the plgx-esp.zip file on the local server.
+**Note:** Do not unzip into a temporary folder.
+
     ```(Md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
     ~/Downloads$ ls
-    plgx_docker.zip
-    ~/Downloads$ unzip plgx_docker.zip 
-    Archive:  plgx_docker.zip
-    inflating: plgx_docker/server.crt 
+    plgx-esp.zip
+    ~/Downloads$ unzip plgx-esp.zip 
+    Archive:  plgx-esp.zip
+    inflating: plgx-esp/server.crt 
     <snip>
-    inflating: plgx_docker/Doorman/doorman/plugins/alerters/debug.pyc  
+    inflating: plgx-esp/Doorman/doorman/plugins/alerters/debug.pyc  
     ~/Downloads$ ls
-    plgx_docker  plgx_docker.zip```
+    plgx-esp  plgx-esp.zip```
 3.  Switch to the folder where the installer is placed.
 
-    ```~/Downloads\$ cd plgx_docker/```
+    ```~/Downloads\$ cd plgx-esp/```
 4.  Enter the certificate-generate.sh script to generate certificates for
     osquery.  
-    ```~/Downloads/plgx_docker$ sh ./certificate-generate.sh <IP address>```
+    ```~/Downloads/plgx-esp$ sh ./certificate-generate.sh <IP address>```
     ```x.x.x.x
     Generating a 2048 bit RSA private key
     .........................................................................................+++
@@ -97,7 +99,7 @@ server.
     ``` 
             
     In the syntax, \<IP address\> is the IP address of the system on which on to host the PolyLogyx server. This will generate 
-    the certificate for osquery (used for provisioning clients) and place the certificate in the plgx_docker folder.
+    the certificate for osquery (used for provisioning clients) and place the certificate in the plgx-esp folder.
 
 5.  Modify and save the docker-compose.yaml file.
 
@@ -107,11 +109,9 @@ server.
     POLYLOGYX_USER=<user login name> 
     POLYLOGYX_PASSWORD=<login password> 
     RSYSLOG_FORWARDING=true
-    LOGSTASH_FORWARDING=true
     VT_API_KEY=<VirusTotal Api Key> 
     IBMxForceKey=<IBMxForce Key> 
     IBMxForcePass=<IBMxForce Pass>
-    APPLY_DEFAULT_POLICY=true|false  
     PURGE_DATA_DURATION=<number of days>  
     THREAT_INTEL_LOOKUP_FREQUENCY=<number of minutes>
      ```   
@@ -121,11 +121,9 @@ server.
 | POLYLOGYX_USER       | Refers to the user login name for the PolyLogyx server.                                                                                                         |
 | POLYLOGYX_PASSWORD       | Indicates to the password for the PolyLogyx server user.                                                                                                              |
 | RSYSLOG_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using rsyslog. |
-| LOGSTASH_FORWARDING       | Set to true to enable forwarding of osquery and PolyLogyx logs to the syslog receiver by using logstash.                                                                            |  
 | VT_API_KEY       | Represents the VirusTotal API key.                                                                            | 
 | IBMxForceKey       | Represents the IBMxForce key.                                                                            | 
 | IBMxForcePass       | Specifies the IBMxForce pass.                                                                            | 
-| APPLY_DEFAULT_POLICY       | Indicates whether the default policy should be applied. Possible values are true and false.                                                                            | 
 | PURGE_DATA_DURATION       | Specifies the frequency (in number of days) for purging the data.                                                                            | 
 | THREAT_INTEL_LOOKUP_FREQUENCY       | Specifies the frequency (in minutes) for fetching threat intelligence data.                                                                            |   
     2. Ensure all the ports specified in the YAML file are open and accessible
@@ -136,14 +134,14 @@ server.
    
 6.  Run the following command to start Docker compose.
 
-    ```docker-compose up```
+    ```docker-compose -p 'plgx-esp' up -d```
     
     Typically, this takes approximately 10-15 minutes. The following lines appear on
     the screen when Docker starts:
-    ````Starting plgx_docker_rabbit1_1  ... done
-        Starting plgx_docker_postgres_1 ... done
-        Starting plgx_docker_vasp_1     ... done
-        Attaching to plgx_docker_rabbit1_1, plgx_docker_postgres_1, plgx_docker_vasp_1
+    ````Starting plgx-esp_rabbit1_1  ... done
+        Starting plgx-esp_postgres_1 ... done
+        Starting plgx-esp_plgx-esp_1     ... done
+        Attaching to plgx-esp_rabbit1_1, plgx-esp_postgres_1, plgx-esp_plgx-esp_1
         .
         .
         .
@@ -153,7 +151,7 @@ server.
 7.  Log on to server using following URL using the latest version of Chrome or
     Firefox browser.
     
-    ```https://<ip address>:5000/manage```
+    ```https://<ip address>:5000```
 
     In the syntax, `<IP address>` is the IP address of the system on which the
     PolyLogyx server is hosted. This is the IP address you specified in step 4.

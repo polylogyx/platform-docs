@@ -6,7 +6,7 @@ PolyLogyx provides a set of predefined rules (available only in the Enterprise E
 
 You can define rules using the web interface. Perform these steps to view or edit rules:
 1. Access the web interface for the server.
-2. Navigate to Soc Operations  > Rule.
+2. Navigate to Rules.
 
      ![add_rule_menu1](../images/add_rule_menu1.png)
 
@@ -23,6 +23,6 @@ You can define rules using the web interface. Perform these steps to view or edi
  
 |										|																							|
 |:---									|													   								    ---:|
-|[Previous << Queries and Packs](../06_Queries_and_packs/Readme.md)  | [Next >> Alerts](../08_Alerts/Readme.md)|
+|[Previous << Queries and Packs](../07_Queries_and_packs/Readme.md)  | [Next >> Alerts](../09_Alerts/Readme.md)|
  
  
