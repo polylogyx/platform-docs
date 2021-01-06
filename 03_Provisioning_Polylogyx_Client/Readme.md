@@ -143,21 +143,21 @@ You will need to download the below files and copy them to an appropriate locati
 
 - plgx_cpt.exe - From PolyLogyx ESP Server 
 - certificate.crt - From PolyLogyx ESP Server
-- Install.bat - From [here](https://github.com/polylogyx/platform-docs/tree/master/files/GPO%20Deployment/Install.bat)
+- Install.bat - From [here](../files/GPO%20Deployment/Install.bat) & update the file with PolyLogyx ESP Server IP address
 
 Looking in the sysvol folder you should now be able to see similar to below.
-![plgx_gpo](../images/plgx_gpo.png)
+![plgx](../images/plgx_gpo.PNG)
 
 #### Scheduled task GPO Policy
 This section sets up a scheduled task to run Install.bat (stored on a network folder), distributed through Group Policy.
 
-Import the plgx-Task GPO into group policy management and link the object to a test Organisational Unit (OU). Once the GPO is confirmed as working in your environment then you can link the GPO to a larger OU to deploy CPT further.
+Import the [plgx-Task]((../files/GPO%20Deployment/plgx_gpo.zip)) GPO into group policy management and link the object to a test Organisational Unit (OU). Once the GPO is confirmed as working in your environment then you can link the GPO to a larger OU to deploy CPT further.
 
   1. Open up group policy management editor
   2. Edit the plgx-Task GPO
   3. Change the setting for the batch file network location by navigating to: ``Computer Configuration\Preferences\Control Panel Settings\Scheduled Tasks\plgx-Task\Actions`` and then select ``"Start a program" > Edit > Change the Location.``
   
-For example \\testing.com\SYSVOL\testing.com\plgx\Install.bat
+For example \\\testing.com\SYSVOL\testing.com\plgx\Install.bat
 
 ### Verifying Client Installation 
 
