@@ -173,6 +173,8 @@ processes/services start:
 
 4.  Plgx_win_extension.ext.exe process
 
+Incase of GPO deployment, ``C:\Program Files\plgx_osquery\runningver.txt`` file will have the status of above services.
+
 Installation is not successful if any of these fail to start.
 
 Follow these steps to check if the required processes are running.
