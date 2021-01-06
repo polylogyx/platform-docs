@@ -130,7 +130,7 @@ PolyLogyx Endpoint Platform services initialized.
 ```
 ### Deploying the PolyLogyx CPT on Windows by GPO
 
-Group Policy Object (GPO) deployment involves created a 'scheduled task' that will periodically connect to a network folder location and run Install.bat to install PolyLogyx CPT.
+Group Policy Object (GPO) deployment involves created 'scheduled task' that will periodically connect to a network folder location and run Install.bat to install PolyLogyx CPT.
 
 Using Microsoft Group Policy to deploy PolyLogyx CPT requires two main things:
 - A shared location to store executables and certificate.
@@ -151,7 +151,7 @@ Looking in the sysvol folder you should now be able to see similar to below.
 #### Scheduled task GPO Policy
 This section sets up a scheduled task to run Install.bat (stored on a network folder), distributed through Group Policy.
 
-Import the [plgx-Task]((../files/GPO%20Deployment/plgx_gpo.zip)) GPO into group policy management and link the object to a test Organisational Unit (OU). Once the GPO is confirmed as working in your environment then you can link the GPO to a larger OU to deploy CPT further.
+Import the [plgx-Task](../files/GPO%20Deployment/plgx_gpo.zip) GPO into group policy management and link the object to a test Organisational Unit (OU). Once the GPO is confirmed as working in your environment then you can link the GPO to a larger OU to deploy CPT further.
 
   1. Open up group policy management editor
   2. Edit the plgx-Task GPO
