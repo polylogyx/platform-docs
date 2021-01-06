@@ -143,10 +143,10 @@ You will need to download the below files and copy them to an appropriate locati
 
 - plgx_cpt.exe - From PolyLogyx ESP Server 
 - certificate.crt - From PolyLogyx ESP Server
-- Install.bat - From here 
+- Install.bat - From [here](https://github.com/polylogyx/platform-docs/tree/master/files/GPO%20Deployment/Install.bat)
 
 Looking in the sysvol folder you should now be able to see similar to below.
-<screenshot>
+![plgx_gpo](../images/plgx_gpo.png)
 
 #### Scheduled task GPO Policy
 This section sets up a scheduled task to run Install.bat (stored on a network folder), distributed through Group Policy.
