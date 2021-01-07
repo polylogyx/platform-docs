@@ -35,17 +35,17 @@ not consume any API unless it is formally documented. All undocumented endpoints
 should be considered private, subject to change without notice, and not covered
 by any agreements.
 
-The API version is currently v0.
+The API version is currently v1.
 
 All API requests must use the https scheme.
 
-Base URL
+BASE_URL
 --------
 
 API calls are made to a URL to identify the location from which the data is
 accessed. You must replace the placeholders \<server IP\> and \<port\> with
-actual details for your PolyLogyx server. The Base URL follows this template:
-https://\<server\>:\<port\>/services/api/v0/
+actual details for your PolyLogyx server. The BASE_URL follows this template:
+https://\<server\>:\<port\>/services/api/v1/
 
 Authentication
 --------------
@@ -103,140 +103,142 @@ to indicate API errors.
 | 500  | Internal server error                                               |
 | 503  | Service currently unavailable                                       |
 
-Login
------------------
 
-### Fetch access token using username and password
-
-Use the admin login username and password to get an access token
-
-
+### Get a file from downloads path
+**URL:** https://<BASE_URL>/downloads/<path: filename>
+**Request type:** GET
 ```
-URL: https://<Base URL>/login
- 
-Request Type: POST
+  https://<BASE_URL>/downloads/certificate.crt -- to download the PolyLogyx server certificate
+  https://<BASE_URL>/downloads/windows/plgx_cpt.exe -- to download the windows Client Provisioning Tool
+  https://<BASE_URL>/downloads/linux/x64/plgx_cpt -- to download the Linux Client Provisioning Tool
+  https://<BASE_URL>/downloads/plgx_cpt.sh -- to download the Mac installer
+```
 
-Example Request
- 
- {
-   "username":"foo",
-   "password":"foo"
- } 
+User's Section:
+---------------
 
-Response:
+### Fetch auth token using username and password
+Use username and password to get an auth token, which is to access the PolyLogyx platform UI.
+**URL:** https://<BASE_URL>/login
+**Request Type:** POST
+**Example Request Format:**
+```
 {
-  "x-access-token":
-  "eyJhbGciOiJIUzUxMiIsImlhdCI6MTU2NzY3MjcyMCwiZXhwIjoxNTY3NjczMzIwfQ.eyJpZCI6MX0.7jklhAly5ZO6xr1t0Y2ahkZvEEMnrescGK9nszqFhMAProwbjOHaiRO3tBS5I2g dmVSqKqBHynveAFbmor7TA"
- }
-
+	"username":"foo",
+	"password":"foo"
+}
 ```
-
-Logout
-------
+**Response:** Returns JSON array of auth token.
+**Example Response Format:**
+```
+{
+	"x-access-token":
+	"eyJhbGciOiJIUzUxMiIsImlhdCI6MTU2NzY3MjcyMCwiZXhwIjoxNTY3NjczMzIwfQ.eyJpZCI6MX0.7jklhAly5ZO6xr1t0Y2ahkZvEEMnrescGK9nszqFhMAProwbjOHaiRO3tBS5I2gdmVSqKqBHynveAFbmor7TA"
+}
+```
 
 ### Logout from the PolyLogyx Server session
-
-Expires the server session for the current user.
-
+Invalidates the platform user session by restricting the authentication of auth token.
+**URL:** https://<BASE_URL>/logout
+**Request Type:** POST
+**Response:** Returns JSON array of status and message.
+**Example Response Format:**
 ```
-URL: https://<Base URL>/logout
- 
-Request Type: POST
-
-Response:
 {
-  "status": "success",
-  "message": "user logged out successfully"
+	"status": "success",
+	"message": "user logged out successfully"
 }
-
 ```
 
-User's data Management
-----------------------
-
-### Change user's and password
-
-Use old password to change password of the current user.
-
+### Change user's password
+Changes password of the current user using current password.
+**URL:** https://<BASE_URL>/changepw
+**Request Type:** POST
+Example Payload Format
 ```
-URL: https://<Base URL>/changepw
- 
-Request Type: POST
-
-Example Request
- 
- {
-   "old_password":"foobar",
-   "new_password":"foo",
-   "confirm_new_password":"foo"
- } 
-
-Response:
-
 {
-   "status":"success",
-   "message":"password is updated successfully"
-}
-
+	"old_password":"foobar",
+	"new_password":"foo",
+	"confirm_new_password":"foo"
+} 
 ```
-
-### Update/Add PolyLogyx Server Options
-
-Add or Update Options used by PolyLogyx Server.
-
+**Response:** Returns JSON array of status and message.
+**Example Response Format:**
 ```
-URL: https://<Base URL>/options/add
- 
-Request Type: POST
-
-Example Request:
-
 {
-"option":{
-	"custom_plgx_EnableLogging": "true",
-	"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
-	"custom_plgx_LogLevel": "1",
-	"custom_plgx_LogModeQuiet": "0",
-	"custom_plgx_ServerPort": "443",
-	"custom_plgx_enable_respserver": "true",
-	"schedule_splay_percent": 10
-	}
+	"status":"success",
+	"message":"password is updated successfully"
 }
+```
 
-Response:
-
+### View PolyLogyx Server Options
+Lists Options used by PolyLogyx Server.
+**URL:** https://<BASE_URL>/options
+**Request Type:** GET
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:**
+```
 {
 	"status": "success",
 	"message": “options are updated successfully“,
 	"data": {
-		"option":{
-			"custom_plgx_EnableLogging": "true",
-			"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
-			"custom_plgx_LogLevel": "1",
-			"custom_plgx_LogModeQuiet": "0",
-			"custom_plgx_ServerPort": "443",
-			"custom_plgx_enable_respserver": "true",
-			"schedule_splay_percent": 10
-			}
-		}
+		"custom_plgx_EnableLogging": "true",
+		"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
+		"custom_plgx_LogLevel": "1",
+		"custom_plgx_LogModeQuiet": "0",
+		"custom_plgx_ServerPort": "443",
+		"custom_plgx_enable_respserver": "true",
+		"schedule_splay_percent": 10
+	}
 }
+```
 
+### Update/Add PolyLogyx Server Options
+Add or Update Options used by PolyLogyx Server.
+**URL:** https://<BASE_URL>/options/add
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	"option":{
+		"custom_plgx_EnableLogging": "true",
+		"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
+		"custom_plgx_LogLevel": "1",
+		"custom_plgx_LogModeQuiet": "0",
+		"custom_plgx_ServerPort": "443",
+		"custom_plgx_enable_respserver": "true",
+		"schedule_splay_percent": 10
+	}
+}
+```
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": “options are updated successfully“,
+	"data": {
+		"custom_plgx_EnableLogging": "true",
+		"custom_plgx_LogFileName": "C:\\ProgramData\\plgx_win_extension\\plgx-agent.log",
+		"custom_plgx_LogLevel": "1",
+		"custom_plgx_LogModeQuiet": "0",
+		"custom_plgx_ServerPort": "443",
+		"custom_plgx_enable_respserver": "true",
+		"schedule_splay_percent": 10
+	}
+}
 ```
 
 ### View Threat Intel Keys
-
-List Threat Intel API keys used by PolyLogyx Server.
-
+Lists Threat Intel API keys used by PolyLogyx Server.
+**URL:** https://<BASE_URL>/management/apikeys
+**Request Type:** GET
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:**
 ```
-URL: https://<Base URL>/apikeys
-
-Request Type: GET
-
-Response:
-
 {
 	"status": "success",
-	"message": "API keys are fetched successfully",
+	"message": "Threat Intel keys are fetched successfully",
 	"data": {
 		"ibmxforce": {
 			"key": "304020f8-99fd-4a17-9e72-80033278810a",
@@ -247,31 +249,27 @@ Response:
 				}
 			}
 }
-
 ```
 
-### Update Threat Intel Keys
-
+### Add/Update Threat Intel Keys
 Updates Threat Intel API keys used by PolyLogyx Server.
-
-
+**URL:** https://<BASE_URL>/management/apikeys
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL>/apikeys
- 
-Request Type: POST
-
-Example Request
- 
- {
+{
 	"IBMxForceKey":"304020f8-99fd-4a17-9e72-80033278810a",
 	"IBMxForcePass":"6710f119-9966-4d94-a7ad-9f98e62373c8",
-	"vt_key":"69f922502ee0ea958fa0ead2979257bd084fa012c283ef9540176ce857ac6f2c"
- }
-
-Response:
+	"vt_key":"69f922502ee0ea958fa0ead2979257bd084fa012c283ef9540176ce857ac6f2c",
+	"otx_key":"69f922502ee0ea958fa0ead2979257bd084fa012c"
+}
+```
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:**
+```
 {
 	"status": "success",
-	"message": "API keys were updated successfully",
+	"message": "Threat Intel keys are updated successfully",
 	"data": {
 		"ibmxforce": {
 			"key": "304020f8-99fd-4a17-9e72-80033278810a",
@@ -282,25 +280,46 @@ Response:
 				}
 			}
 }
+```
 
+### View email sender and recipients used by PolyLogyx platform
+Lists the email configuration used by PolyLogyx platform user to send emails for alerts.
+**URL:** https://<BASE_URL>/email/configure
+**Request Type:** GET
+**Response:** Returns JSON array of status,message and data.
+Example Response
+```
+{
+	"data": {
+		"email": "johndoe@xyzcomp.com",
+		"emailRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
+		"emails": "jimdoe@abccorp.com",
+		"password": "YQ==\n",
+		"smtpAddress": "smtp2.gmail.com",
+		"smtpPort": 445
+	},
+	"message": "Successfully fetched the details",
+	"status": "success"
+}
 ```
 
 ### Configure email sender and recipients for alerts
-
+Updates the email configuration used by PolyLogyx platform user to send emails for alerts.
+**URL:** https://<BASE_URL>/email/configure
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL> /email/configure
-Request Type: POST
- 
-Example request:
 {
-  "emalRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
-  "email": "johndoe@xyzcomp.com",
-  "smtpAddress": "smtp2.gmail.com",
-  "password": "a",
-  "smtpPort": 445
+	"emalRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
+	"email": "johndoe@xyzcomp.com",
+	"smtpAddress": "smtp2.gmail.com",
+	"password": "a",
+	"smtpPort": 445
 }
-
-Response
+```
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:**
+```
 {
 	"data": {
 		"email": "johndoe@xyzcomp.com",
@@ -313,1892 +332,3287 @@ Response
 	"message": "Successfully updated the details",
 	"status": "success"
 }
-
 ```
 
-Fetching Node Details
----------------------
-
-### Fetch Details for all Managed Nodes
-
-Lists all endpoint nodes managed by the PolyLogyx server and their properties.
-
+### Test email sender and recipients
+Tests the email configuration, which is going to be used by PolyLogyx platform user before updating.
+**URL:** https://<BASE_URL>/email/test
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL>/nodes
- 
-Request Type: GET
-Response: A JSON Array of nodes and their properties. 
- 
-Example Response
-
- {
- 	"status": "success",
- 	"message": "nodes data fetched successfully",
- 	"data": [
- 		{
- 		"id": 4,
- 		"host_identifier": "D8FC0C20-7D9A-11E7-9483-54E1AD6C8228",
- 		"node_info": {
- 			"computer_name": "DESKTOP-QIRBS33",
- 			"hardware_model": "80XL",
- 			"hardware_serial": "PF0UFSFS",
- 			"hardware_vendor": "LENOVO",
- 			"physical_memory": "8458571776",
- 			"cpu_physical_cores": "2"
- 			},
-		"os_info": {
- 			"name": "Microsoft Windows Server 2019 Datacenter",
- 			"build": "17763",
- 			"major": "10",
- 			"minor": "0",
- 			"patch": "",
- 			"version": "10.0.17763",
- 			"codename": "Server Datacenter (full installation)",
- 			"platform": "windows",
- 			"platform_like": "windows"
- 			}
- 		"network_info": {
-			"mac_address": "0a:00:27:00:00:06"
- 			},
- 		"node_key": "c6a054a5-ccac-42f2-b631-d1ba2fc59d8a",
- 		"last_checkin": "2019-04-08T06:32:27.355782",
- 		"enrolled_on": "2019-02-18T07:32:32.003949",
- 		"tags": [
- 			{
- 			"id": 1,
- 			"value": "foo"
- 			}
- 			]
- 		}
-	]
- }
-
-```
-
-### Fetch Details for Specific Managed Node
-
-Lists information and properties for a specific managed endpoint based on
-host_identifier.
-
-``` 
-URL: https://<Base URL>/nodes/<host_identifier>
- 
-Request Type: GET
-Response: A node with its properties.
- 
-Example Response
- 
 {
- 	"status": "success",
- 	"message": "Successfully fetched the node info",
- 	"data": {
- 		"id": 4,
- 		"host_identifier": "D8FC0C20-7D9A-11E7-9483-54E1AD6C8228",
- 		"node_info": {
- 			"computer_name": "DESKTOP-QIRBS33",
- 			"hardware_model": "80XL",
- 			"hardware_serial": "PF0UFSFS",
- 			"hardware_vendor": "LENOVO",
- 			"physical_memory": "8458571776",
- 			"cpu_physical_cores": "2"
- 			},
-		"os_info": {
- 			"name": "Microsoft Windows Server 2019 Datacenter",
- 			"build": "17763",
- 			"major": "10",
- 			"minor": "0",
- 			"patch": "",
- 			"version": "10.0.17763",
- 			"codename": "Server Datacenter (full installation)",
- 			"platform": "windows",
- 			"platform_like": "windows"
- 			}
- 		"network_info": {
-			"mac_address": "0a:00:27:00:00:06"
- 			},
- 		"node_key": "c6a054a5-ccac-42f2-b631-d1ba2fc59d8a",
- 		"last_checkin": "2019-04-08T06:32:27.355782",
- 		"enrolled_on": "2019-02-18T07:32:32.003949",
- 		"tags": [
- 			{
- 			"id": 1,
- 			"value": "foo"
- 			}
- 			]
- 		}
- }
-
-```
-
-### Export Details of all Managed Nodes
-
-Exports all endpoint nodes managed by the PolyLogyx server and their properties.
-
-```
-URL: https://<Base URL>/nodes_csv
- 
-Request Type: GET
-Response: A CSV file of nodes and their properties. 
- 
-```
-
-### List schedule query results of managing node
-
-Lists schedule query results of a managing node for a query name.
-
-```
-URL: https://<Base URL>/nodes/schedule_query/results
- 
-Request Type: POST
-
-{
-	“host_identifier”:”"216F6B87-8922-4BAE-A68A-0E5EB11ACA1C”,
-	“query_name”: “win_file_events”,
-	“start”: 1,
-	“limit”: 20
+	"emalRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
+	"email": "johndoe@xyzcomp.com",
+	"smtpAddress": "smtp2.gmail.com",
+	"password": "a",
+	"smtpPort": 445
 }
-
-Response: 
-	
+```
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:**
+```
 {
-	“status”: ”success”,
-	“message”: “Successfully received node schedule query results”
-	“data”: [{
-			"id": 4439993,
-			"name": "win_dns_response_events",
-			"timestamp": "2019-06-07T14:52:11",
+	"data": {
+		"email": "johndoe@xyzcomp.com",
+		"emailRecipients": "janedoe@abccomp.com,charliedoe@xyzcomp.com",
+		"emails": "jimdoe@abccorp.com",
+		"password": "YQ==\n",
+		"smtpAddress": "smtp2.gmail.com",
+		"smtpPort": 445
+	},
+	"message": "A test email is sent successfully",
+	"status": "success"
+}
+```
+
+### View data purge duration
+Returns the data purge duration set for which result log, alerts and status logs should be deleted.
+**URL:** https://<BASE_URL>/purge/update
+**Request Type:** GET
+**Response:** Returns JSON array of data, status and message
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": “Purge data present duration is fetched successfully “,
+	“data”:7
+}
+```
+
+### Update data purge duration
+Updates the data purge duration for which result log, alerts and status logs should be deleted.
+**URL:** https://<BASE_URL>/purge/update
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“days”: 2
+}
+```
+**Required Payload Arguments:** days
+**Response:** Returns JSON array of status and message
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": “Purge data duration is changed successfully“,
+}
+```
+
+### Get Dashboard data
+Get the data required for POLYLOGYX platform for dashboard.
+**URL:** https://<BASE_URL>/dashboard
+**Request Type:** GET
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Data is fetched successfully",
+	"data": {
+		"alert_data": {
+			"top_five": {
+			"rule": [
+				{
+					"rule_name": "Executable used by PlugX in Uncommon Location",
+					"count": 4609
+				},
+				{
+					"rule_name": "test_rule",
+					"count": 13
+				},
+				{
+					"rule_name": "Service Stop",
+					"count": 2
+				}
+			],
+			"hosts": [
+				{
+					"host_identifier": "EC2CD1A0-140B-9331-7A60-CFFCE29D2E71",
+					"count": 4629
+				}
+			],
+			"query": [
+				{
+					"query_name": "Test_query",
+					"count": 4609
+				},
+				{
+					"query_name": "win_file_events",
+					"count": 14
+				},
+				{
+					"query_name": "win_image_load_events",
+					"count": 4
+				},
+				{
+					"query_name": "win_process_events",
+					"count": 2
+				}
+			]
+			},
+			"source": {
+				"ioc": {
+					"INFO": 0,
+					"LOW": 0,
+					"WARNING": 0,
+					"CRITICAL": 0,
+					"TOTAL": 0
+				},
+				"rule": {
+					"INFO": 13,
+					"LOW": 0,
+					"WARNING": 0,
+					"CRITICAL": 4611,
+					"TOTAL": 4624
+				},
+				"virustotal": {
+					"INFO": 0,
+					"LOW": 5,
+					"WARNING": 0,
+					"CRITICAL": 0,
+					"TOTAL": 5
+				},
+				"ibmxforce": {
+					"INFO": 0,
+					"LOW": 0,
+					"WARNING": 0,
+					"CRITICAL": 0,
+					"TOTAL": 0
+				},
+				"alienvault": {
+					"INFO": 0,
+					"LOW": 0,
+					"WARNING": 0,
+					"CRITICAL": 0,
+					"TOTAL": 0
+				}
+			}
+		},
+		"distribution_and_status": {
+			"hosts_platform_count": [
+				{
+					"os_name": "ubuntu",
+					"count": 1
+				},
+				{
+					"os_name": "windows",
+					"count": 1
+				}
+			],
+			"hosts_status_count": {
+				"online": 2,
+				"offline": 0
+			}
+		}
+	}
+}
+```
+
+Host's Section:
+---------------
+
+### Export hosts information
+Returns a response of a csv file with all hosts information.
+**URL:** https://<BASE_URL>/hosts/export
+**Request Type:** GET
+**Response:** Returns a csv file.
+
+### View all hosts
+Lists all hosts managed by POLYLOGYX platform for the filters applied.
+**URL:** https://<BASE_URL>/hosts
+**Request Type:** POST
+**Example Response Format:**
+```
+{
+	"status":false,
+	"platform":"windows",
+	“searchterm”:”EC2”,
+	"start":0,
+	"limit":10,
+	“enabled”:true
+}
+```
+**Filters Description:**
+```
+	status – true – to get all active hosts
+	status – false – to get all inactive hosts
+	platform – to filter the results with platform
+	enabled – true – to get all non-removed hosts
+	enabled – false – to get all removed hosts
+```
+**Response:** Returns JSON array of hosts and their properties.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the nodes details",
+	"data": {
+	"results": [
+		{
+			"id": 2,
+			"display_name": "EC2AMAZ-2RJ1BIF",
+			"host_identifier": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+			"os_info": {
+				"name": "Microsoft Windows Server 2019 Datacenter",
+				"build": "17763",
+				"major": "10",
+				"minor": "0",
+				"patch": "",
+				"version": "10.0.17763",
+				"codename": "Server Datacenter (full installation)",
+				"platform": "windows",
+				"install_date": "20190613115936.000000+000",
+				"platform_like": "windows"
+			},
+			"tags": [
+				"zdsd"
+			],
+			"last_ip": "15.206.168.222",
+			"is_active": false
+		}
+	],
+	"count": 3,
+	"total_count": 3
+	}
+}
+```
+
+### View a host
+Lists a node info managed by the POLYLOGYX platform and its properties.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier> 
+	https://<BASE_URL>/hosts/<int:node_id>
+**Request Type:** GET
+**Response:** Returns a JSON array of status, data and message. 
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Node details is fetched successfully",
+	"data": {
+		"id": 1,
+		"host_identifier": "EC2306BC-DCF7-A1F9-3ADE-CED9B00D49FB",
+		"node_key": "6b38482b-2526-4b3a-bc1c-b5166dc7f57f",
+		"last_ip": "13.234.136.159",
+		"os_info": {
+			"name": "Ubuntu",
+			"build": "",
+			"major": "18",
+			"minor": "4",
+			"patch": "0",
+			"version": "18.04.2 LTS (Bionic Beaver)",
+			"codename": "bionic",
+			"platform": "ubuntu",
+			"platform_like": "debian"
+		},
+		"node_info": {
+			"computer_name": "ip-172-31-30-15",
+			"hardware_model": "HVM domU",
+			"hardware_serial": "ec2306bc-dcf7-a1f9-3ade-ced9b00d49fb",
+			"hardware_vendor": "Xen",
+			"physical_memory": "8362713088",
+			"cpu_physical_cores": "2"
+		},
+		"network_info": [
+			{
+			"mac": "02:4b:07:36:bd:fc",
+			"mask": "255.255.240.0",
+			"address": "172.31.30.15",
+			"enabled": "",
+			"description": "",
+			"manufacturer": "",
+			"connection_id": "",
+			"connection_status": ""
+			}
+		],
+		"last_checkin": "2020-06-24T05:02:59.956558",
+		"enrolled_on": "2020-06-20T15:45:37.870494",
+		"last_status": "2020-06-24T05:02:58.337353",
+		"last_result": "2020-06-24T05:02:58.337353",
+		"last_config": "2020-06-24T04:59:27.771166",
+		"last_query_read": "2020-06-24T05:02:59.963197",
+		"last_query_write": "2020-06-23T17:43:30.837109"
+	}
+}
+```
+
+### View hosts distribution count
+Get count of hosts based on status and platform.
+**URL:** https://<BASE_URL>/hosts/count
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the nodes status count",
+	"data": {
+		"windows": {
+			"online": 0,
+			"offline": 2
+		},
+		"linux": {
+			"online": 0,
+			"offline": 1
+		},
+		"darwin": {
+			"online": 0,
+			"offline": 0
+		}
+	}
+}
+```
+
+### View status logs
+Returns status logs of a host for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/status_logs
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“host_identifier”: “EC2306BC-DCF7-A1F9-3ADE-CED9B00D49FB”,
+	“node_id”:1,
+	“start”:0,
+	“limit”:10,
+	“searchterm”:””
+}
+```
+**Required Payload Arguments:** host_identifier / node_id
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the node's status logs",
+	"data": {
+		"results": [
+			{
+				"line": 922,
+				"message": "The chrome_extensions table returns data based on the current user by default, consider JOINing against the users table",
+				"severity": 1,
+				"filename": "virtual_table.cpp",
+				"created": "2020-06-21T00:59:32.768726",
+				"version": "4.0.2"
+			}
+		],
+		"count": 197,
+		"total_count": 197
+	}
+}
+```
+
+### View additional config
+Returns additional config of a host for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/additional_config
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“host_identifier”: “EC2306BC-DCF7-A1F9-3ADE-CED9B00D49FB”,
+	“node_id”:1
+}
+```
+**Required Payload Arguments:** host_identifier / node_id
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully fetched additional config of the node for the host identifier passed",
+	"data": {
+		"queries": [],
+		"packs": [],
+		"tags": [
+			"test"
+		]
+	}
+}
+```
+
+### View full config
+Returns full config of a host for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/config
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“host_identifier”: “EC2306BC-DCF7-A1F9-3ADE-CED9B00D49FB”,
+	“node_id”:1
+}
+```
+**Required Payload Arguments:** host_identifier / node_id
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully fetched full config of the node for the host identifier passed",
+	"data": {
+		"options": {
+			"disable_watchdog": true,
+			"logger_tls_compress": true,
+			"host_identifier": "uuid",
+			"custom_plgx_enable_respserver": "true",
+			"custom_plgx_EnableAgentRestart": "false"
+		},
+		"file_paths": {},
+		"queries": {
+			"win_process_events": {
+				"id": 125,
+				"query": "select * from win_process_events_optimized;",
+				"interval": 30,
+				"description": "Windows Process Events",
+				"status": true
+			},
+			"win_file_events": {
+				"id": 126,
+				"query": "select * from win_file_events_optimized;",
+				"interval": 180,
+				"description": "File Integrity Monitoring",
+				"status": true
+			}
+		},
+		"packs": [],
+		"filters": {}
+	}
+}
+```
+
+### View count of result log
+Returns result log count of a host for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/recent_activity/count
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“host_identifier”: “EC2306BC-DCF7-A1F9-3ADE-CED9B00D49FB”,
+	“node_id”:1
+}
+```
+**Required Payload Arguments:** host_identifier / node_id
+**Response:** Returns a JSON array data, status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the count of schedule query results count of host identifier passed",
+	"data": [
+		{
+			"name": "certificates",
+			"count": 514
+		},
+		{
+			"name": "drivers",
+			"count": 41
+		}
+	]
+}
+```
+
+### View result log
+Returns result log data of a host for a query for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/recent_activity
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“host_identifier”: “EC2306BC-DCF7-A1F9-3ADE-CED9B00D49FB”,
+	“node_id”:1,
+	“query_name”:”certificates”,
+	“start”:0,
+	“limit”:2,
+	“searchterm”:””
+}
+```
+**Required Payload Arguments:** host_identifier / node_id, query_name, start and limit
+**Response:** Returns a response json containing data, status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the schedule query results of host identifier passed",
+	"data": {
+	"count": 514,
+	"total_count": 514,
+	"results": [
+		{
+			"timestamp": "06/20/2020 18/05/15",
 			"action": "added",
 			"columns": {
-				"eid": "3B7C7A62-6D3C-404D-924C-E77F51000000",
-				"pid": "1308",
-				"time": "1559919087",
-				"action": "",
-				"utc_time": "Fri Jun 7 14:51:27 2019 UTC",
-				"event_type": "DNS_RESPONSE",
-				"domain_name": ".ec2messages.ap-south-1.amazonaws.com",
-				"remote_port": "53",
-				"resolved_ip": "52.95.80.172",
-				"request_type": "1",
-				"request_class": "1",
-				"remote_address": "172.31.0.2"
-				},
-			"node_id": 16,
-			"node": {
-				"id": 16,
-				"host_identifier": "EC2A1F1D-0C6E-072D-C830-392246FCBAAE",
-				"node_key": "9c7a7086-8f0f-4d45-abd2-68b1d3149439",
-				"last_checkin": "2019-06-13T12:01:32.839308",
-				"enrolled_on": "2019-04-23T09:52:43.761165",
-				"tags": [
-					{
-					"id": 5,
-					"value": "Windows"
-					}
-					]
-				}
-			}]
+				"path": "LocalMachine\\Windows Live ID Token Issuer",
+				"issuer": "Token Signing Public Key",
+				"common_name": "Token Signing Public Key",
+				"self_signed": "1",
+				"not_valid_after": "1530479437"
+			}
+		},
+		{
+			"timestamp": "06/20/2020 18/05/15",
+			"action": "added",
+			"columns": {
+				"path": "LocalMachine\\Windows Live ID Token Issuer",
+				"issuer": "Token Signing Public Key",
+				"common_name": "Token Signing Public Key",
+				"self_signed": "1",
+				"not_valid_after": "1620506455"
+			}
+		}
+	]
+	}
 }
- 
 ```
 
-### Export schedule query results of managing node for search applied
-
-Export schedule query results of managing node for conditions given.
-
+### View list of tags of a host
+Returns list of tags of a host for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier>/tags
+	https://<BASE_URL>/hosts/<int:node_id>/tags
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:** 
 ```
-URL: https://<Base URL>/nodes/search/export
- 
-Request Type: POST
-
 {
-	"conditions":{
+	"status": "success",
+	"message": "Successfully fetched the tags of host",
+	"data": [
+		"test"
+	]
+}
+```
+
+### Create tags to a host
+Creates tags to a host.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier>/tags
+	https://<BASE_URL>/hosts/<int:node_id>/tags
+**Request Type:** POST
+**Example Request Format:** 
+```
+{
+	“tag": "test”
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully created tags to host"
+}
+```
+
+### Remove tags from a host
+Remove tags of a host for the host identifier given.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier>/tags
+	https://<BASE_URL>/hosts/<int:node_id>/tags
+**Request Type:** DELETE
+**Example Request Format:**
+```
+{
+	“tag”: “simple”
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully removed tags from host"
+}
+```
+
+### Search export
+Exports the search results of a host into csv file.
+**URL:** https://<BASE_URL>/hosts/search/export
+**Request Type:** POST
+**Example Request Format:** 
+```
+{
+	"conditions": {
 		"condition": "OR",
 		"rules": [
-				{
+			{
 				"id": "name",
 				"field": "name",
 				"type": "string",
 				"input": "text",
 				"operator": "contains",
 				"value": "EC2"
-				},
-				{
+			},
+			{
 				"id": "name",
 				"field": "name",
 				"type": "string",
 				"input": "text",
 				"operator": "equal",
 				"value": "pc"
-				}
-				],
+			}
+		],
 		"valid": true
-		},
-	“host_identifier”:”EC241E83-BDC2-CAFC-BF9F-28C22B37A7F0”
+	},
+	“host_identifier”:”EC241E83-BDC2-CAFC-BF9F-28C22B37A7F0”,
+	“query_name”:”win_file_events”
 }
+```
+**Required Payload Arguments:** conditions, host_identifier and query_name.
+**Response:** Returns a CSV file.
 
-Response: 
-	
-A CSV file of schedule query results for the payload given.
 
+### Hunt through file upload
+Hunt on Result Log through the file of indicators uploaded.
+**URL:** https://<BASE_URL>/hunt-upload
+**Request Type:** POST
+Example Payload Format 1:
+```
+{
+	“file”: “hunt file object to add the alerts”,
+	“type”:”md5”
+}
+```
+**Required Payload Arguments:** file and type
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:** 1:
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the results through the hunt",
+	"data": [
+		{
+			"hostname": "EC2AMAZ-2RJ1BIF",
+			"host_identifier": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+			"queries": [
+				{
+					"query_name": "osquery_info",
+					"count": 1
+				}
+			]
+		}
+	]
+}
+```
+Example Payload Format 2:
+```
+{
+	“file”: “hunt file object to add the alerts”,
+	“type”:”md5”,
+	“host_identifier”:”EC2300D6-B0D5-F9A6-1237-6553106EC525”, 
+	“query_name”:”win_file_events”, 
+	“start”:2, 
+	“limit”:10
+}
+```
+**Required Payload Arguments:** file, type, host_identifier, query_name, start and limit
+**Example Response Format:** 2:
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the results through the hunt",
+	"data": {
+		"count": 1,
+		"results": [
+			{
+				"pid": "4752",
+				"uuid": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+				"version": "4.0.2",
+				"watcher": "-1",
+				"extensions": "active",
+				"start_time": "1592672947",
+				"config_hash": "71f4969da7d79f6b2cbeb64d02e04b17bd8815e7",
+				"instance_id": "78a850bf-844e-426a-8cc6-a66d3975a2ba",
+				"build_distro": "10",
+				"config_valid": "1",
+				"build_platform": "windows"
+			}
+		]
+	}
+}
 ```
 
-### Export Schedule Query Results
+### Hunt through list of indicators
+Hunt on Result Log through the list of indicators provided.
+**URL:** https://<BASE_URL>/indicators/hunt
+**Request Type:** POST
+Example Payload Format 1:
+```
+{
+	“indicators”: “275a71899f7db9d1663fc695ec2fe2a2c4538, 275a71899fdjsaddb9d1663fc695ec2fe2a2c453fsgs”,
+	“type”:”md5”
+}
+```
+**Required Payload Arguments:** type and indicators
+**Response:** Returns JSON array of status,message and data.
+**Example Response Format:** 1:
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the results through the hunt",
+	"data": [
+		{
+			"hostname": "EC2AMAZ-2RJ1BIF",
+			"host_identifier": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+			"queries": [
+				{
+					"query_name": "osquery_info",
+					"count": 1
+				}
+			]
+		}
+	]
+}
+```
+Example Payload Format 2:
+```
+{
+	“indicators”: “hunt file object to add the alerts”,
+	“type”:”md5”,
+	“host_identifier”:”EC2300D6-B0D5-F9A6-1237-6553106EC525”, 
+	“query_name”:”win_file_events”, 
+	“start”:2, 
+	“limit”:10
+}
+```
+**Required Payload Arguments:** indicators, type, host_identifier, query_name, start and limit
+**Example Response Format:** 2:
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the results through the hunt",
+	"data": {
+		"count": 1,
+		"results": [
+			{
+				"pid": "4752",
+				"uuid": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+				"version": "4.0.2",
+				"watcher": "-1",
+				"extensions": "active",
+				"start_time": "1592672947",
+				"config_hash": "71f4969da7d79f6b2cbeb64d02e04b17bd8815e7",
+				"instance_id": "78a850bf-844e-426a-8cc6-a66d3975a2ba",
+				"build_distro": "10",
+				"config_valid": "1",
+				"build_platform": "windows"
+			}
+		]
+	}
+}
+```
 
-Exports schedule query results of a specific managed node.
+### Export Hunt results
+Export the hunt results to a csv file.
+**URL:** https://<BASE_URL>/hunt-upload/export
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“file”: “hunt file object to add the alerts”,
+	“type”:”md5”,
+	“host_identifier”:”EC2300D6-B0D5-F9A6-1237-6553106EC525”, 
+	“query_name”:”win_file_events”
+}
+```
+**Required Payload Arguments:** file, type, host_identifier, query_name
+**Response:** Returns a CSV file.
+**Example Response Format:** A CSV file object with hunt results.
 
-``` 
-URL: https://<Base URL>/schedule_query/export
- 
-Request Type: POST
+### Search in result log:
+Searches for results in Result Log for the conditions given.
+**URL:** https://<BASE_URL>/search
+**Request Type:** POST
+**Response:** Returns JSON array of status,message and data.
+Example Payload Format 1:
+```
+{
+	"conditions": {
+		"condition": "OR",
+		"rules": [
+			{
+				"id": "name",
+				"field": "name",
+				"type": "string",
+				"input": "text",
+				"operator": "contains",
+				"value": "EC2"
+			},
+			{
+				"id": "name",
+				"field": "name",
+				"type": "string",
+				"input": "text",
+				"operator": "equal",
+				"value": "pc"
+			}
+		],
+		"valid": true
+	}
+}
+```
+**Required Payload Arguments:** conditions
+**Example Response Format:** 1:
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the results through the payload given",
+	"data": [
+		{
+			"hostname": "EC2AMAZ-2RJ1BIF",
+			"host_identifier": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+			"queries": [
+				{
+					"query_name": "osquery_info",
+					"count": 1
+				}
+			]
+		}
+	]
+}
+```
+Example Payload Format 2:
+```
+{
+	"conditions": {
+		"condition": "OR",
+		"rules": [
+			{
+				"id": "name",
+				"field": "name",
+				"type": "string",
+				"input": "text",
+				"operator": "contains",
+				"value": "EC2"
+			},
+			{
+				"id": "name",
+				"field": "name",
+				"type": "string",
+				"input": "text",
+				"operator": "equal",
+				"value": "pc"
+			}
+		],
+		"valid": true
+	},
+	“host_identifier”:”EC241E83-BDC2-CAFC-BF9F-28C22B37A7F0”, "query_name":"per_query_perf", 
+	"start":2, 
+	"limit":2
+}
+```
+**Required Payload Arguments:** conditions, host_identifier, query_name, start and limit
+**Example Response Format:** 2:
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the results through the payload given",
+	"data": {
+		"count": 1,
+		"results": [
+			{
+				"pid": "4752",
+				"uuid": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+				"version": "4.0.2",
+				"watcher": "-1",
+				"extensions": "active",
+				"start_time": "1592672947",
+				"config_hash": "71f4969da7d79f6b2cbeb64d02e04b17bd8815e7",
+				"instance_id": "78a850bf-844e-426a-8cc6-a66d3975a2ba",
+				"build_distro": "10",
+				"config_valid": "1",
+				"build_platform": "windows"
+			}
+		]
+	}
+}
+```
 
-Example Request
+### Delete recent query result
+Deletes the query result for some recent days for the number given.
+**URL:** https://<BASE_URL>/queryresult/delete
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“days_of_data”: 2
+}
+```
+**Required Payload Arguments:** days_of_data
+**Response:** Returns JSON array of data, status and message
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": “Query result data is deleted successfully “,
+	“data”:7
+}
+```
 
+### Export schedule query results
+Returns a response of a csv file object with schedule query results.
+**URL:** https://<BASE_URL>/schedule_query/export
+**Request Type:** POST
+**Example Request Format:**
+```
 {
 	“query_name”: “win_registry_events”,
 	“host_identifier”:”EC259C26-B72F-553F-A2B3-FD9517DAE7D2”
 }
-
-Response: A file of a node schedule query results for a specific query.
- 
 ```
-OSQuery Tables Schema
----------------------
+**Required Payload Arguments:** query_name and host_identifier
+**Response:** Returns a csv file
 
-### Get Schema Info for all OSQuery Tables 
-
-List all the OSQuery table schemas supported by the server.
-
-``` 
-URL: https://<Base URL> /schema
-Request Type: GET
- 
-Example Response
- 
+### Delete a host permanently
+Delete a host permanently for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier>/delete
+	https://<BASE_URL>/hosts/<int:node_id>/delete
+**Request Type:** DELETE
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:** 
+```
 {
-  "data": {
-    "account_policy_data": "CREATE TABLE account_policy_data (uid BIGINT, creation_time DOUBLE, failed_login_count BIGINT, failed_login_timestamp DOUBLE, password_last_set_time DOUBLE)",
-    "win_dns_events": "CREATE TABLE win_dns_events(event_type TEXT,eid TEXT, domain_name TEXT, pid TEXT, remote_address TEXT, remote_port BIGINT, time BIGINT, utc_time TEXT)",
-    "win_dns_response_events": "CREATE TABLE win_dns_response_events( event_type TEXT,eid TEXT, domain_name TEXT,resolved_ip TEXT, pid BIGINT, remote_address TEXT, remote_port INTEGER , time BIGINT, utc_time TEXT  )",
-    "win_epp_table": "CREATE TABLE win_epp_table(product_type TEXT, product_name TEXT,product_state TEXT, product_signatures TEXT)",
-    "win_file_events": "CREATE TABLE win_file_events(action TEXT, eid TEXT,target_path TEXT, md5 TEXT ,hashed BIGINT,uid TEXT, time BIGINT,utc_time TEXT, pe_file TEXT , pid BIGINT)",
-    "win_http_events": "CREATE TABLE win_http_events(event_type TEXT, eid TEXT, pid TEXT, url TEXT, remote_address TEXT, remote_port BIGINT, time BIGINT,utc_time TEXT)",
-    "win_image_load_events": "CREATE TABLE win_image_load_events(eid TEXT, pid BIGINT,uid TEXT,  image_path TEXT, sign_info TEXT, trust_info TEXT, time BIGINT, utc_time      TEXT, num_of_certs BIGINT, cert_type         TEXT, version TEXT, pubkey TEXT, pubkey_length TEXT, pubkey_signhash_algo         TEXT, issuer_name TEXT, subject_name TEXT, serial_number TEXT, signature_algo     TEXT, subject_dn TEXT, issuer_dn TEXT)",
-    "win_msr": "CREATE TABLE win_msr(turbo_disabled INTEGER , turbo_ratio_limt INTEGER ,platform_info INTEGER, perf_status INTEGER ,perf_ctl INTEGER,feature_control INTEGER, rapl_power_limit INTEGER ,rapl_energy_status INTEGER, rapl_power_units INTEGER )",
-    "win_obfuscated_ps": "CREATE TABLE win_obfuscated_ps(script_id TEXT, time_created TEXT, obfuscated_state TEXT, obfuscated_score TEXT)",
-    "win_pefile_events": "CREATE TABLE win_pefile_events(action TEXT, eid TEXT,target_path TEXT, md5 TEXT ,hashed BIGINT,uid TEXT, pid BIGINT, time BIGINT,utc_time TEXT )",
-    "win_process_events": "CREATE TABLE win_process_events(action TEXT, eid TEXT,pid BIGINT, path TEXT ,cmdline TEXT,parent BIGINT, parent_path TEXT,owner_uid TEXT, time BIGINT, utc_time TEXT  )",
-    "win_process_handles": "CREATE TABLE win_process_handles(pid BIGINT, handle_type TEXT, object_name TEXT, access_mask BIGINT)",
-    "win_process_open_events": "CREATE TABLE win_process_open_events(action TEXT, eid TEXT,src_pid BIGINT,target_pid BIGINT, src_path TEXT ,target_path TEXT,owner_uid TEXT, time BIGINT, utc_time TEXT  )",
-    "win_registry_events": "CREATE TABLE win_registry_events(action TEXT, eid TEXT,key_name TEXT, new_key_name TEXT,value_data TEXT, value_type TEXT, owner_uid TEXT, time BIGINT, utc_time TEXT)",
-    "win_remote_thread_events": "CREATE TABLE win_remote_thread_events( eid TEXT,src_pid BIGINT,target_pid BIGINT, src_path TEXT ,target_path TEXT,owner_uid TEXT, time BIGINT, utc_time TEXT  )",
-    "win_removable_media_events": "CREATE TABLE win_removable_media_events(removable_media_event_type TEXT, eid TEXT,uid TEXT,time BIGINT, utc_time TEXT,pid BIGINT)",
-    "win_socket_events": "CREATE TABLE win_socket_events(event_type TEXT, eid TEXT, action TEXT, utc_time TEXT,time BIGINT, pid BIGINT, family TEXT, protocol INTEGER, local_address TEXT, remote_address TEXT, local_port INTEGER,remote_port INTEGER)",
-    "win_yara_events": "CREATE TABLE win_yara_events(target_path TEXT, category TEXT, action TEXT, matches TEXT, count INTEGER, eid TEXT)",
-    "windows_crashes": "CREATE TABLE windows_crashes (datetime TEXT, module TEXT, path TEXT, pid BIGINT, tid BIGINT, version TEXT, process_uptime BIGINT, stack_trace TEXT, exception_code TEXT, exception_message TEXT, exception_address TEXT, registers TEXT, command_line TEXT, current_directory TEXT, username TEXT, machine_name TEXT, major_version INTEGER, minor_version INTEGER, build_number INTEGER, type TEXT, crash_path TEXT)"
-  },
-  "message": "Successfully fetched the schema",
-  "status": "success"
-}
-
-```
-
-### Get Schema info for Specific OSQuery Table from Server
-
-List the OSQuery table schemas for a specific table from the server.
-
-```
-URL: https://<Base URL> /schema/<table_name>
-Request Type: GET
- 
-Example Response
- 
-{
-	"data": "CREATE TABLE win_file_events(action TEXT, eid TEXT,target_path TEXT, md5 TEXT ,hashed BIGINT,uid TEXT, time BIGINT,utc_time TEXT, pe_file TEXT , pid BIGINT)",
-	"message": "Successfully received table schema",
-	"status": "success"
-}
-
-```
-Config Section
---------------
-
-### Get All Available Configs from Server
-
-Lists all available configs that can be applied to managed nodes based on their platform.
-
-```
-URL: https://<Base URL>/configs
- 
-Request Type: GET
-Response: List all the configs available. 
- 
-Example Response
- 
- {
- 	"status": "success",
- 	"message": "Successfully fetched the configs",
- 	"data": {
- 		"windows": {
- 			"queries": {
- 				"win_remote_thread_events": {
- 					"id": 124,
- 					"query": "select * from win_remote_thread_events;",
- 					"interval": 90,
- 					"platform": "windows",
- 					"version": null,
- 					"description": "Remote Thread Events",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
-					"status": true
- 					},
- 				"powershell_events": {
- 					"id": 125,
- 					"query": "select * from powershell_events;",
- 					"interval": 300,
- 					"platform": "windows",
- 					"version": null,
- 					"description": "Power Shell Events",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 					}
- 				},
- 			"filters": {
- 				"feature_vectors": {
- 					"character_frequencies": []
- 					},
- 				"win_include_paths": {
- 					"all_files": [
- 						"*"
- 						]
- 					},
-				"plgx_event_filters": {
- 					"win_file_events": {
- 						"target_path": {
- 							"exclude": {
- 								"values": [
- 									"C:\\Windows\\system32\\DriverStore\\Temp\\*",
- 									"C:\\Windows\\system32\\wbem\\Performance*"
- 									]
- 							},
- 							"include": {
- 								"values": [
- 									"*\\Start Menu*",
-									"*\\Startup\\*"
- 									]
- 							}
- 						},
- 					}
- 				}
- 			}
- 		},
- 		"linux": {
- 			"queries": {
- 				"process_events": {
- 					"id": 1,
- 					"query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
- 					"interval": 10,
- 					"platform": "linux",
- 					"version": null,
- 					"description": null,
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"osquery_info": {
- 					"id": 31,
- 					"query": "SELECT * FROM osquery_info;",
- 					"interval": 86400,
- 					"platform": "linux",
- 					"version": null,
- 					"description": "Information about the running osquery configuration",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"events": {
- 					"disable_subscribers": [
-						"user_events"
- 					]
- 				},
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%",
- 						"/usr/sbin/%%"
- 					]
- 				}
- 			}
-		},
- 		"darwin": {
- 			"queries": {
- 				"authorized_keys": {
- 					"id": 45,
- 					"query": "SELECT * FROM users JOIN authorized_keys USING (uid);",
- 					"interval": 28800,
- 					"platform": "darwin",
- 					"version": null,
- 					"description": "List authorized_keys for each user on the system",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"wireless_networks": {
- 					"id": 94,
- 					"query": "SELECT ssid, network_name, security_type, last_connected, captive_portal, possibly_hidden, roaming, roaming_profile FROM wifi_networks;",
- 					"interval": 28800,
- 					"platform": "darwin",
- 					"version": null,
-					"description": "OS X known/remembered Wi-Fi networks list.",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%"
- 						"/opt/sbin/%%"
- 					],
-					"configuration": [
- 						"/etc/%%"
- 					]
- 				}
- 			}
- 		}
- 	}
- }
-
-```
-### Get Details for Specific Config from Server
-
-Each configuration available at the server is identified by the platform. Use
-this API to fetch information for a specific config based on its platform.
-
-```
-URL: https://<Base URL>/configs/<platform>
- 
-Request Type: GET
- 
-Example Response
- 
- {
- 	"status": "success",
- 	"message": "Successfully fetched the config",
- 	"data": {
- 		"linux": {
- 			"queries": {
- 				"process_events": {
- 					"id": 1,
- 					"query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
- 					"interval": 10,
- 					"platform": "linux",
- 					"version": null,
- 					"description": null,
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"osquery_info": {
- 					"id": 31,
- 					"query": "SELECT * FROM osquery_info;",
- 					"interval": 86400,
- 					"platform": "linux",
- 					"version": null,
- 					"description": "Information about the running osquery configuration",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"events": {
- 					"disable_subscribers": [
-						"user_events"
- 					]
- 				},
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%",
- 						"/usr/sbin/%%"
- 					]
- 				}
- 			}
-		}
- 	}
- }
-
-```
-
-### Update a Config on the Server 
-
-Use this API to modify information for a specific config based on its Platform.
-
-```
-URL: https://<Base URL>/configs/<platform>
- 
-Request Type: POST
- 
-Example Request
- 
- {
- 	"platform": "linux",
- 	“arch”:”x86_64”,
- 	"queries": {
- 		"process_events": {
- 			"interval": 10,
- 			"platform": "linux",
- 			"status": true
- 		},
- 		"osquery_info": {
- 			"interval": 86400,
- 			"platform": "linux",
- 			"status": true
- 		}
- 	},
- 	"filters": {
- 		"events": {
- 			"disable_subscribers": [
- 				"user_events"
- 			]
- 		},
- 		"file_paths": {
- 			"binaries": [
- 				"/usr/bin/%%",
- 				"/usr/sbin/%%",
- 				"/bin/%%",
- 				"/sbin/%%",
- 				"/usr/local/bin/%%",
- 				"/usr/local/sbin/%%"
- 			]
- 		}
- 	}
- }
-
-Response
-
- {
- 	"status": "success",
- 	"message": "Successfully updated the config",
- 	"data": {
- 		"linux": {
- 			"queries": {
- 				"process_events": {
- 					"id": 1,
- 					"query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
- 					"interval": 10,
- 					"platform": "linux",
- 					"version": null,
- 					"description": null,
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				},
- 				"osquery_info": {
- 					"id": 31,
- 					"query": "SELECT * FROM osquery_info;",
- 					"interval": 86400,
- 					"platform": "linux",
- 					"version": null,
- 					"description": "Information about the running osquery configuration",
- 					"value": null,
- 					"removed": false,
- 					"shard": null,
- 					"snapshot": false,
- 					"status": true
- 				}
- 			},
- 			"filters": {
- 				"events": {
- 					"disable_subscribers": [
-						"user_events"
- 					]
- 				},
- 				"file_paths": {
- 					"binaries": [
- 						"/usr/bin/%%",
- 						"/usr/sbin/%%"
- 					]
- 				}
- 			}
-		}
- 	}
- }
-
-```
-
-Managing Queries
------------------
-
-### Run a Live Query
-
-Define and run a live query on one or more nodes.
-
-```
-URL: https://<Base URL> /distributed/add
-Request Type: POST
- 
-Example Request
-{
- 		"query": "select * from system_info;",
- 		"tags": "demo,foo",
- 		"nodes": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113,D8FC0C20-7D9A-11E7-9483-54E1AD6C8228"
-}
- 
-Response
- 
-{
-    	"status": "success",
-    	"message": "Successfully send the distributed query",
-    	“query_id": "1"
-}
-
-```
-
-### View Live Query Results 
-Live query results are streamed over a websocket. You can use any websocket client. Query results will expire, if not retrieved in 10 minutes.
-
-```
-URL: wss://<IP_ADDRESS:PORT>/distributed/result
-Send the query id as a message after connect
-```
-
-### Define a Scheduled Query
-
-Define and assign a scheduled query.
-
-```
-URL: https://<Base URL> /queries/add
-Request Type: POST
- 
-Example Request
- {
- 	"name": "running_process_query",
- 	"query": "select * from processes;",
- 	"interval": 5,
- 	"platform": "windows",
- 	"version": "2.9.0",
- 	"description": "Processes",
- 	"value": "Processes",
- 	"tags":"finance,sales"
-}
-
-Response
-
- {
-     "data": 104,
-     "message": "Successfully created the query",
-     "status": "success"
- }
-
-```
-
-### List all Defined Queries
-
-List all queries defined on the server. 
-
-```
-URL: https://<Base URL> /queries
-Request Type: GET
- 
-Response
-
- {
- 	"status": "success",
- 	"message": "successfully fecthed the queries info",
- 	"data": [
- 		{
- 		"id": 1,
- 		"name": "win_file_events",
- 		"sql": "select * from win_file_events;",
- 		"interval": 13,
- 		"platform": "windows",
- 		"version": "2.9.0",
- 		"description": "Windows File Events",
- 		"value": "File Events",
- 		"snapshot": true,
- 		"shard": null,
- 		"packs": [
- 			"all-events-pack"
- 			]
- 		}
- 	]
- }
-
-```
-
-### List a Specific Query
-List a specific query defined on the server based on its ID.
-
-```
-URL: https://<Base URL> /queries/<query_id>
-Request Type: GET
- 
-Response
-
- {
- 	"status": "success",
- 	"message": "successfully fecthed the query info for the id given",
- 	"data":{
- 		"id": 1,
- 		"name": "win_file_events",
- 		"sql": "select * from win_file_events;",
- 		"interval": 13,
- 		"platform": "windows",
- 		"version": "2.9.0",
- 		"description": "Windows File Events",
- 		"value": "File Events",
- 		"snapshot": true,
- 		"shard": null,
- 		"packs": [
- 			"all-events-pack"
- 			]
- 	}
- }
-
-```
-
-Query Packs Section
--------------------
-
-### List all Packs
-Use this API to list all defined packs on the server. 
-
-```
-URL: https://<Base URL>/packs
-Request Type: GET
- 
-Response
-
-{
-  "data": [
-    {
-      "discovery": [],
-      "id": 1,
-      "name": "all-query-pack",
-      "platform": null,
-      "queries": {
-        "win_dns_events": {
-          "description": "Windows DNS Events",
-          "id": 8,
-          "interval": 60,
-          "platform": "windows",
-          "query": "select * from win_dns_events;",
-          "removed": true,
-          "shard": null,
-          "tags": [],
-          "value": "Dns events",
-          "version": "2.9.0"
-        }
-      },
-      "shard": null,
-      "tags": [],
-      "version": null
-    }
-  ],
-  "status": "success",
-  "message": "Successfully received the packs"
-}
-
-```
-
-### List a Specific Pack
-Get details for a specific query pack defined on the server based on its ID.
-
-```
-URL: https://<Base URL> /packs/<pack_id>
-Request Type: GET
- 
-Response
-
-{
-	"data": {
-		"discovery": [],
-		"id": 1,
-		"name": "pack_1",
-		"platform": null,
-		"queries": {
-			"win_yara_events": {
-				"description": "YARA scan result events",
-				"id": 4,
-				"interval": 5,
-				"platform": "windows",
-				"query": "select * from win_yara_events;",
-				"removed": true,
-				"shard": 100,
-				"tags": [],
-				"value": "scan results",
-				"version": "2.9.0"
-			}
-		},
-		"shard": null,
-		"tags": [],
-		"version": null
-	},
-	"message": "Successfully fetched the pack",
-	"status": "success"
-}
-
-```
-### Define a Pack
-A group of scheduled queries is known as a pack. Use this API to define a new pack.
-
-```
-URL: https://<Base URL> /packs/add
-Request Type: POST
- 
-Example Request
-
- {
- 	"name": "process_query_pack",
- 	"queries": {
- 		"win_file_events": {
- 		"query": "select * from processes;",
- 		"interval": 5,
- 		"platform": "windows",
- 		"version": "2.9.0",
- 		"description": "Processes",
- 		"value": "Processes"
- 		}
- 	},
-	"tags":"finance,sales"
- }
-
-Response
-
- {
-    "message": "Imported query pack process_query_pack",
-    "status": "success"
- }
-
-```
-
-Managing Tags
------------------
-
-### Get all Tags
-
-Get details for all tags defined on the server.
-
-```
-URL: https://<Base URL> /tags
-Request Type: GET
- 
-Example Response
- {
- 	"data": [
- 		"finance",
-        "sales"
-    ],
-    "message": "Successfully received the tags",
-    "status": "success"
- }
-
-```
-
-### Add Tags
-Tags are a mechanism to logically group or associate elements such as nodes, packs, and so on. Add one or more tags.
-
-```
-URL: https://<Base URL> /tags/add
-Request Type: POST
- 
-Example Request
-{
-"tags":"finance,sales"
-}
- 
-Response
- {
-    "message": "Successfully added the tags",
-    "status": "success"
- }
-
-```
-
-### Modify Tags for a Node
-Add or remove tags for a node.
-
-```
-URL: https://<Base URL> /nodes/tag/edit
-Request Type: POST
- 
-Example Request
- {
- 	"host_identifier":"77858CB1-6C24-584F-A28A-E054093C8924",
- 	"add_tags":"finance,sales",
- 	"remove_tags":"demo,foo"
- }
-
-Response
- {
-    "message": "Successfully modified the tag(s)",
-    "status": "success"
- }
-
-```
-
-### List Tags for a Node
-view tags for a node.
-
-```
-URL: https://<Base URL> /nodes/<host_identifier>/tags
-Request Type: GET
- 
-Response
- {
-	“status”: ”success”,
-	“message”: “Successfully fetched the tag(s)”
-	“data”: [
-		{
-		"id": 1,
-		"value": "foo"
-		},
-		{
-		"id": 9,
-		"value": "foobar"
-		}
-	]
-}
-
-```
-
-### Modify Tags for a Query
-
-Add or remove tags on a query.
-
-```
-URL: https://<Base URL> /queries/tag/edit
-Request Type: POST
- 
-Example Request
- {
- 	"query_id":1,
- 	"add_tags":"finance,sales",
- 	"remove_tags":"demo,foo"
- }
-
-Response
- {
-    "message": "Successfully modified the tag(s)",
-    "status": "success"
- }
-
-```
-
-### List Tags for a Query
-view tags for a query.
-
-```
-URL: https://<Base URL> /queries/<query_id>/tags
-Request Type: GET
- 
-Response
- {
-	“status”: ”success”,
-	“message”: “Successfully fetched the tag(s)”
-	“data”: [
-		{
-		"id": 1,
-		"value": "foo"
-		},
-		{
-		"id": 9,
-		"value": "foobar"
-		}
-	]
-}
-
-```
-
-### Modify Tags on a Pack
-Add and remove tags on a pack.
-
-```
-URL: https://<Base URL> /packs/tag/edit
-Request Type: POST
- 
-Example Request
- {
- 	"pack_id":1,
- 	"add_tags":"finance,sales",
- 	"remove_tags":"demo"
- }
-
-Response
- {
-    "message": "Successfully modified the tag(s)",
-    "status": "success"
- }
-
-```
-
-
-### List Tags for a Pack
-view tags for a pack.
-
-```
-URL: https://<Base URL> /packs/<pack_name>/tags
-Request Type: GET
- 
-Response
- {
-	“status”: ”success”,
-	“message”: “Successfully fetched the tag(s)”
-	“data”: [
-		{
-		"id": 1,
-		"value": "foo"
-		},
-		{
-		"id": 9,
-		"value": "foobar"
-		}
-	]
-}
-
-```
-
-Monitoring and Viewing Fleet Activity
--------------------------------------
-
-### View Scheduled Query Results for a Node
-
-Get all the data coming from a scheduled query for a specific endpoint node.
-This query will retrieve all the results that match from the PolyLogyx server
-database.
-
-```
-URL: https://<Base URL >/nodes/schedule_query/results
-Request Type: POST
- 
-Example Request:
- {
- 	"host_identifier": "<host_identifier>",
- 	"query": "win_file_events",
- 	"start": 0,
- 	"limit": 2
- }
- 
-Example Response:
- 
- {
-     	"status": "success",
-     	"message": "Successfully received node schedule query results",
-     	"data": [
-              	{
-                	"name": "win_file_events",
-                    "timestamp": "2018-07-24T07:09:38",
-                    "node_id": 6,
-                    "action": "added",
-                    "id": 948,
-                    "columns": {
-                    	"uid": "poly-win10\\test",
-                        "pid": "4",
-                        "hashed": "1",
-                        "target_path": "C:\\Users\\test\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\Settings\\settings.dat",
-                        "pe_file": "NO",
-                        "eid": "0A253E4E-6996-11E8-BF2C-000D3A01FCC1",
-                        "time": "1528295378",
-                        "action": "WRITE",
-                        "utc_time": "Wed Jun  6 14:29:38 2018 UTC",
-                        "md5": "6eea00c4dd37725e90c027a60f3ce1a6"
-                        }
-              	},
-              	{
-                    "name": "win_file_events",
-                    "timestamp": "2018-07-24T07:09:38",
-                    "node_id": 6,
-                    "action": "added",
-                    "id": 949,
-                    "columns": {
-                        "uid": "poly-win10\\test",
-                        "pid": "4",
-                        "hashed": "1",
-                        "target_path": "C:\\Users\\test\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\Settings\\settings.dat.LOG1",
-                        "pe_file": "NO",
-                        "eid": "0A253E4F-6996-11E8-BF2C-000D3A01FCC1",
-                        "time": "1528295378",
-                        "action": "WRITE",
-                        "utc_time": "Wed Jun  6 14:29:38 2018 UTC",
-                        "md5": "a8546005d1e59626d25c8884a1176a27"
-                    }
-              	}
-     	]
-}
-
-```
-
-Managing Rules for Alerts
--------------------------------------
-
-### List all the Rules
-
-List all rules defined for alerts on the server.
-
-```
-URL: https://<Base URL> /rules
-Request Type: GET
-
-Response
-{
-	"data": [
-		{
-			"alerters": [
-				"email",
-				"debug"
-			],
-			"conditions": {
-				"condition": "AND",
-				"rules": [
-					{
-						"field": "column",
-						"id": "column",
-						"input": "text",
-						"operator": "column_contains",
-						"type": "string",
-						"value": [
-							"domain_name",
-							"89.com"
-						]
-					}
-				],
-				"valid": true
-			},
-			"type": "MITRE",
-			"tactics": [
-				"persistence",
-				"defense-evasion"
-				],
-			"technique_id": "T1197",
-			"description": "Adult websites test",
-			"id": 1,
-			"name": "Adult websites test",
-			"status": "ACTIVE",
-			"updated_at": "Tue, 31 Jul 2018 12:31:43 GMT"
-		}
-	],
-	"message": "Successfully received the alert rules",
-	"status": "success"
-}
-
-```
-### List a Specific Rule
-List a specific rule defined on the server based on its ID.
-
-```
-URL: https://<Base URL> /rules/<rule_id>
-Request Type: GET
- 
-Response
-{
-	"data": {
-		"alerters": [
-			"email",
-			"debug"
-		],
-		"conditions": {
-			"condition": "AND",
-			"rules": [
-				{
-					"field": "column",
-					"id": "column",
-					"input": "text",
-					"operator": "column_contains",
-					"type": "string",
-					"value": [
-						"domain_name",
-						"89.com"
-					]
-				}
-			],
-			"valid": true
-		},
-		"type": "MITRE",
-		"tactics": [
-			"persistence",
-			"defense-evasion"
-		],
-		"technique_id": "T1197",
-		"description": "Adult websites test",
-		"id": 1,
-		"name": "Adult websites test",
-		"status": "ACTIVE",
-		"updated_at": "Tue, 31 Jul 2018 12:31:43 GMT"
-	},
-	"message": "Successfully fetched the rule",
-	"status": "success"
-}
-
-```
-
-### Add a Rule
-Define a rule to for a new alert.
-
-```
-URL: https://<Base URL> /rules/add
-Request Type: POST
- 
-Example request:
-{
-  	"alerters": [
-    	"email","splunk"
-  	],
-	"type": "MITRE",
-	"tactics": [
-		"persistence",
-		"defense-evasion"
-		],
-	"technique_id": "T1197",
-	"name":"Adult website test",
-	"description":"Rule for finding adult websites",
-  	"conditions": {
-    	"condition": "AND",
-  		"rules": [
-    		{
-      		"id": "column",
-      		"type": "string",
-      		"field": "column",
-      		"input": "text",
-      		"value": [
-      		  "issuer_name",
-      		  "Polylogyx.com(Test)"
-      			],
-      		"operator": "column_contains"
-    		}
-  		],
-  		"valid": true
-		}
-}
-
-Response
-
-{
-	"data": 2,
-	"message": "Successfully configured the rule",
-	"status": "success"
-}
-
-```
-
-### Modify a Rule
-Update an existing rule.
-
-```
-URL: https://<Base URL> /rules/<rule_id>
-Request Type: POST
-
-Example request:
-
-{
-  	"alerters": [
-    	"email","splunk"
-  	],
-	"type": "MITRE",
-	"tactics": [
-		"persistence",
-		"defense-evasion"
-		],
-	"technique_id": "T1197",
-	"name":"Adult website test",
-	"description":"Rule for finding adult websites",
-  	"conditions": {
-    	"condition": "AND",
-  		"rules": [
-    		{
-      		"id": "column",
-      		"type": "string",
-      		"field": "column",
-      		"input": "text",
-      		"value": [
-      		  "issuer_name",
-      		  "Polylogyx.com(Test)"
-      			],
-      		"operator": "column_contains"
-    		}
-  		],
-  		"valid": true
-		}
-}
-
-Response:
-
-{
-	"data": {
-		"alerters": [
-			"email",
-			"debug"
-		],
-		"conditions": {
-			"condition": "AND",
-			"rules": [
-				{
-					"field": "column",
-					"id": "column",
-					"input": "text",
-					"operator": "column_contains",
-					"type": "string",
-					"value": [
-						"domain_names",
-						"89.com"
-					]
-				}
-			],
-			"valid": true
-		},
-		"type": "MITRE",
-		"tactics": [
-			"persistence",
-			"defense-evasion"
-			],
-		"technique_id": "T1197",
-		"description": "Adult websites test",
-		"id": 1,
-		"name": "Adult websites test",
-		"status": "ACTIVE",
-		"updated_at": "Wed, 01 Aug 2018 15:15:10 GMT"
-	},
-	"message": "Successfully modified the rule",
-	"status": "success"
-}
-
-```
-
-### List Alerts
-List alerts based on node, query_name, and rule_id.
-
-```
-URL: https://<Base URL>/alerts
-Request Type: POST
- 
-Example Request:
-
- {
-	"host_identifier":"77858CB1-6C24-584F-A28A-E054093C8924",
-	"query_name":"processes",
-	"rule_id":3
- }
-
-Response
-{
-  "data": [
-    {
-      "created_at": "Tue, 31 Jul 2018 14:19:30 GMT",
-      "id": 1,
-      "message": {
-        "cmdline": "/sbin/launchd",
-        "cwd": "/",
-        "egid": "0",
-        "euid": "0",
-        "gid": "0",
-        "name": "launchd",
-        "nice": "0",
-        "on_disk": "1",
-        "parent": "0",
-        "path": "/sbin/launchd",
-        "pgroup": "1",
-        "pid": "1",
-        "resident_size": "6078464",
-        "root": "",
-        "sgid": "0",
-        "start_time": "0",
-        "state": "R",
-        "suid": "0",
-        "system_time": "105116",
-        "threads": "4",
-        "total_size": "17092608",
-        "uid": "0",
-        "user_time": "10908",
-        "wired_size": "0"
-      },
-      "node_id": 1,
-      "query_name": "processes",
-      "rule_id": 3,
-      "sql": null
-    }
-  ],
-  "message": "Successfully received the alerts",
-  "status": "success"
-}
-
-```
-
-Carves Section
---------------
-
-### Carves
-
-List all the carve sessions. Host identifier is optional.
-
-```
-URL: https://<Base URL> /carves
-Request Type: POST
- 
-Example Request:
-
-{
-	"host_identifier":"77858CB1-6C24-584F-A28A-E054093C8924"
-	
-}
-
-Response
-
-{
-	"data": [
-		{
-			"archive": "2N1P2UNDY6cd0877fa-36e4-41ff-926a-ff2a22673dc3.tar",
-			"block_count": 1,
-			"carve_guid": "cd0877fa-36e4-41ff-926a-ff2a22673dc3",
-			"carve_size": 5632,
-			"created_at": "2018-07-24 07:50:05",
-			"id": 10,
-			"node_id": 1,
-			"session_id": "2N1P2UNDY6"
-		}
-	],
-	"message": "Successfully fetched the carves",
-	"status": "success"
-}
-
-```
-
-### Get/Download a Carve
-
-Returns a carve session.
-
-```
-URL: https://<Base URL> /carves/download/<session_id>
-Request Type: GET
-Response: A carve file object.
-
-```
-
-Search over Schedule queries data through conditions or hashes
---------------------------------------------------------------
-
-### Hunt on managing nodes
-
-Searches throughout the managing nodes for the file hashes provided through text file.
-
-```
-URL: https://<Base URL> /hunt-upload
-Request Type: POST
-
-Example Request:
-
- Content-Type: multipart/form-data
- {
- 	“file”: “hunt file object”,
- 	“type”:”md5”
- }
-
-Response
-
- {
- 	“status”: “success”,
- 	“message”:”successfully fetched the data through the hunt file uploaded”,
- 	“data”:{
- 		“EC2300D6-B0D5-F9A6-1237-6553106EC525”: {
- 			“query_name”:”win_file_events”
- 			“count”:4
-			},
- 		“EC241E83-BDC2-CAFC-BF9F-28C22B37A7F0”: {
- 			“query_name”:”win_process_events”
- 			“count”:6
-			}
- 		}
- }
-
-Example Request:
-
- Content-Type: multipart/form-data
- {
- 	“file”: “hunt file object”,
- 	“type”:”md5”,
- 	"host_identifier":“EC2300D6-B0D5-F9A6-1237-6553106EC525”,
- 	"query_name":"win_file_events",
-	"start":0,
- 	"limit":10
- }
-
-Response
-
- {
 	"status": "success",
- 	"message": "successfully fetched the data through the hunt file uploaded",
- 	"data": [
- 		{
-		"eid": "04030A02-0BB2-4AD3-BCBE-317A03B8FFFF",
- 		"md5": "b3215c06647bc550406a9c8ccc378756",
- 		"pid": "5904",
- 		"uid": "BUILTIN\\Administrators",
- 		"time": "1564493377",
- 		"action": "FILE_WRITE",
- 		"hashed": "1",
- 		"sha256":"c0de104c1e68625629646025d15a6129a2b4b6496",
- 		"pe_file": "NO",
- 		"utc_time": "Tue Jul 30 13:29:37 2019 UTC",
- 		"target_path": "C:\\Users\\Administrator\\Downloads\\test\\5MB.zip",
- 		"process_guid": "3D62F1B7-B2BC-11E9-824A-9313D46ED9F3",
- 		"process_name": "C:\\Windows\\explorer.exe"
-		}
-	]
- }
-
+	"message": "Successfully deleted the host"
+}
 ```
 
-### Search on managing node's activity
-
-Searches throughout the managing node's recent activity.
-
+### Remove a host
+Remove a host from the platform for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier>/delete
+	https://<BASE_URL>/hosts/<int:node_id>/delete
+**Request Type:** PUT
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:** 
 ```
-URL: https://<Base URL> /search
-Request Type: POST
-
-Example Request:
-
 {
-	"conditions":{
- 		"condition": "OR",
- 		"rules": [
- 			{
- 			"id": "name",
- 			"field": "name",
- 			"type": "string",
- 			"input": "text",
- 			"operator": "contains",
- 			"value": "EC2"
- 			},
- 			{
- 			"id": "name",
- 			"field": "name",
- 			"type": "string",
- 			"input": "text",
- 			"operator": "equal",
- 			"value": "pc"
- 			}
- 		],
- 	"valid": true
+	"status": "success",
+	"message": "Successfully removed the host"
+}
+```
+
+### Enable a host
+Enable a host for the host identifier or node id given.
+**URL:** https://<BASE_URL>/hosts/<string:host_identifier>/enable
+	https://<BASE_URL>/hosts/<int:node_id>/enable
+**Request Type:** PUT
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:** 
+```
+{
+	"status": "success",
+	"message": "Successfully enabled the host"
+}
+```
+
+Tag's Section:
+--------------
+
+### View list of all tags
+Returns list of all tags.
+**URL:** https://<BASE_URL>/tags
+**Request Type:** GET
+**Example Request Format:**
+```
+{
+	“searchterm”:“test”,
+	“start”:0,
+	“limit”:10
+}
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the tags info",
+	"data": {
+		"count": 7,
+		"total_count": 7,
+		"results": [
+			{
+				"value": "test67",
+				"nodes": [],
+				"packs": [],
+				"queries": [],
+				"file_paths": []
+			},
+			{
+				"value": "test",
+				"nodes": [],
+				"packs": [
+					"all-events-pack"
+				],
+				"queries": [
+					"App_disabledExceptionChainValidation"
+				],
+				"file_paths": []
+			}
+		]
 	}
 }
+```
 
-Response
+### Add a tag
+Adds a tag.
+**URL:** https://<BASE_URL>/tags/add
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“tag": "test”
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+	“status”: “success”,
+	“message”: “Tag is added successfully”,
+}
+```
 
- {
- 	“status”: “success”,
- 	“message”:”successfully fetched the data through the payload given”,
- 	“data”:{
- 		“EC2300D6-B0D5-F9A6-1237-6553106EC525”: {
- 			“query_name”:”win_file_events”
- 			“count”:4
-			},
- 		“EC241E83-BDC2-CAFC-BF9F-28C22B37A7F0”: {
- 			“query_name”:”win_process_events”
- 			“count”:6
+### Delete a tag
+Deletes a tag.
+**URL:** https://<BASE_URL>/tags/delete
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“tag": "test”
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+	“status”: “success”,
+	“message”: “Tag is deleted successfully”,
+}
+```
+
+### View all hosts, packs, queries of a tag
+Get list of all hosts, packs and queries of a tag.
+**URL:** https://<BASE_URL>/tags/tagged
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“tags": "test”
+}
+```
+**Required Payload Arguments:** tags
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "All hosts, queries, packs for the tag provided!",
+	"data": {
+		"hosts": [
+			{
+				"id": 3,
+				"display_name": "EC2AMAZ-2RJ1BIF",
+				"host_identifier": "EC2CE2E2-3D74-1248-2FA9-23F2E960ED42",
+				"os_info": {
+					"name": "windows"
+				},
+				"tags": [
+					"test"
+				],
+				"last_ip": "15.206.168.222",
+				"is_active": false
 			}
- 		}
- }
-
-Example Request:
-
- {
-	"conditions":{
- 		"condition": "OR",
- 		"rules": [
- 			{
- 			"id": "name",
- 			"field": "name",
- 			"type": "string",
- 			"input": "text",
- 			"operator": "contains",
- 			"value": "EC2"
- 			},
- 			{
- 			"id": "name",
- 			"field": "name",
- 			"type": "string",
- 			"input": "text",
- 			"operator": "equal",
- 			"value": "pc"
- 			}
- 		],
- 	"valid": true
-	},
- 	"host_identifier":“EC2300D6-B0D5-F9A6-1237-6553106EC525”,
- 	"query_name":"win_file_events",
-	"start":0,
- 	"limit":10
- }
-
-Response
-
- {
-	"status": "success",
- 	"message": "successfully fetched the data through the payload given",
- 	"data": [
- 		{
-		"eid": "04030A02-0BB2-4AD3-BCBE-317A03B8FFFF",
- 		"md5": "b3215c06647bc550406a9c8ccc378756",
- 		"pid": "5904",
- 		"uid": "BUILTIN\\Administrators",
- 		"time": "1564493377",
- 		"action": "FILE_WRITE",
- 		"hashed": "1",
- 		"sha256":"c0de104c1e68625629646025d15a6129a2b4b6496",
- 		"pe_file": "NO",
- 		"utc_time": "Tue Jul 30 13:29:37 2019 UTC",
- 		"target_path": "C:\\Users\\Administrator\\Downloads\\test\\5MB.zip",
- 		"process_guid": "3D62F1B7-B2BC-11E9-824A-9313D46ED9F3",
- 		"process_name": "C:\\Windows\\explorer.exe"
-		}
-	]
- }
-
+		],
+		"packs": [
+			{
+				"id": 1,
+				"name": "all-events-pack",
+				"platform": null,
+				"version": null,
+				"description": null,
+				"shard": null,
+				"category": "General",
+				"tags": [
+					"test"
+				],
+				"queries": []
+			}
+		]
+		"queries": [
+			{
+				"id": 2,
+				"name": "win_process_events",
+				"sql": "select * from win_process_events;",
+				"interval": 38,
+				"platform": "windows",
+				"version": "2.9.0",
+				"description": "Windows Process Events",
+				"value": "Process Events",
+				"snapshot": false,
+				"shard": null,
+				"tags": [],
+				"packs": [
+					"all-events-pack"
+				]
+			}
+		]
+	}
+}
 ```
 
-Yara Files section
-------------------
+Carve's Section:
+----------------
 
-### List yara files
-
-lists all yara file names.
-
+### View all carves
+Lists all carves.
+**URL:** https://<BASE_URL>/carves
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL>/yara/
-Request Type: GET
-
-Response
-
+{
+	"host_identifier":"77858CB1-6C24-584F-A28A-E054093C8924",
+	“start”:0,
+	“limit”:10
+}
+```
+**Filters Description:**
+```
+  host_identifier – pass value to this argument to filter the records by a host
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
 {
 	"status": "success",
-	"message": "Successfully fetched the yara files“,
-	“data”:[“data.txt”,”sample.txt”]
+	"message": "Successfully fetched the Carves data",
+	"data": {
+		"count": 1,
+		"results": [
+			{
+				"id": 1,
+				"node_id": 2,
+				"session_id": "793OF12PEQ",
+				"carve_guid": "3ecdb82c-5d6f-4c0f-b532-bdcb2588894d",
+				"carve_size": 34766848,
+				"block_size": 300000,
+				"block_count": 116,
+				"archive": "793OF12PEQ3ecdb82c-5d6f-4c0f-b532-bdcb2588894d.tar",
+				"status": "COMPLETED",
+				"created_at": "2020-06-29T10:41:41.532733",
+				"hostname": "EC2AMAZ-5FTJV7B"
+			}
+		]
+	}
 }
- 
 ```
 
-### Upload yara file
+### Download a carve
+Returns a file object of Carves.
+**URL:** https://<BASE_URL>/carves/download/<string:session_id>
+**Request Type:** GET
+**Response:** Returns a file.
 
-Add an yara file.
+### Delete a carve
+Deletes a carve.
+**URL:** https://<BASE_URL>/carves/delete
+**Request Type:** POST
+**Example Response Format:**
 ```
-URL: https://<Base URL>/yara/add
-Request Type: POST
-
-Example request
-
 {
-	“file”:”an yara file object here”
+	“session_id”:” 793OF12PEQ”
 }
+```
+**Required Payload Arguments:** session_id
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+	“status”:”success”,
+	“message”:”Carve is deleted successfully”
+}
+```
 
-Response
+YARA's Section:
+---------------
 
+### View YARA files list
+Returns list of yara file names.
+**URL:** https://<BASE_URL>/yara
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
 {
 	"status": "success",
-	"message": "Successfully uploaded the file“
+	"message": "Successfully fetched the yara files “, 
+	“data”: [“data.txt”,” sample.txt”]
 }
- 
 ```
 
-### List iocs
-
-Lists iocs.
-
+### Upload YARA file
+Uploads a yara file to the POLYLOGYX server.
+**URL:** https://<BASE_URL>/yara/add
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL>/iocs/
-Request Type: GET
+{
+	“file”:”a yara file object here”
+}
+```
+**Required Payload Arguments:** file
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Successfully uploaded the file"
+}
+```
 
-Response
+### View content of YARA file
+Returns the content of the yara file.
+**URL:** https://<BASE_URL>/yara/view
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“file_name”:”eicar.yara”
+}
+```
+**Required Payload Arguments:** file_name
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the yara file content!",
+	"data": 
+	"rule eicar_av_test {\n    /*\n       Per standard, match only if entire file is EICAR string plus optional trailing whitespace.\n       The raw EICAR string to be matched is:\n       X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*\n    */\n\n    meta:\n        description = \"This is a standard AV test, intended to verify that BinaryAlert is working correctly.\"\n        author = \"Austin Byers | Airbnb CSIRT\"\n        reference = \"http://www.eicar.org/86-0-Intended-use.html\"\n\n    strings:\n        $eicar_regex = /^X5O!P%@AP\\[4\\\\PZX54\\(P\\^\\)7CC\\)7\\}\\$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!\\$H\\+H\\*\\s*$/\n\n    condition:\n        all of them\n}\n\nrule eicar_substring_test {\n    /*\n       More generic - match just the embedded EICAR string (e.g. in packed executables, PDFs, etc)\n    */\n\n    meta:\n        description = \"Standard AV test, checking for an EICAR substring\"\n        author = \"Austin Byers | Airbnb CSIRT\"\n\n    strings:\n        $eicar_substring = \"$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!\"\n\n    condition:\n        all of them\n}"
+}
+```
 
+### Delete a YARA file
+Deletes a yara file for the name given.
+**URL:** https://<BASE_URL>/yara/delete
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+	“file_name”:”eicar.yara”
+}
+```
+**Required Payload Arguments:** file_name
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "File with the given file name is deleted successfully"
+}
+```
+
+IOC's Section:
+--------------
+
+### View IOCs
+Returns existing IOCs.
+**URL:** https://<BASE_URL>/iocs
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
 {
 	"status": "success",
 	"message": "Successfully fetched the iocs",
-	"data": [
-		{
-		"type": "hello_name",
-		"intel type": "self","value": "dummy_testing_rr.com",
-		"threat name": "test-intel_domain_name"
+	"data": {
+		"test-intel_ipv4": {
+			"type": "remote_address",
+			"severity": "WARNING",
+			"intel_type": "self",
+			"values": "3.30.1.15,3.30.1.16"
+		},
+		"test-intel_domain_name": {
+			"type": "domain_name",
+			"severity": "WARNING",
+			"intel_type": "self",
+			"values": "unknown.com,slackabc.com"
+		},
+		"test-intel_md5": {
+			"type": "md5",
+			"severity": "INFO",
+			"intel_type": "self",
+			"values": "3h8dk0sksm0,9sd772ndd80"
 		}
-		]
+	}
 }
-
 ```
 
-### Add iocs
-
-Add iocs.
-
+### Update IOCs
+Update iocs json.
+**URL:** https://<BASE_URL>/iocs/add
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL> /iocs/add
-Request Type: POST
-
-Example Request
-
 {
-	“file”:”an iocs file object here”
+	"data": {
+		"test-intel_ipv4": {
+			"type": "remote_address",
+			"severity": "WARNING",
+			"intel_type": "self",
+			"values": "3.30.1.15,3.30.1.16"
+		},
+		"test-intel_domain_name": {
+			"type": "domain_name",
+			"severity": "WARNING",
+			"intel_type": "self",
+			"values": "unknown.com,slackabc.com"
+		},
+		"test-intel_md5": {
+			"type": "md5",
+			"severity": "INFO",
+			"intel_type": "self",
+			"values": "3h8dk0sksm0,9sd772ndd80"
+		}
+	}
 }
-
-Response
-
+```
+**Required Payload Arguments:** data
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
 {
 	"status": "success",
-	"message": "Successfully updated the intel from the file uploaded“
+	"message": "Successfully updated the intel data “
 }
-
 ```
 
-Response Action -- Only Avaiable for Enterprise Edition
+OS Query Schema's Section:
+--------------------------
+
+### View OSQuery schema
+Returns all OSQuery tables schema.
+**URL:** https://<BASE_URL>/schema
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the schema",
+	"data": {
+		"account_policy_data": "CREATE TABLE account_policy_data (uid BIGINT, creation_time DOUBLE, failed_login_count BIGINT, failed_login_timestamp DOUBLE, password_last_set_time DOUBLE)",
+		"acpi_tables": "CREATE TABLE acpi_tables (name TEXT, size INTEGER, md5 TEXT)",
+	}
+}
+```
+
+### View one OSQuery table’s schema
+Returns an OSQuery table schema for the table name given.
+**URL:** https://<BASE_URL>/schema/<string:table>
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+	"status": "success",
+	"message": "Successfully fetched the table schema",
+	"data": {
+	"account_policy_data": "CREATE TABLE account_policy_data (uid BIGINT, creation_time DOUBLE, failed_login_count BIGINT, failed_login_timestamp DOUBLE, password_last_set_time DOUBLE)"
+	}
+}
+```
+
+Rule's Section:
 ---------------
 
-### List all Response Actions performed
-
-Lists All response actions performed by server on agent.
-
+### View all rules
+Returns all rules.
+**URL:** https://<BASE_URL>/rules
+**Request Type:** POST
+**Example Request Format:**
 ```
-URL: https://<Base URL>/response?start=0&limit=1
-Request Type: GET
-
-Response:
 {
-"status": "success",
-"message": "successfully fetched the responses info",
-"data": {
-		"count":12,
-		"results":[
-			{
-			"id": 1,
-			"action": "delete",
-			"command": {"action": "delete", 
-						"actuator":{"endpoint": "polylogyx_vasp"}, 
-						"target": {
-							"file": {
-								"device":{"hostname": "DESKTOP-QIRBS33"}, 
-								"hashes": {}, 
-								"name": "C:\\\\Users\\\\Default\\\\Downloads\\\\malware.txt"
-								}
-							}
-						},
-			"command_id": "2c92808a69099f17016910516100000a",
-			"message": "FILE_NOT_DELETED",
-			"status": "failure",
-			"data": null,
-			"hostname": "DESKTOP-QIRBS33",
-			“target”:”file”
-			}
-			]
-		}
+	“start”:0,
+	“limit”:1,
+	“searchterm”:””
 }
-
 ```
-
-### List a Response Action performed
-
-List a Response Action performed for the command id provided.
-
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
 ```
-URL: https://<Base URL>/response/<command_id>
-Request Type: GET
-
-Response:
 {
 	"status": "success",
-	"message": “Successfully received the command status”,
+	"message": "Successfully fetched the rules info",
 	"data": {
-			"id": 1,
-			"action": "delete",
-			"command": {"action": "delete", 
-						"actuator":{"endpoint": "polylogyx_vasp"}, 
-						"target": {
-							"file": {
-								"device":{"hostname": "DESKTOP-QIRBS33"}, 
-								"hashes": {}, 
-								"name": "C:\\\\Users\\\\Default\\\\Downloads\\\\malware.txt"
-								}
-							}
-						},
-			"command_id": "2c92808a69099f17016910516100000a",
-			"message": "FILE_NOT_DELETED",
-			"status": "failure",
-			"data": null,
-			"hostname": "DESKTOP-QIRBS33",
-			“target”:”file”
+	"count": 147,
+	"total_count": 147,
+	"results": [
+		{
+		"id": 147,
+		"alerters": [
+			"debug"
+		],
+		"conditions": {
+			"rules": [
+			{
+				"id": "action",
+				"type": "string",
+				"field": "action",
+				"input": "text",
+				"value": "test",
+				"operator": "equal"
 			}
+			],
+			"valid": true,
+			"condition": "AND"
+		},
+		"description": "tesing",
+		"name": "test123",
+		"severity": "INFO",
+		"status": "ACTIVE",
+		"updated_at": "2020-06-30T07:46:00.265400",
+		"type": "MITRE",
+		"tactics": [
+			"defense-evasion"
+		],
+		"technique_id": "T1070"
+		}
+	]
+	}
 }
-
 ```
 
-### Take an Action on a windows managing node
-
-Take an Action on a windows managing node against a file/process/ip_adress.
-
+### View a rule
+Returns a rule info for the id given.
+**URL:** https://<BASE_URL>/rules/<int:rule_id>
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
 ```
-URL: https://<Base URL>/response/add
-Request Type: POST
-	
-Example Request:
-
-a) File Delete:
-	{
-  		"action": "delete",
-  		"actuator_id": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113",
-  		"target": "file",
-		"file_name": "C:\\Users\\Default\\Downloads\\malware.txt",
-		"file_hash": "<file hash(md5) here>"
-	}
-	Required Payload paramaters: action, actuator_id, target, file_name/file_hash
-b) Process Stop:
-	{
-  		"action": "stop",
-  		"actuator_id": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113",
-  		"target": "process",
-		"process_name": "",
-		"pid": “pid here”
-	}
-	Required Payload paramaters: action, actuator_id, target, process_name, pid
-
-c)Network Response:
-	{
-  		"action": "contain",
-  		"actuator_id": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113",
-  		"target": "ip_connection",
-      	"rule_name": "foo",
-      	"rule_group": "foo",
-      	"src_port": "ANY",
-      	"dst_port": "ANY",
-      	"dst_addr": "*",
-      	"application": "chrome.exe",
-      	"direction": 1,
-      	"layer4_protocol": "256"
-	}
-
-Response Format:
-
 {
-	"status": "success",
-	"message": “Successfully sent the response command”,
-	“command_id”:"2c92808a69099f17016910516100000a"
+  "status": "success",
+  "message": "Successfully fetched the rules info",
+  "data": {
+    "id": 147,
+    "alerters": [
+      "debug"
+    ],
+    "conditions": {
+      "rules": [
+        {
+          "id": "action",
+          "type": "string",
+          "field": "action",
+          "input": "text",
+          "value": "test",
+          "operator": "equal"
+        }
+      ],
+      "valid": true,
+      "condition": "AND"
+    },
+    "description": "tesing",
+    "name": "test123",
+    "severity": "INFO",
+    "status": "ACTIVE",
+    "updated_at": "2020-06-30T07:46:00.265400",
+    "type": "MITRE",
+    "tactics": [
+      "defense-evasion"
+    ],
+    "technique_id": "T1070"
+  }
 }
+```
 
+### Modify a rule
+Edits and Returns a rule info for the id, data given.
+**URL:** https://<BASE_URL>/rules/<int:rule_id>
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "alerters": "debug,email”,
+  "conditions": {
+    "rules": [
+      {
+        "id": "action",
+        "type": "string",
+        "field": "action",
+        "input": "text",
+        "value": "test",
+        "operator": "equal"
+      }
+    ],
+    "valid": true,
+    "condition": "AND"
+  },
+  "description": "tesing",
+  "name": "test123",
+  "severity": "INFO",
+  "status": "ACTIVE",
+  "updated_at": "2020-06-30T07:46:00.265400",
+  "type": "MITRE",
+  "tactics": "defense-evasion",
+  "technique_id": "T1070, T1005"
+}
+```
+**Required Payload Arguments:** name and conditions
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully modified the rules info",
+  "data": {
+    "id": 147,
+    "alerters": [
+      "debug"
+    ],
+    "conditions": {
+      "rules": [
+        {
+          "id": "action",
+          "type": "string",
+          "field": "action",
+          "input": "text",
+          "value": "test",
+          "operator": "equal"
+        }
+      ],
+      "valid": true,
+      "condition": "AND"
+    },
+    "description": "tesing",
+    "name": "test123",
+    "severity": "INFO",
+    "status": "ACTIVE",
+    "updated_at": "2020-06-30T07:46:00.265400",
+    "type": "MITRE",
+    "tactics": [
+      "defense-evasion"
+    ],
+    "technique_id": "T1070"
+  }
+}
+```
+
+### Add a rule
+Adds a rule for the data given.
+**URL:** https://<BASE_URL>/rules/add
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "alerters": "debug,email”,
+  "conditions": {
+    "rules": [
+      {
+        "id": "action",
+        "type": "string",
+        "field": "action",
+        "input": "text",
+        "value": "test",
+        "operator": "equal"
+      }
+    ],
+    "valid": true,
+    "condition": "AND"
+  },
+  "description": "tesing",
+  "name": "test123",
+  "severity": "INFO",
+  "status": "ACTIVE",
+  "updated_at": "2020-06-30T07:46:00.265400",
+  "type": "MITRE",
+  "tactics": "defense-evasion",
+  "technique_id": "T1070, T1005"
+}
+```
+**Required Payload Arguments:** name and conditions
+**Response:** Returns a JSON array of rule_id, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Rule is added successfully “,
+  “rule_id”: 2
+}
+```
+
+### Get tactics for technique ids
+Returns tactics for the technique ids given.
+**URL:** https://<BASE_URL>/rules/tactics
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “technique_ids”:” T1005, T1004”
+}
+```
+**Required Payload Arguments:** technique_ids
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Tactics are fetched successfully from technique ids",
+  "data": {
+    "tactics": [
+      "collection"
+    ],
+    "description": "\nSensitive data can be collected from local system sources, such as the file system or databases of information residing on the system prior to Exfiltration.\n\nAdversaries will often search the file system on computers they have compromised to find files of interest. They may do this using a [Command-Line Interface](https://attack.mitre.org/techniques/T1059), such as [cmd](https://attack.mitre.org/software/S0106), which has functionality to interact with the file system to gather information. Some adversaries may also use [Automated Collection](https://attack.mitre.org/techniques/T1119) on the local system.\n"
+  }
+}
+```
+
+Query's Section:
+----------------
+
+### View all queries
+Returns all queries.
+**URL:** https://<BASE_URL>/queries
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "start":0,
+  "limit":1,
+  “searchterm”:””
+}
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the queries info!",
+  "data": {
+    "count": 103,
+    "total_count": 103,
+    "results": [
+      {
+        "id": 78,
+        "name": "AppCompat",
+        "sql": "select * from registry where key='HKEY_LOCAL_MACHINE\\SOFTWARE\\%Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers'",
+        "interval": 86400,
+        "platform": null,
+        "version": null,
+        "description": "Check Applications opted in for DEP",
+        "value": null,
+        "snapshot": true,
+        "shard": null,
+        "tags": [],
+        "packs": [
+          "windows-hardening"
+        ]
+      }
+    ]
+  }
+}
+```
+
+### View all packed queries
+Returns all packed queries.
+**URL:** https://<BASE_URL>/queries/packed
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "start":0,
+  "limit":1,
+  “searchterm”:””
+}
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the packed queries info",
+  "data": {
+    "count": 103,
+    “total_count”:103,
+    "results": [
+      {
+        "id": 78,
+        "name": "AppCompat",
+        "sql": "select * from registry where key='HKEY_LOCAL_MACHINE\\SOFTWARE\\%Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers'",
+        "interval": 86400,
+        "platform": null,
+        "version": null,
+        "description": "Check Applications opted in for DEP",
+        "value": null,
+        "snapshot": true,
+        "shard": null,
+        "tags": [],
+        "packs": [
+          "windows-hardening"
+        ]
+      }
+    ]
+  }
+}
+```
+
+### View a query
+Returns a query info for the id given.
+**URL:** https://<BASE_URL>/queries/<int:query_id>
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the query info for the given id",
+  "data": {
+    "id": 78,
+    "name": "AppCompat",
+    "sql": "select * from registry where key='HKEY_LOCAL_MACHINE\\SOFTWARE\\%Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers'",
+    "interval": 86400,
+    "platform": null,
+    "version": null,
+    "description": "Check Applications opted in for DEP",
+    "value": null,
+    "snapshot": true,
+    "shard": null,
+    "tags": [],
+    "packs": [
+      "windows-hardening"
+    ]
+  }
+}
+```
+
+### Add a query
+Adds a query for the data given.
+**URL:** https://<BASE_URL>/queries/add
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "name": "running_process_query", 
+  "query": "select * from processes;", 
+  "interval": 5, 
+  "platform": "windows", 
+  "version": "2.9.0",
+  "snapshot": "true",
+  "description": "Processes", 
+  "value": "Processes”, 
+  "tags":"finance,sales" 
+}
+```
+**Required Payload Arguments:** name, query and interval
+**Response:** Returns a JSON array of query_id, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Successfully added the query for the data given”,
+  “query_id”: 2
+}
+```
+
+### Modify a query
+Edits a query for the id given.
+**URL:** https://<BASE_URL>/queries/<int:query_id>
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "name": "running_process_query", 
+  "query": "select * from processes;", 
+  "interval": 5, 
+  "platform": "windows", 
+  "version": "2.9.0",
+  "snapshot": "true",
+  "description": "Processes", 
+  "value": "Processes”, 
+  "tags":"finance,sales" 
+}
+```
+**Required Payload Arguments:** name, query and interval
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully edited the query info for the given id",
+  "data": {
+    "id": 78,
+    "name": "AppCompat",
+    "sql": "select * from registry where key='HKEY_LOCAL_MACHINE\\SOFTWARE\\%Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers'",
+    "interval": 86400,
+    "platform": "all",
+    "version": null,
+    "description": "Check Applications opted in for DEP",
+    "value": null,
+    "snapshot": true,
+    "shard": null
+  }
+}
+```
+
+### View tags of a query
+Modifies tags for a query for id given.
+**URL:** https://<BASE_URL>/queries/<int:query_id/tags
+**Request Type:** GET
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the tags of query",
+  "data": [
+    "test"
+  ]
+}
+```
+
+### Add tags to a query
+Adds tags to a query for id given.
+**URL:** https://<BASE_URL>/queries/<int:query_id>/tags
+**Request Type:** POST
+**Example Request Format:**
+```
+{ 
+  “tag":"finance" 
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Successfully created the tag(s) to queries”
+}
+```
+
+### Delete tags from a query
+Removes tags of a query for id given.
+**URL:** https://<BASE_URL>/queries/<int:query_id>/tags
+**Request Type:** DELETE
+**Example Request Format:**
+```
+{ 
+  “tag":"finance" 
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully removed tags from query"
+}
+```
+
+### Delete a query
+Delete a query for id given.
+**URL:** https://<BASE_URL>/queries/<int:query_id>/delete
+  https://<BASE_URL>/queries/<string:query_name>/delete
+**Request Type:** DELETE
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Successfully deleted the query”
+}
+```
+
+Pack's Section:
+---------------
+
+### View all packs
+Returns all Packs.
+**URL:** https://<BASE_URL>/packs
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “start”:0,
+  “limit”:1,
+  “searchterm”:””
+}
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "successfully fetched the packs info",
+  "data": {
+    "count": 12,
+    “total_count”:12,
+    "results": [
+      {
+        "id": 12,
+        "name": "windows-hardening",
+        "platform": null,
+        "version": null,
+        "description": null,
+        "shard": null,
+        "category": "General",
+        "tags": [],
+        "queries": [
+          {
+            "id": 82,
+            "name": "PolicyScopeMachine",
+            "sql": "select * from registry where key='HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Safer\\CodeIdentifiers\\PolicyScope'",
+            "interval": 86400,
+            "platform": null,
+            "version": null,
+            "description": "Check Software Restriction Policies state",
+            "value": null,
+            "snapshot": true,
+            "shard": null,
+            "tags": [],
+            "packs": [
+              "windows-hardening"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### View a pack
+Returns a pack for the id given.
+**URL:** https://<BASE_URL>/packs/<int:pack_id>
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "successfully fetched the packs info",
+  "data": {
+    "id": 12,
+    "name": "windows-hardening",
+    "platform": null,
+    "version": null,
+    "description": null,
+    "shard": null,
+    "category": "General",
+    "tags": [],
+    "queries": [
+      {
+        "id": 82,
+        "name": "PolicyScopeMachine",
+        "sql": "select * from registry where key='HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Safer\\CodeIdentifiers\\PolicyScope'",
+        "interval": 86400,
+        "platform": null,
+        "version": null,
+        "description": "Check Software Restriction Policies state",
+        "value": null,
+        "snapshot": true,
+        "shard": null,
+        "tags": [],
+        "packs": [
+          "windows-hardening"
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Add a pack
+Adds a pack for the data given.
+**URL:** https://<BASE_URL>/packs/add
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "name": "process_query_pack", 
+  "queries": { 
+    "win_file_events": {
+      "query": "select * from processes;", 
+      "interval": 5, 
+      "platform": "windows", 
+      "version": "2.9.0", 
+      "description": "Processes", 
+      "value": "Processes"
+    }
+  },
+  "tags": "finance, sales",
+  “category": "General”
+}
+```
+**Required Payload Arguments:** name, queries
+**Response:** Returns a JSON array of pack_id, status and message.
+**Example Response Format:**
+```
+{
+  “status": "success”,
+  “message": "Imported query pack and pack is added successfully”,
+  “pack_id”:2
+}
+```
+
+### View tags of a pack
+Lists tags for a pack for id given.
+**URL:** https://<BASE_URL>/packs/<int:pack_id/tags
+  https://<BASE_URL>/packs/<string:pack_name>/tags
+**Request Type:** GET
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the tags of pack",
+  "data": [
+    "test"
+  ]
+}
+```
+
+### Add tags to a pack
+Adds tags to a pack for id given.
+**URL:** https://<BASE_URL>/packs/<int:pack_id>/tags
+  https://<BASE_URL>/packs/<string:pack_name>/tags
+**Request Type:** POST
+**Example Request Format:**
+```
+{ 
+  “tag": "finance" 
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Successfully created the tag(s) to packs”
+}
+```
+
+### Delete tags from a pack
+Removes tags of a pack for id given.
+**URL:** https://<BASE_URL>/packs/<int:pack_id>/tags
+  https://<BASE_URL>/packs/<string:pack_name>/tags
+**Request Type:** DELETE
+**Example Request Format:**
+```
+{ 
+  “tag": "finance" 
+}
+```
+**Required Payload Arguments:** tag
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully removed tags from pack"
+}
+```
+
+### Delete a pack
+Delete a pack for id given.
+**URL:** https://<BASE_URL>/packs/<int:pack_id>/delete
+  https://<BASE_URL>/packs/<string:pack_name>/delete
+**Request Type:** DELETE
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Successfully deleted the pack”
+}
+```
+
+### Upload a pack
+Adds pack through a file upload
+**URL:** https://<BASE_URL>/packs/upload
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “file”: “A JSON file object with json content same as /packs/add but without pack name”,
+  “category”: “General”
+}
+```
+**Required Payload Arguments:** file and category
+**Response:** Returns a JSON array of pack id, status and message.
+**Example Response Format:**
+```
+{
+  “status": "success”,
+  “message": "pack uploaded successfully”,
+  “pack_id”:2
+}
+```
+
+Config's Section:
+-----------------
+
+### View all configs
+Returns all configs.
+**URL:** https://<BASE_URL>/configs/all
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the configs",
+  "data": {
+    "linux": {
+      "x86_64": {
+        "0": {
+          "queries": {
+            "process_events": {
+              "id": 1,
+              "query": "SELECT auid, cmdline, ctime, cwd, egid, euid, gid, parent, path, pid, time, uid,eid FROM process_events WHERE path NOT IN ('/bin/sed', '/usr/bin/tr', '/bin/gawk', '/bin/date', '/bin/mktemp', '/usr/bin/dirname', '/usr/bin/head', '/usr/bin/jq', '/bin/cut', '/bin/uname', '/bin/basename') and cmdline NOT LIKE '%_key%' AND cmdline NOT LIKE '%secret%';",
+              "interval": 10,
+              "platform": "linux",
+              "version": null,
+              "description": null,
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "socket_events": {
+              "id": 2,
+              "query": "SELECT action, auid, family, local_address, local_port, path, pid, remote_address, remote_port, success, time,eid FROM socket_events WHERE success=1 AND path NOT IN ('/usr/bin/hostname') AND remote_address NOT IN ('127.0.0.1', '169.254.169.254', '', '0000:0000:0000:0000:0000:0000:0000:0001', ':1', '0000:0000:0000:0000:0000:ffff:7f00:0001', 'unknown', '0.0.0.0', '0000:0000:0000:0000:0000:0000:0000:0000');",
+              "interval": 10,
+              "platform": "linux",
+              "version": null,
+              "description": null,
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {
+            "events": {
+              "disable_subscribers": [
+                "user_events"
+              ]
+            },
+            "file_paths": {
+              "binaries": [
+                "/usr/local/sbin/%%"
+              ],
+              "configuration": [
+                "/etc/passwd"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "windows": {
+      "x86_64": {
+        "1": {
+          "queries": {
+            "win_epp_table": {
+              "id": 110,
+              "query": "select * from win_epp_table;",
+              "interval": 360,
+              "platform": "windows",
+              "version": null,
+              "description": "Endpoint Products Status",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "win_image_load_events": {
+              "id": 111,
+              "query": "select * from win_image_load_events_optimized;",
+              "interval": 180,
+              "platform": "windows",
+              "version": null,
+              "description": "Extensions in the Chrome browser",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": false,
+          "filters": {
+            "plgx_event_filters": {
+              "win_ssl_events": {
+                "process_name": {
+                  "exclude": {
+                    "values": [
+                      "*\\plgx_cpt.exe"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "2": {
+          "queries": {
+            "win_remote_thread_events": {
+              "id": 153,
+              "query": "select * from win_remote_thread_events_optimized;",
+              "interval": 90,
+              "platform": "windows",
+              "version": null,
+              "description": "Remote Thread Events",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "powershell_events": {
+              "id": 154,
+              "query": "select * from powershell_events;",
+              "interval": 300,
+              "platform": "windows",
+              "version": null,
+              "description": "Power Shell Events",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {
+            "feature_vectors": {
+              "character_frequencies": [
+                0
+              ]
+            },
+            "win_include_paths": {
+              "all_files": [
+                "*"
+              ]
+            },
+            "plgx_event_filters": {
+              "win_ssl_events": {
+                "process_name": {
+                  "exclude": {
+                    "values": [
+                      "*\\Program Files\\plgx_osquery\\plgx_osqueryd.exe"                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x86": {
+        "0": {
+          "queries": {
+            "appcompat_shims": {
+              "id": 155,
+              "query": "SELECT * FROM appcompat_shims WHERE description!='EMET_Database' AND executable NOT IN ('setuphost.exe','setupprep.exe','iisexpress.exe');",
+              "interval": 3600,
+              "platform": "windows",
+              "version": null,
+              "description": "Appcompat shims (.sdb files) installed on Windows hosts.",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "certificates": {
+              "id": 156,
+              "query": "SELECT * FROM certificates WHERE path!='Other People';",
+              "interval": 3600,
+              "platform": "windows",
+              "version": null,
+              "description": "List all certificates in the trust store",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {}
+        }
+      }
+    },
+    "darwin": {
+      "x86_64": {
+        "0": {
+          "queries": {
+            "authorized_keys": {
+              "id": 45,
+              "query": "SELECT * FROM users JOIN authorized_keys USING (uid);",
+              "interval": 28800,
+              "platform": "darwin",
+              "version": null,
+              "description": "List authorized_keys for each user on the system",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            },
+            "boot_efi_hash": {
+              "id": 46,
+              "query": "SELECT path, md5 FROM hash WHERE path='/System/Library/CoreServices/boot.efi';",
+              "interval": 28800,
+              "platform": "darwin",
+              "version": null,
+              "description": "MD5 hash of boot.efi",
+              "value": null,
+              "removed": false,
+              "shard": null,
+              "snapshot": false,
+              "status": true
+            }
+          },
+          "status": true,
+          "filters": {
+            "file_paths": {
+              "binaries": [
+                "/usr/bin/%%"
+              ],
+              "configuration": [
+                "/etc/%%"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### View a config
+Returns config of a specific platform.
+**URL:** https://<BASE_URL>/configs/view
+**Request Type:** POST
+**Example Response Format:**
+```
+{
+  “platform”:”linux”,
+  “arch”:”x86_64”
+}
+```
+**Required Payload Arguments:** platform and arch
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Config is fetched successfully for the platform given",
+  "data": {
+    "queries": {
+      "process_events": {
+        "status": true,
+        "interval": 10
+      }
+    },
+    "filters": {
+      "events": {
+        "disable_subscribers": [
+          "user_events"
+        ]
+      },
+      "file_paths": {
+        "binaries": [
+          "/usr/bin/%%"
+        ]
+      }
+    },
+    "type": "default"
+  }
+}
+```
+
+### Modify a config
+Modifies config of a platform for the name given.
+**URL:** https://<BASE_URL>/configs/update
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "platform": "linux",
+  “arch”:”x86_64”,
+  “type”:”default”,
+  "queries": {
+    "process_events": {
+      "interval": 10,
+      "status": true
+    },
+    "osquery_info": {
+      "interval": 86400,
+      "status": true
+    }
+  },
+  "filters": {}
+}
+```
+**Required Payload Arguments:** platform, arch, type, queries and filters
+**Response:** Returns a JSON array of config, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Config is edited successfully for the platform given”,
+  “config”: {
+    "platform": "linux",
+    "queries": {
+      "process_events": {
+        "interval": 10,
+        "status": true
+      },
+      "osquery_info": {
+        "interval": 86400,
+        "status": true
+      }
+    },
+    "filters": {},
+    "type": "default"
+  }
+}
+```
+
+### Toggle the config
+Toggles the config in between shallow and deep.
+**URL:** https://<BASE_URL>/configs/toggle
+**Request Type:** PUT
+**Example Request Format:**
+```
+{
+  "platform": windows",
+  "arch":"x86_64",
+  "type": "shallow”
+}
+```
+**Required Payload Arguments:** platform, arch and type
+**Response:** Returns a JSON array of status and message.
+**Example Response Format:**
+```
+{
+  “status": "success”,
+  “message”: “Default config for the platform and arch given is changed successfully"
+}
+```
+
+Alert's Section:
+----------------
+
+### View alerts source distribution
+Returns all alerts count for all the sources.
+**URL:** https://<BASE_URL>/alerts/count_by_source
+**Request Type:** GET
+**Example Request Format:**
+```
+{
+  "resolved": false
+}
+```
+**Filters Description:**
+```
+  resolved – true to get only resolved alerts count / false to get non-resolved alerts count
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Data is fetched successfully",
+  "data": {
+    "alert_source": [
+      {
+        "name": "virustotal",
+        "count": 0
+      },
+      {
+        "name": "rule",
+        "count": 93833
+      },
+      {
+        "name": "ibmxforce",
+        "count": 3
+      },
+      {
+        "name": "alienvault",
+        "count": 0
+      },
+      {
+        "name": "ioc",
+        "count": 21
+      }
+    ]
+  }
+}
+```
+
+### View all alerts
+Returns all alerts for the filters applied.
+**URL:** https://<BASE_URL>/alerts
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "source":"rule",
+  "resolved":false,
+  "start":0,
+  “limit”:1,
+  “searchterm”:””,
+  “event_ids”: [],
+  “duration”:”3”,
+  “date”: "2020-8-5",
+  “type”:”2”
+}
+```
+**Required Payload Arguments:** source
+**Filters Description:**
+```
+  source – alert’s source to get the alerts only for
+  resolved – true to get only resolved alerts / false to get non-resolved alerts
+  event_ids – event ids to filter the alerts for
+  duration – to get recent alerts by(month/week/day)
+  date – end date for the duration to be calculated by
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Data is fetched successfully",
+  "data": {
+    "count": 93833,
+    "total_count": 93833,
+    "results": [
+      {
+        "id": 93855,
+        "node_id": 4,
+        "rule_id": 146,
+        "severity": "INFO",
+        "rule": {
+          "name": "test_process_without_default_query",
+          "id": 146
+        },
+        "created_at": "2020-08-04 17:01:13.458996",
+        "type": "rule",
+        "source": "rule",
+        "status": "OPEN",
+        "alerted_entry": {
+          "eid": "241E415E-9F35-42DA-9F20-0D3F03F8FFFF",
+          "pid": "5704",
+          "path": "C:\\Windows\\System32\\wbem\\WmiPrvSE.exe",
+          "time": "1596557041",
+          "action": "PROC_TERMINATE",
+          "cmdline": "C:\\Windows\\system32\\wbem\\wmiprvse.exe",
+          "utc_time": "Tue Aug  4 16:04:01 2020 UTC",
+          "owner_uid": "NT AUTHORITY\\NETWORK SERVICE",
+          "parent_pid": "700",
+          "parent_path": "C:\\Windows\\System32\\svchost.exe",
+          "process_guid": "58E0F736-D62C-11EA-8283-02F7A50E7DFE",
+          "parent_process_guid": "58E0F62F-D62C-11EA-8283-02F7A50E7DFE"
+        },
+        "hostname": "EC2AMAZ-H7M54UV"
+      },
+      {
+        "id": 93854,
+        "node_id": 4,
+        "rule_id": 146,
+        "severity": "INFO",
+        "rule": {
+          "name": "test_process_without_default_query",
+          "id": 146
+        },
+        "created_at": "2020-08-04 17:01:13.448373",
+        "type": "rule",
+        "source": "rule",
+        "status": "OPEN",
+        "alerted_entry": {
+          "eid": "74A4627E-AE27-4A1F-9DAC-2E6303F8FFFF",
+          "pid": "5348",
+          "path": "C:\\Windows\\WinSxS\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.850_none_7e18264b4d00f498\\TiWorker.exe",
+          "time": "1596556952",
+          "action": "PROC_CREATE",
+          "cmdline": "C:\\Windows\\winsxs\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.850_none_7e18264b4d00f498\\TiWorker.exe -Embedding",
+          "utc_time": "Tue Aug  4 16:02:32 2020 UTC",
+          "owner_uid": "NT AUTHORITY\\SYSTEM",
+          "parent_pid": "700",
+          "parent_path": "C:\\Windows\\System32\\svchost.exe",
+          "process_guid": "58E0F73A-D62C-11EA-8283-02F7A50E7DFE",
+          "parent_process_guid": "58E0F62F-D62C-11EA-8283-02F7A50E7DFE"
+        },
+        "hostname": "EC2AMAZ-H7M54UV"
+      }
+    ]
+  }
+}
+```
+
+### View an alert
+Returns an alert data.
+**URL:** https://<BASE_URL>/alerts/<int:alert_id>
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the Alerts data",
+  "data": {
+    "query_name": "win_dns_events",
+    "message": {
+      "eid": "22682106-0532-4AA9-AEA6-6E6931000000",
+      "pid": "1144",
+      "time": "1596551122",
+      "action": "DNS_LOOKUP",
+      "utc_time": "Tue Aug  4 14:25:22 2020 UTC",
+      "event_type": "DNS",
+      "domain_name": ".www.google.com",
+      "remote_port": "53",
+      "request_type": "1",
+      "request_class": "1",
+      "remote_address": "172.31.0.2"
+    },
+    "node_id": 4,
+    "rule_id": null,
+    "severity": "WARNING",
+    "created_at": "2020-08-04 15:36:49.651175",
+    "type": "Threat Intel",
+    "source": "ioc",
+    "recon_queries": {},
+    "status": "OPEN",
+    "source_data": {},
+    "hostname": "EC2AMAZ-H7M54UV",
+    "platform": "windows"
+  }
+}
+```
+
+### Resolve/Unresolve an alert
+Resolve/Unresolve an alert.
+**URL:** https://<BASE_URL> /alerts/<int:alert_id>
+**Request Type:** PUT
+**Example Request Format:**
+```
+{
+  “resolve": true
+}
+```
+**Filters Description:**
+```
+  resolve – true to resolve / false to unresolve
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Alert status is changed successfully"
+}
+```
+
+### Export alerts
+Exports alerts data.
+**URL:** https://<BASE_URL>/alert_source/export
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “source": "rule”
+}
+```
+**Required Payload Arguments:** source
+**Response:** Returns a csv file.
+
+Alert's Investigate Section: -- Available only for Enterprise Edition
+--------------------------------------------------------------------
+
+### View graph data
+Returns alerts graph data.
+**URL:** https://<BASE_URL>/alerts/graph
+**Request Type:** GET
+**Example Request Format:**
+```
+{
+  "source":"rule",
+  “duration”:"3",
+  “date”:”2020-8-5”,
+  “type”:”2”
+}
+```
+**Required Payload Arguments:** source
+**Filters Description:**
+```
+  source – alert’s source to get the alerts only for
+  duration – to get recent alerts by(month/week/day)
+  date – end date for the duration to be calculated by
+```
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Data is fetched successfully",
+  "data": [
+    {
+      "start": 1596560473458.996,
+      "content": "",
+      "event_id": 93855,
+      "className": ""
+    },
+    {
+      "start": 1596560473448.373,
+      "content": "",
+      "event_id": 93854,
+      "className": ""
+    }
+  ]
+}
+```
+
+### View alerted events
+Returns events related to the alert.
+**URL:** https://<BASE_URL>/alerts/<int:alert_id>/events
+**Request Type:** GET
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the Alert's events data",
+  "data": {
+    "schedule_query_data_list_obj": [
+      {
+        "name": "win_dns_events",
+        "data": [
+          {
+            "eid": "15A348E7-AAD4-4099-8A53-F25532000000",
+            "pid": "1144",
+            "time": "1596551139",
+            "action": "DNS_LOOKUP",
+            "utc_time": "Tue Aug  4 14:25:39 2020 UTC",
+            "event_type": "DNS",
+            "domain_name": ".www.gstatic.com",
+            "remote_port": "53",
+            "request_type": "1",
+            "request_class": "1",
+            "remote_address": "172.31.0.2",
+            "date": "Tue Aug  4 14:25:39 2020 UTC"
+          },
+          {
+            "eid": "579D64E5-8A48-4F87-83BB-F87B32000000",
+            "pid": "1144",
+            "time": "1596551139",
+            "action": "DNS_LOOKUP",
+            "utc_time": "Tue Aug  4 14:25:39 2020 UTC",
+            "event_type": "DNS",
+            "domain_name": ".www.gstatic.com",
+            "remote_port": "53",
+            "request_type": "1",
+            "request_class": "1",
+            "remote_address": "172.31.0.2",
+            "date": "Tue Aug  4 14:25:39 2020 UTC"
+          }
+        ]
+      }
+    ],
+    "system_state_data_list": [
+      "etc_hosts",
+      "drivers",
+      "kernel_info",
+      "users",
+      "scheduled_tasks",
+      "uptime",
+      "osquery_info",
+      "os_version",
+      "patches",
+      "certificates"
+    ]
+}
+}
+```
+
+### Get alerts data for process analysis
+Returns alerts data for process analysis.
+**URL:** https://<BASE_URL>/alerts/process
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "process_guid": "58E0F736-D62C-11EA-8283-02F7A50E7DFE",
+  "alert_id": "93855",
+  "node_id": 4
+}
+```
+**Required Payload Arguments:** process_guid and node_id
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Data is fetched successfully",
+  "data": {
+    "name": "svchost.exe",
+    "path": "C:\\Windows\\System32\\svchost.exe",
+    "all_children": [
+      {
+        "action": "PROC_CREATE",
+        "count": 4,
+        "color": "blue",
+        "node_type": "action",
+        "children": [
+          {
+            "color": "red",
+            "name": "child",
+            "data": {
+              "eid": "44A8FC8A-2223-455B-89ED-BE1503F8FFFF",
+              "pid": "2156",
+              "path": "C:\\Windows\\System32\\taskhostw.exe",
+              "time": "1596551290",
+              "action": "PROC_CREATE",
+              "cmdline": "taskhostw.exe NGCKeyPregen",
+              "utc_time": "Tue Aug  4 14:28:10 2020 UTC",
+              "owner_uid": "NT AUTHORITY\\SYSTEM",
+              "parent_pid": "1032",
+              "parent_path": "C:\\Windows\\System32\\svchost.exe",
+              "process_guid": "58E0F688-D62C-11EA-8283-02F7A50E7DFE",
+              "parent_process_guid": "58E0F638-D62C-11EA-8283-02F7A50E7DFE"
+            }
+          }
+        ],
+        "last_time": "1596558693",
+        "all_children": [
+          {
+            "color": "red",
+            "name": "child",
+            "data": {
+              "eid": "44A8FC8A-2223-455B-89ED-BE1503F8FFFF",
+              "pid": "2156",
+              "path": "C:\\Windows\\System32\\taskhostw.exe",
+              "time": "1596551290",
+              "action": "PROC_CREATE",
+              "cmdline": "taskhostw.exe NGCKeyPregen",
+              "utc_time": "Tue Aug  4 14:28:10 2020 UTC",
+              "owner_uid": "NT AUTHORITY\\SYSTEM",
+              "parent_pid": "1032",
+              "parent_path": "C:\\Windows\\System32\\svchost.exe",
+              "process_guid": "58E0F688-D62C-11EA-8283-02F7A50E7DFE",
+              "parent_process_guid": "58E0F638-D62C-11EA-8283-02F7A50E7DFE"
+            }
+          }
+        ],
+        "name": "PROC_CREATE",
+        "fetched": true,
+        "process_guid": "58E0F638-D62C-11EA-8283-02F7A50E7DFE"
+      }
+    ],
+    "node_type": "root",
+    "data": {
+      "process_guid": "58E0F638-D62C-11EA-8283-02F7A50E7DFE",
+      "path": "C:\\Windows\\System32\\svchost.exe"
+    }
+  }
+}
+```
+
+### Get alerts data for process child analysis
+Returns alerts data for process child analysis.
+**URL:** https://<BASE_URL>/alerts/process/child
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "process_guid": "58E0F638-D62C-11EA-8283-02F7A50E7DFE",
+  "action": "PROC_TERMINATE",
+  "node_id": 4
+}
+```
+**Required Payload Arguments:** process_guid, action and node_id
+**Response:** Returns a JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully get the data",
+  "data": {
+    "child_data": [
+      {
+        "color": "red",
+        "name": "child",
+        "data": {
+          "eid": "404D77BA-055E-4EFD-9BE3-9C0403F8FFFF",
+          "pid": "2156",
+          "path": "C:\\Windows\\System32\\taskhostw.exe",
+          "time": "1596551290",
+          "action": "PROC_TERMINATE",
+          "cmdline": "taskhostw.exe NGCKeyPregen",
+          "utc_time": "Tue Aug  4 14:28:10 2020 UTC",
+          "owner_uid": "NT AUTHORITY\\SYSTEM",
+          "parent_pid": "1032",
+          "parent_path": "C:\\Windows\\System32\\svchost.exe",
+          "process_guid": "58E0F688-D62C-11EA-8283-02F7A50E7DFE",
+          "parent_process_guid": "58E0F638-D62C-11EA-8283-02F7A50E7DFE"
+        }
+      }
+    ],
+    "last_time": "1596558693"
+  }
+}
+```
+
+Response Action's Section: -- Available only for Enterprise Edition
+-------------------------------------------------------------------
+
+### View all response actions
+Returns all response actions.
+**URL:** https://<BASE_URL>/response
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "start": 0,
+  “limit”:1,
+  “searchterm”:””
+}
+```
+**Response:** Returns JSON array of data, status and message.
+**Example Response Format:** 
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the responses info",
+  "data": {
+    "count": 1,
+    "total_count": 1,
+    "results": [
+      {
+        "id": 7,
+        "action": "stop",
+        "command": {
+          "action": "stop",
+          "actuator": {
+            "endpoint": "polylogyx_vasp"
+          },
+          "target": {
+            "process": {
+              "name": "calc.exe",
+              "pid": "8282"
+            }
+          }
+        },
+        "created_at": "2020-08-04 15:10:11.284031",
+        "updated_at": "2020-08-04 15:10:11.283453",
+        "script_name": null,
+        "target": "process",
+        "Executed": "1/1"
+      }
+    ]
+  }
+}
+```
+
+### View response actions in node level
+Returns all response actions in node level.
+**URL:** https://<BASE_URL>/response/view
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  "start": 0,
+  “limit”:1,
+  “searchterm”:””,
+  “openc2_id”:1
+}
+```
+**Required Payload Arguments:** openc2_id
+**Response:** Returns JSON array of data, status and message.
+**Example Response Format:** 
+```
+{
+  "status": "success",
+  "message": "Successfully fetched the responses info",
+  "data": {
+    "count": 1,
+    "total_count": 7,
+    "results": [
+      {
+        "id": 8,
+        "command": {
+          "action": "stop",
+          "actuator": {
+            "endpoint": "polylogyx_vasp"
+          },
+          "target": {
+            "process": {
+              "name": "calc.exe",
+              "pid": "8282"
+            }
+          }
+        },
+        "created_at": "2020-08-04 15:10:11.315204",
+        "updated_at": "2020-08-04 15:10:11.288915",
+        "node_id": 3,
+        "command_id": "2c92808273b870760173ba05d560000c",
+        "status": "failure",
+        "message": "RESP_SERVER_DISABLED",
+        "hostname": "EC2AMAZ-VLRC0S2",
+        "target": "process",
+        "action": "stop"
+      }
+    ]
+  }
+}
+```
+
+### Export response actions
+Returns all response actions into a csv file.
+**URL:** https://<BASE_URL>/response/export
+**Request Type:** POST
+**Response:** Returns a csv file.
+
+### View a response action
+Returns all responses info for the command id given.
+**URL:** https://<BASE_URL>/response/<string:command_id>
+**Request Type:** GET
+**Response:** Returns JSON array of data, status and message.
+**Example Response Format:**
+```
+{
+  “status”:”success”,
+  “message”:”Successfully received the command status”,
+  “data”: {
+    "id": 8,
+    "command": {
+      "action": "stop",
+      "actuator": {
+        "endpoint": "polylogyx_vasp"
+      },
+      "target": {
+        "process": {
+          "name": "calc.exe",
+          "pid": "8282"
+        }
+      }
+    },
+    "created_at": "2020-08-04 15:10:11.315204",
+    "updated_at": "2020-08-04 15:10:11.288915",
+    "node_id": 3,
+    "command_id": "2c92808273b870760173ba05d560000c",
+    "status": "failure",
+    "message": "RESP_SERVER_DISABLED",
+    "hostname": "EC2AMAZ-VLRC0S2",
+    "target": "process",
+    "action": "stop"
+  }
+}
+```
+
+### Get action status
+Returns response action status of a host.
+**URL:** https://<BASE_URL>/response/status
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “host_identifier”:”EC2CD1A0-140B-9331-7A60-CFFCE29D2E71”,
+  “node_id”:1
+}
+```
+**Required Payload Arguments:** host_identifier / node_id
+**Response:** Returns JSON array of status, message and responseEnabled.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully received the status",
+  "responseEnabled": true,
+  "endpointOnline": true
+}
+```
+
+### Agent restart
+Restart an agent.
+**URL:** https://<BASE_URL>/response/restart-agent
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “host_identifier”:”EC2CD1A0-140B-9331-7A60-CFFCE29D2E71”
+}
+```
+**Required Payload Arguments:** host_identifier
+**Response:** Returns JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Action to restart agent is added successfully"
+}
+```
+
+### Add an action
+Adds response action for the data given.
+**URL:** https://<BASE_URL>/response/add
+**Request Type:** POST
+**Example Request Format:**
+```
+1)File Response Action:
+{
+  "action": "delete",
+  "actuator_id": "EC2CD1A0-140B-9331-7A60-CFFCE29D2E71",
+  "target": "file",
+  "file_name": "C:\\Users\\PolyLogyx\\Downloads\\suspicious.exe",
+  "file_hash": "o2MJjT8UKSRM7eoLDMWvm4LxqaFvDxd2wLg1KQQQ2jXfG5UE"
+}
+**Required Payload Arguments:** action, actuator_id, file_name/file_hash and target
+2)Process Response Action:
+{
+  "action": "stop",
+  "actuator_id": "EC2CD1A0-140B-9331-7A60-CFFCE29D2E71",
+  "target": "process",
+  "process_name": "suspicious1.exe",
+  "pid": "3123"
+}
+**Required Payload Arguments:** action, actuator_id, process_name/pid and target
+3)Network Response Action:
+A) Delete a rule:
+{
+  "action": "delete",
+  "actuator_id": "EC2CD1A0-140B-9331-7A60-CFFCE29D2E71",
+  "target": "ip_connection",
+  "rule_name": "test_rule_12"
+}
+**Required Payload Arguments:** action, actuator_id, rule_name and target
+B) Isolate a rule:
+{
+  "action": "contain",
+  "actuator_id": "EC2CD1A0-140B-9331-7A60-CFFCE29D2E71",
+  "target": "ip_connection",
+  "rule_name": "test_rule_12",
+  "rule_group": "test",
+  "src_port": "",
+  "dst_port": "",
+  "dst_addr": "",
+  "application": "",
+  "direction": "1",
+  "layer4_protocol": "256"
+}
+```
+**Response:** Returns JSON array of command_id, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Successfully sent the response command”,
+  “command_id”:"2c92808a69099f17016910516100000a"
+}
+```
+
+### Add a custom action:
+Adds custom response action.
+**URL:** https://<BASE_URL>/response/custom-action
+**Request Type:** POST
+**Example Request Format:**
+```
+{
+  “host_identifier”:”EC2CD1A0-140B-9331-7A60-CFFCE29D2E71”,
+  “content”:"dir\n$pwd",
+  “file_type”:”2”,
+  “save_script”:”true”,
+  “script_name”:”dir_script”
+}
+```
+**Filters Description:**
+```
+  file_type – 1 for .bat, 2 for powershell scripts and 3 for shell scripts
+  save_script - “true” to save the script, “false” not to save
+```
+**Required Payload Arguments:** host_identifier, file_type
+**Response:** Returns JSON array of openc2_id, status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": “Action is added successfully”,
+  “openc2_id”: 1
+}
+```
+
+### Delete a response action
+Delete a response action record from the database.
+**URL:** https://<BASE_URL>/response/<int: openc2_id>/delete
+**Request Type:** DELETE
+**Response:** Returns JSON array of status and message.
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Successfully removed the response"
+}
+```
+
+### Distributed query flow:
+--> Post query to /distributed/add API.
+**URL:** https://<BASE_URL>/distributed/add
+**Request Type:** POST
+Example payload:
+```
+{ 
+  "tags": "demo",
+  "query": "select * from system_info;”,
+  "nodes": "6357CE4F-5C62-4F4C-B2D6-CAC567BD6113,6357CE4F-5C62-4F4C-B2D6-CAGF12F17F23”,
+  “description”:”live query to get system_info”
+}
+```
+**Example Response Format:**
+```
+{
+  "status": "success",
+  "message": "Distributed query is sent successfully",
+  "data": {
+    "query_id": 200,
+    "onlineNodes": 3
+  }
+}
+```
+--> Make a connection from a socketio client to the below URL.
+wss://<IP_OF_THE_SERVER>:5000/distributed/result
+--> Emit below payload to the socket server.
+{“query_id”:<query_id_from_api_response>}
+For ex: {“query_id”:2}
+--> Keep the socket client listen to server till a message with format is received.
+```
+{
+  "node": {
+    "id": 6,
+    "name": "ip-172-31-16-229"
+  },
+  "data": [
+    {
+      "uid": "0",
+      "gid": "0",
+      "uid_signed": "0",
+      "gid_signed": "0",
+      "username": "root",
+      "description": "root",
+      "directory": "/root",
+      "shell": "/bin/bash",
+      "uuid": ""
+    }
+  ],
+  "query_id": 2
+}
 ```
 	
 
-[Previous << Tables](../12_Tables/Readme.md)  
+[Previous << Tables](../11_Tables/Readme.md)  
