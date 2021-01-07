@@ -128,7 +128,36 @@ Verifying PolyLogyx Endpoint Platform services are up and running....
 PolyLogyx Endpoint Platform services initialized.
 ########### Installation operation completed successfully ###########
 ```
+### Deploying the PolyLogyx CPT on Windows by GPO
 
+Group Policy Object (GPO) deployment involves created 'scheduled task' that will periodically connect to a network folder location and run Install.bat to install PolyLogyx CPT.
+
+Using Microsoft Group Policy to deploy PolyLogyx CPT requires two main things:
+- A shared location to store executables and certificate.
+- A Group Policy Object (GPO) to create a scheduled task.
+
+#### Folder Layout
+A centralised network folder accessible by all machines that are going to be running PolyLogyx CPT is needed. We suggest inside the sysvol directory as a suitable place since this is configured by default to have very restricted write permissions. It is important that the folder contents cannot be modified by users, hence recommending Sysvol folder!
+
+You will need to download the below files and copy them to an appropriate location such as sysvol located at ``\\%YourDomainName%\sysvol\%YourDomainName%\plgx``
+
+- plgx_cpt.exe - From PolyLogyx ESP Server 
+- certificate.crt - From PolyLogyx ESP Server
+- Install.bat - From [here](../files/GPO%20Deployment/Install.bat) & update the file with PolyLogyx ESP Server IP address
+
+Looking in the sysvol folder you should now be able to see similar to below.
+![plgx](../images/plgx_gpo.PNG)
+
+#### Scheduled task GPO Policy
+This section sets up a scheduled task to run Install.bat (stored on a network folder), distributed through Group Policy.
+
+Import the [plgx-Task](../files/GPO%20Deployment/plgx_gpo.zip) GPO into group policy management and link the object to a test Organisational Unit (OU). Once the GPO is confirmed as working in your environment then you can link the GPO to a larger OU to deploy CPT further.
+
+  1. Open up group policy management editor
+  2. Edit the plgx-Task GPO
+  3. Change the setting for the batch file network location by navigating to: ``Computer Configuration\Preferences\Control Panel Settings\Scheduled Tasks\plgx-Task\Actions`` and then select ``"Start a program" > Edit > Change the Location.``
+  
+For example \\\testing.com\SYSVOL\testing.com\plgx\Install.bat
 
 ### Verifying Client Installation 
 
@@ -143,6 +172,8 @@ processes/services start:
 3.  vastnw service
 
 4.  Plgx_win_extension.ext.exe process
+
+Incase of GPO deployment, ``C:\Program Files\plgx_osquery\runningver.txt`` file will have the status of above services.
 
 Installation is not successful if any of these fail to start.
 
