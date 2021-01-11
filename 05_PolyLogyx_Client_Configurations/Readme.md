@@ -100,7 +100,8 @@ Perform these steps to view or edit this configuration:
 
 5. Click Update to save your changes. 
 
-
+**Note:**
+On Linux platform, agent restart is required to take effect of these options.
 |										|																							|
 |:---									|													   								    ---:|
 |[Previous << Configuring the server](../04_PolyLogyx_Server_Configurations/Readme.md)  | [Next >> Configuring the filters](../06_Understanding_Filters/Readme.md)|

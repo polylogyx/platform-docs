@@ -33,8 +33,9 @@ Sending "Response Actions" can be a powerful feature for responding to an incide
 
 The response actions are available on Windows and Linux endpoints only. 
 
-**Note:** Response command can be sent to an offline host.
-
+**Note:** 
+- Response command can be sent to an offline host.
+- Response Action scripts should not be destructive or wait for user input.
 
 Perform these steps to take a response.
 1. Access the web interface for the server.

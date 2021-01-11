@@ -236,7 +236,7 @@ Follow these steps to uninstall the PolyLogyx client.
 
     Run the uninstall command.
 
-    Here is the syntax to execute the installation command.
+    Here is the syntax to execute the uninstallation command.
 
 ```plgx_cpt -u <d / s>```
 
