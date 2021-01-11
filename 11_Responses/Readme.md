@@ -18,7 +18,21 @@ d) Re-Start an agent remotely
 
 d) Execute a shell command on linux and powershell/cmd command on windows systems
 
+Sending "Response Actions" can be a powerful feature for responding to an incident on scale. However this feature, if not used properly, can be highly disruptve. It is stronly recommended that a script for custom respo be sent down this path with extreme caution. Some basic precautions are listed below:
+
+
+1) Make sure the response capabilities of the target host shows enabled.
+
+![response_host_details](../images/host_details_response.png)
+
+2) Only those scripts be sent which **DO NOT** require any user intervention on the host device.
+
+3) Test the script on a standalone system to ensure it works as designed.
+
+4) If the script does not return the output, DO NOT send another one without understading the reason of the previous failure.
+
 The response actions are available on Windows and Linux endpoints only. 
+
 **Note:** Response command can be sent to an offline host.
 
 
@@ -56,6 +70,7 @@ Perform these steps to take a response.
 
     ![response_status_view](../images/response_action_page_view.png)
 
- |										|																							|
+
+|										|																							|
 |:---									|													   								    ---:|
 |[Previous << Carves](../10_Carves/Readme.md)  | [Next >> Tables](../12_Tables/Readme.md)|
