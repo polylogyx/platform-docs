@@ -1,0 +1,7 @@
+<job id="SMSDeploy">
+	<script language="VBScript" src=".\Install.vbs"/>
+	<script language="VBScript">
+		
+		Call WScript.Quit(DeployPackage)
+	</script>
+</job>
