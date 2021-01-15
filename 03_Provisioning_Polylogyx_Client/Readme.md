@@ -159,6 +159,20 @@ Import the [plgx-Task](../files/GPO%20Deployment/plgx_gpo.zip) GPO into group po
   
 For example \\\testing.com\SYSVOL\testing.com\plgx\Install.bat
 
+### Deploying the PolyLogyx CPT on Windows by SCCM
+
+Whilst SCCM deployment is not usually the first choice for the deployment of PolyLogyx CPT we have included an example Windows Script File along with VBS Script file. You will need to download the below files and copy them to an Windows Server where SCCM is setup.
+
+- plgx_cpt.exe - From PolyLogyx ESP Server 
+- certificate.crt - From PolyLogyx ESP Server
+- Install.vbs - From [here](../files/SCCM%20Deployment/Install.vbs) & update the file with PolyLogyx ESP Server IP address
+- Install.wsf - From [here](../files/SCCM%20Deployment/Install.wsf)
+
+Looking in the Windows server folder you should now be able to see similar to below.
+![plgx-sccm](../images/plgx-sccm.png)
+
+Install Program: Wscript.exe Install.wsf
+
 ### Verifying Client Installation 
 
 After you deploy the PolyLogyx client, complete these steps to verify the
